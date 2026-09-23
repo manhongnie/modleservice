@@ -1,0 +1,137 @@
+{
+  "timestamp_unix": 1790148710.1459253,
+  "transport": "real TCP HTTP / uvicorn CLI",
+  "deployment_mode": "production",
+  "allow_mock": false,
+  "results": {
+    "chat": {
+      "elapsed_s": 8.786004560999572,
+      "response": {
+        "request_id": "167fc73cca7941cc8e5eaaf3a2da3e2f",
+        "model": "qwen3.5-0.8b@2fc06364715b",
+        "output": {
+          "text": "你好\n",
+          "usage": {
+            "prompt_tokens": 17,
+            "completion_tokens": 4
+          }
+        },
+        "mock": false,
+        "done": true
+      },
+      "unload": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "asr": {
+      "elapsed_s": 2.963192118011648,
+      "response": {
+        "request_id": "6b8e32b4a23b4060b627c8a3f94053b4",
+        "model": "whisper-tiny@169d4a4341b3",
+        "output": {
+          "text": "你"
+        },
+        "mock": false,
+        "done": true
+      },
+      "unload": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "tts": {
+      "elapsed_s": 0.6198102429916617,
+      "response": {
+        "request_id": "5bfe81b1889f440eab4d871d3f04d19b",
+        "model": "vits-zh-aishell3@icefall-2024-04-06",
+        "output": {
+          "sample_rate": 8000,
+          "format": "wav",
+          "duration_s": 1.488,
+          "audio_base64_chars": 31804
+        },
+        "mock": false,
+        "done": true
+      },
+      "unload": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      }
+    }
+  },
+  "chat_streaming": {
+    "frames": 66,
+    "chunks": 65,
+    "first_chunk_seconds": 0.187,
+    "terminal_seconds": 4.341,
+    "output": {
+      "delta": "",
+      "streaming_mode": "incremental",
+      "finish_reason": "length",
+      "text": "**机器学习**（Machine Learning，简称 ML）是一种由计算机自动学习、从数据中归纳规律并预测未来结果的技术。它不依赖于人工编写复杂的规则（如“如果输入是红色，则输出蓝色”），而是通过算法让计算机“学会”如何从数据中发现问题并做出判断。",
+      "usage": {
+        "prompt_tokens": 18,
+        "completion_tokens": 64
+      }
+    },
+    "disconnect_stop_seconds": 0.07,
+    "cancelled_worker": {
+      "backend": "transformers",
+      "device": "CPU",
+      "streaming": "incremental",
+      "load_seconds": 2.1009613729838748,
+      "pid": 96444,
+      "state": "loaded",
+      "alive": true,
+      "rss_bytes": 5745946624,
+      "rss_mb": 5479.762,
+      "load_count": 1,
+      "output_buffer_limit": 8,
+      "buffered_chunks": 0,
+      "busy": 0,
+      "inference_seconds": 0.19111591399996541,
+      "completed": 3
+    },
+    "reuse": {
+      "request_id": "9a5ceb25151c42ca8faf6d1fd854339c",
+      "model": "qwen3.5-0.8b@2fc06364715b",
+      "output": {
+        "text": "你好\n",
+        "usage": {
+          "prompt_tokens": 17,
+          "completion_tokens": 4
+        }
+      },
+      "mock": false,
+      "done": true
+    },
+    "permit_held_during_output": true
+  },
+  "scheduler_after_unload": {
+    "queue_length": 0,
+    "queue_capacity": 16,
+    "active_count": 0,
+    "execution_capacity": 2,
+    "resident_mb": 0,
+    "temporary_mb": 0,
+    "reserved_mb": 0,
+    "budget_mb": 8192,
+    "resident_instances": 0,
+    "quarantined_requests": [],
+    "active_by_model": {}
+  },
+  "ready": {
+    "status": "ready",
+    "reasons": []
+  },
+  "metrics": "# TYPE model_service_up gauge\nmodel_service_up 1\n# TYPE model_service_started_timestamp_seconds gauge\nmodel_service_started_timestamp_seconds 1790148710.3584912\n# TYPE model_service_requests_total counter\nmodel_service_requests_total{outcome=\"cancelled\"} 1\nmodel_service_requests_total{outcome=\"completed\"} 5\n# TYPE model_service_queue_length gauge\nmodel_service_queue_length 0\n# TYPE model_service_active_requests gauge\nmodel_service_active_requests 0\n# TYPE model_service_resident_bytes gauge\nmodel_service_resident_bytes 0\n# TYPE model_service_temporary_bytes gauge\nmodel_service_temporary_bytes 0\n# TYPE model_service_budget_bytes gauge\nmodel_service_budget_bytes 8589934592\n# TYPE model_service_quarantined_requests gauge\nmodel_service_quarantined_requests 0\n# TYPE model_service_worker_rss_bytes gauge\nmodel_service_worker_rss_bytes 0\n# TYPE model_service_workers gauge\nmodel_service_workers 0\n# TYPE model_service_request_duration_seconds_sum counter\nmodel_service_request_duration_seconds_sum 10.846025912993355\n# TYPE model_service_execution_duration_seconds_sum counter\nmodel_service_execution_duration_seconds_sum 10.798904708004557\n# TYPE model_service_executions_total counter\nmodel_service_executions_total 6\n",
+  "shutdown": {
+    "returncode": -15,
+    "application_shutdown_completed": true
+  },
+  "status": "passed_real_http_models"
+}

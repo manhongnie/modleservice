@@ -1,0 +1,21 @@
+{
+  "deployment_mode": "production",
+  "allow_mock": false,
+  "database": "var/models.sqlite3",
+  "model_roots": ["models"],
+  "total_memory_mb": 8192,
+  "max_executions": 2,
+  "queue_size": 16,
+  "queue_timeout_s": 30,
+  "execution_timeout_s": 180,
+  "load_timeout_s": 180,
+  "drain_timeout_s": 60,
+  "max_body_bytes": 2097152,
+  "max_output_bytes": 8388608,
+  "max_http_requests": 128,
+  "body_timeout_s": 15,
+  "write_timeout_s": 30,
+  "maintenance_interval_s": 1,
+  "resident_retry_seconds": 30,
+  "http_allowed_hosts": ["127.0.0.1", "localhost"]
+}

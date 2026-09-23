@@ -1,0 +1,50 @@
+{
+  "whisper-tiny": {
+    "model": "whisper-tiny@169d4a4341b3",
+    "backend": "transformers",
+    "path": "models/whisper-tiny",
+    "timestamp_unix": 1790145092.4450488,
+    "validation_input": "var/real-tts-16khz.wav",
+    "status": "passed_real_weights_smoke",
+    "load": {
+      "backend": "transformers",
+      "device": "CPU",
+      "streaming": "buffered",
+      "load_seconds": 1.8881987009954173,
+      "pid": 59935,
+      "load_count": 1,
+      "state": "loaded"
+    },
+    "load_elapsed_s": 1.9897721099841874,
+    "inference_elapsed_s": 0.3351281660143286,
+    "worker": {
+      "backend": "transformers",
+      "device": "CPU",
+      "streaming": "buffered",
+      "load_seconds": 1.8881987009954173,
+      "pid": 59935,
+      "state": "loaded",
+      "alive": true,
+      "rss_bytes": 625643520,
+      "rss_mb": 596.66,
+      "load_count": 1,
+      "busy": 0,
+      "inference_seconds": 0.3341547769960016,
+      "completed": 1
+    },
+    "output": [
+      {
+        "text": "你好事件"
+      }
+    ],
+    "reference_text": "你好，世界。",
+    "assessment": "路径已运行；转写为“你好事件”，存在同音字错误，不是质量验收通过。",
+    "source": {
+      "repo": "openai/whisper-tiny",
+      "revision": "169d4a4341b33bc18d8881c4b69c2e104e1cc0af",
+      "sha256": {
+        "model.safetensors": "7ebd0e69e78190ffe1438491fa05cc1f5c1aa3a4c4db3bc1723adbb551ea2395"
+      }
+    }
+  }
+}

@@ -1,0 +1,453 @@
+{
+  "model": "qwen3.5-0.8b@2fc06364715b",
+  "test": "real_qwen_incremental_stream",
+  "boundary": "ProcessExecutor (not HTTP)",
+  "timestamp_utc": "2026-09-23T07:24:06.078744+00:00",
+  "load": {
+    "backend": "transformers",
+    "device": "CPU",
+    "streaming": "incremental",
+    "load_seconds": 2.0670389930019155,
+    "pid": 91627,
+    "load_count": 1,
+    "state": "loaded"
+  },
+  "chunks": [
+    {
+      "at_seconds": 0.758,
+      "delta": "**",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 0.831,
+      "delta": "机器学习",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 0.899,
+      "delta": "**",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 0.967,
+      "delta": "（",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.035,
+      "delta": "Machine",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.104,
+      "delta": " Learning",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.172,
+      "delta": "，",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.241,
+      "delta": "简称",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.307,
+      "delta": " ML",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.377,
+      "delta": "）",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.447,
+      "delta": "是一种",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.518,
+      "delta": "由",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.585,
+      "delta": "计算机",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.645,
+      "delta": "自动",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.707,
+      "delta": "学习",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.768,
+      "delta": "、",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.833,
+      "delta": "从",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.895,
+      "delta": "数据",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 1.959,
+      "delta": "中",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.023,
+      "delta": "归纳",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.083,
+      "delta": "规律",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.143,
+      "delta": "并",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.202,
+      "delta": "预测",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.266,
+      "delta": "未来",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.328,
+      "delta": "结果",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.39,
+      "delta": "的技术",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.452,
+      "delta": "。",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.513,
+      "delta": "它",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.573,
+      "delta": "不",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.63,
+      "delta": "依赖于",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.691,
+      "delta": "人工",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.756,
+      "delta": "编写",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.826,
+      "delta": "复杂的",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.888,
+      "delta": "规则",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 2.95,
+      "delta": "（",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.009,
+      "delta": "如",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.07,
+      "delta": "“",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.133,
+      "delta": "如果",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.194,
+      "delta": "输入",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.254,
+      "delta": "是",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.316,
+      "delta": "红色",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.378,
+      "delta": "，",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.439,
+      "delta": "则",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.498,
+      "delta": "输出",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.557,
+      "delta": "蓝色",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.616,
+      "delta": "”",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.675,
+      "delta": "），",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.736,
+      "delta": "而是",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.798,
+      "delta": "通过",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.862,
+      "delta": "算法",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.924,
+      "delta": "让",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 3.987,
+      "delta": "计算机",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 4.047,
+      "delta": "“",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 4.11,
+      "delta": "学会",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 4.171,
+      "delta": "”",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 4.234,
+      "delta": "如何",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 4.294,
+      "delta": "从",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 4.354,
+      "delta": "数据",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 4.412,
+      "delta": "中",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 4.471,
+      "delta": "发现问题",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 4.529,
+      "delta": "并",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 4.587,
+      "delta": "做出",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 4.647,
+      "delta": "判断",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 4.708,
+      "delta": "。",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    {
+      "at_seconds": 4.759,
+      "delta": "",
+      "streaming_mode": "incremental",
+      "finish_reason": "length",
+      "text": "**机器学习**（Machine Learning，简称 ML）是一种由计算机自动学习、从数据中归纳规律并预测未来结果的技术。它不依赖于人工编写复杂的规则（如“如果输入是红色，则输出蓝色”），而是通过算法让计算机“学会”如何从数据中发现问题并做出判断。",
+      "usage": {
+        "prompt_tokens": 18,
+        "completion_tokens": 64
+      }
+    }
+  ],
+  "cancel": {
+    "first_chunk": {
+      "delta": "**",
+      "streaming_mode": "incremental",
+      "finish_reason": null
+    },
+    "stop_seconds": 0.066,
+    "signalled": true,
+    "state": {
+      "backend": "transformers",
+      "device": "CPU",
+      "streaming": "incremental",
+      "load_seconds": 2.0670389930019155,
+      "pid": 91627,
+      "state": "loaded",
+      "alive": true,
+      "rss_bytes": 5757755392,
+      "rss_mb": 5491.023,
+      "load_count": 1,
+      "output_buffer_limit": 8,
+      "buffered_chunks": 0,
+      "busy": 0,
+      "inference_seconds": 0.22148998398915865,
+      "completed": 2
+    }
+  },
+  "reuse": [
+    {
+      "text": "你好\n",
+      "usage": {
+        "prompt_tokens": 17,
+        "completion_tokens": 4
+      }
+    }
+  ],
+  "unload": {
+    "released": true,
+    "state": "unloaded",
+    "process_exited": true
+  },
+  "status": "passed"
+}

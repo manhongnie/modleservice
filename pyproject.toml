@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shared-model-service"
+version = "0.1.0"
+description = "Single-host, process-isolated multi-model inference service"
+requires-python = ">=3.11"
+dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1", "pydantic>=2.9,<3", "httpx>=0.27,<1", "psutil>=6,<8"]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10", "pytest-asyncio>=0.24,<2"]
+openvino = ["openvino>=2025.0,<2027", "numpy>=2,<3"]
+text = ["transformers>=5.2,<6", "numpy>=2,<3", "pillow>=11,<13"]
+generative = ["torch>=2.6,<3", "transformers>=5.2,<6", "numpy>=2,<3"]
+speech = ["sherpa-onnx>=1.12,<2", "numpy>=2,<3"]
+
+[project.scripts]
+model-service = "model_service.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["model_service*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

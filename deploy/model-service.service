@@ -1,0 +1,32 @@
+# Deployment template. Adjust paths and create the dedicated user/environment file first.
+[Unit]
+Description=Shared single-host model inference service
+After=network.target
+
+[Service]
+Type=exec
+User=model-service
+Group=model-service
+WorkingDirectory=/opt/model-service
+EnvironmentFile=/etc/model-service.env
+Environment=PYTHONUNBUFFERED=1
+Environment=HF_HOME=/opt/model-service/var/cache/huggingface
+Environment=HF_HUB_OFFLINE=1
+ExecStartPre=/opt/model-service/.venv/bin/python -m model_service --config examples/service.production.json --check-config
+ExecStart=/opt/model-service/.venv/bin/python -m model_service --config examples/service.production.json --host 127.0.0.1 --port 8000
+# Signal only the controller first; it drains and stops its workers itself.
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=15min
+# A stuck native operation must remain visible, not be silently killed/restarted.
+SendSIGKILL=no
+Restart=no
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict
+ReadWritePaths=/opt/model-service/var
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

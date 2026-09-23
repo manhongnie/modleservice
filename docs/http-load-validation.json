@@ -1,0 +1,66 @@
+{
+  "scope": "Explicit Mock only: HTTP overload admission, bounded queue and resource cleanup; not real-model throughput or quality",
+  "requested": 200,
+  "client_concurrency": 16,
+  "execution_capacity": 4,
+  "queue_capacity": 8,
+  "mock_execution_delay_s": 0.1,
+  "duration_s": 1.0293,
+  "http_status_counts": {
+    "200": 33,
+    "429": 167
+  },
+  "error_code_counts": {
+    "queue_full": 167
+  },
+  "latency_ms_all_requests_including_rejections": {
+    "p50": 17.403,
+    "p95": 359.092,
+    "max": 428.801
+  },
+  "sampling_interval_s": 0.005,
+  "samples": 112,
+  "observed_peaks": {
+    "active_count": 4,
+    "queue_length": 8,
+    "temporary_mb": 16,
+    "reserved_mb": 80,
+    "resident_instances": 1
+  },
+  "scheduler_after_requests": {
+    "queue_length": 0,
+    "queue_capacity": 8,
+    "active_count": 0,
+    "execution_capacity": 4,
+    "resident_mb": 64,
+    "temporary_mb": 0,
+    "reserved_mb": 64,
+    "budget_mb": 128,
+    "resident_instances": 1,
+    "quarantined_requests": [],
+    "active_by_model": {}
+  },
+  "worker": {
+    "pid": 95190,
+    "load_count": 1,
+    "load_count_includes_registration_validation": true
+  },
+  "checks": {
+    "bounded_active_and_queue": true,
+    "bounded_budget": true,
+    "both_success_and_overload_rejection_observed": true,
+    "no_automatic_request_retries": true,
+    "single_worker_load": true,
+    "active_queue_temporary_returned_to_zero": true
+  },
+  "timestamp_utc": "2026-09-23T07:29:48.847213+00:00",
+  "transport": "real TCP HTTP to one isolated uvicorn CLI controller",
+  "mock": true,
+  "status": "passed_mock_http_overload",
+  "shutdown": {
+    "returncode": -15,
+    "application_shutdown_completed": true,
+    "controller_exited": true,
+    "remaining_child_processes": 0
+  }
+}

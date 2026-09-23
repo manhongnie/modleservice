@@ -1,0 +1,231 @@
+{
+  "whisper-tiny": {
+    "model": "whisper-tiny@169d4a4341b3",
+    "status": "passed_real_service_pipeline",
+    "timestamp_unix": 1790148914.1550627,
+    "deployment_mode": "production",
+    "allow_mock": false,
+    "elapsed_s": 3.3418679409951437,
+    "output": [
+      {
+        "request_id": "83f294eec02d420d8d11d6d629098d60",
+        "model": "whisper-tiny@169d4a4341b3",
+        "output": {
+          "text": "你"
+        },
+        "mock": false,
+        "done": true
+      }
+    ],
+    "worker": {
+      "backend": "transformers",
+      "device": "CPU",
+      "streaming": "buffered",
+      "load_seconds": 1.878777428995818,
+      "pid": 98610,
+      "state": "loaded",
+      "alive": true,
+      "rss_bytes": 607105024,
+      "rss_mb": 578.98,
+      "load_count": 1,
+      "output_buffer_limit": 8,
+      "buffered_chunks": 0,
+      "busy": 0,
+      "inference_seconds": 0.23653522098902613,
+      "completed": 2
+    },
+    "release": {
+      "released": true,
+      "state": "unloaded",
+      "process_exited": true
+    },
+    "resources_after_unload": {
+      "queue_length": 0,
+      "queue_capacity": 16,
+      "active_count": 0,
+      "execution_capacity": 2,
+      "resident_mb": 0,
+      "temporary_mb": 0,
+      "reserved_mb": 0,
+      "budget_mb": 8192,
+      "resident_instances": 0,
+      "quarantined_requests": [],
+      "active_by_model": {}
+    },
+    "assertions": {
+      "real_output": true,
+      "reused_after_validation": true,
+      "no_active_request": true
+    },
+    "removal": {
+      "references_checked": true,
+      "registration_removed": true,
+      "files_preserved": true,
+      "result": {
+        "model_id": "whisper-tiny@169d4a4341b3",
+        "operation": "remove",
+        "files_deleted": false,
+        "release": {
+          "state": "unloaded",
+          "already_unloaded": true
+        },
+        "state": null
+      }
+    }
+  },
+  "vits-zh-aishell3": {
+    "model": "vits-zh-aishell3@icefall-2024-04-06",
+    "status": "passed_real_service_pipeline",
+    "timestamp_unix": 1790148914.8955095,
+    "deployment_mode": "production",
+    "allow_mock": false,
+    "elapsed_s": 0.7333766900119372,
+    "output": [
+      {
+        "request_id": "1d7c54f3e9364458a905d1331c30cd31",
+        "model": "vits-zh-aishell3@icefall-2024-04-06",
+        "output": {
+          "sample_rate": 8000,
+          "format": "wav",
+          "duration_s": 1.388875,
+          "artifact": "var/service-tts-smoke.wav"
+        },
+        "mock": false,
+        "done": true
+      }
+    ],
+    "worker": {
+      "backend": "sherpa_tts",
+      "sample_rate": 8000,
+      "streaming": "buffered",
+      "load_seconds": 0.33957915799692273,
+      "pid": 98658,
+      "state": "loaded",
+      "alive": true,
+      "rss_bytes": 156020736,
+      "rss_mb": 148.793,
+      "load_count": 1,
+      "output_buffer_limit": 8,
+      "buffered_chunks": 0,
+      "busy": 0,
+      "inference_seconds": 0.05436129801091738,
+      "completed": 2
+    },
+    "release": {
+      "released": true,
+      "state": "unloaded",
+      "process_exited": true
+    },
+    "resources_after_unload": {
+      "queue_length": 0,
+      "queue_capacity": 16,
+      "active_count": 0,
+      "execution_capacity": 2,
+      "resident_mb": 0,
+      "temporary_mb": 0,
+      "reserved_mb": 0,
+      "budget_mb": 8192,
+      "resident_instances": 0,
+      "quarantined_requests": [],
+      "active_by_model": {}
+    },
+    "assertions": {
+      "real_output": true,
+      "reused_after_validation": true,
+      "no_active_request": true
+    },
+    "removal": {
+      "references_checked": true,
+      "registration_removed": true,
+      "files_preserved": true,
+      "result": {
+        "model_id": "vits-zh-aishell3@icefall-2024-04-06",
+        "operation": "remove",
+        "files_deleted": false,
+        "release": {
+          "state": "unloaded",
+          "already_unloaded": true
+        },
+        "state": null
+      }
+    }
+  },
+  "qwen3.5-0.8b": {
+    "model": "qwen3.5-0.8b@2fc06364715b",
+    "status": "passed_real_service_pipeline",
+    "timestamp_unix": 1790148910.654864,
+    "deployment_mode": "production",
+    "allow_mock": false,
+    "elapsed_s": 5.0264752809889615,
+    "output": [
+      {
+        "request_id": "6d9ad728aa8e403a9639886e07c2ce98",
+        "model": "qwen3.5-0.8b@2fc06364715b",
+        "output": {
+          "text": "你好\n",
+          "usage": {
+            "prompt_tokens": 17,
+            "completion_tokens": 4
+          }
+        },
+        "mock": false,
+        "done": true
+      }
+    ],
+    "worker": {
+      "backend": "transformers",
+      "device": "CPU",
+      "streaming": "incremental",
+      "load_seconds": 2.2829470539873,
+      "pid": 98515,
+      "state": "loaded",
+      "alive": true,
+      "rss_bytes": 5710409728,
+      "rss_mb": 5445.871,
+      "load_count": 1,
+      "output_buffer_limit": 8,
+      "buffered_chunks": 0,
+      "busy": 0,
+      "inference_seconds": 0.451936644007219,
+      "completed": 2
+    },
+    "release": {
+      "released": true,
+      "state": "unloaded",
+      "process_exited": true
+    },
+    "resources_after_unload": {
+      "queue_length": 0,
+      "queue_capacity": 16,
+      "active_count": 0,
+      "execution_capacity": 2,
+      "resident_mb": 0,
+      "temporary_mb": 0,
+      "reserved_mb": 0,
+      "budget_mb": 8192,
+      "resident_instances": 0,
+      "quarantined_requests": [],
+      "active_by_model": {}
+    },
+    "assertions": {
+      "real_output": true,
+      "reused_after_validation": true,
+      "no_active_request": true
+    },
+    "removal": {
+      "references_checked": true,
+      "registration_removed": true,
+      "files_preserved": true,
+      "result": {
+        "model_id": "qwen3.5-0.8b@2fc06364715b",
+        "operation": "remove",
+        "files_deleted": false,
+        "release": {
+          "state": "unloaded",
+          "already_unloaded": true
+        },
+        "state": null
+      }
+    }
+  }
+}

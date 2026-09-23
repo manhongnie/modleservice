@@ -1,0 +1,158 @@
+[
+  {
+    "name": "mock-embeddings",
+    "version": "1",
+    "capabilities": [
+      "embeddings"
+    ],
+    "task": "mock",
+    "backend": "mock",
+    "path": "",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "resident_mb": 64,
+    "request_mb": 8,
+    "max_input_bytes": 1048576,
+    "options": {},
+    "validation_input": {
+      "texts": [
+        "你好，世界"
+      ]
+    }
+  },
+  {
+    "name": "mock-rerank",
+    "version": "1",
+    "capabilities": [
+      "rerank"
+    ],
+    "task": "mock",
+    "backend": "mock",
+    "path": "",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "resident_mb": 64,
+    "request_mb": 8,
+    "max_input_bytes": 1048576,
+    "options": {},
+    "validation_input": {
+      "query": "中国首都",
+      "documents": [
+        "北京",
+        "上海"
+      ]
+    }
+  },
+  {
+    "name": "mock-image_embeddings",
+    "version": "1",
+    "capabilities": [
+      "image_embeddings"
+    ],
+    "task": "mock",
+    "backend": "mock",
+    "path": "",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "resident_mb": 64,
+    "request_mb": 8,
+    "max_input_bytes": 1048576,
+    "options": {},
+    "validation_input": {
+      "images": [
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aWQ0AAAAASUVORK5CYII="
+      ]
+    }
+  },
+  {
+    "name": "mock-sparse_embeddings",
+    "version": "1",
+    "capabilities": [
+      "sparse_embeddings"
+    ],
+    "task": "mock",
+    "backend": "mock",
+    "path": "",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "resident_mb": 64,
+    "request_mb": 8,
+    "max_input_bytes": 1048576,
+    "options": {},
+    "validation_input": {
+      "texts": [
+        "hello world"
+      ]
+    }
+  },
+  {
+    "name": "mock-chat",
+    "version": "1",
+    "capabilities": [
+      "chat"
+    ],
+    "task": "mock",
+    "backend": "mock",
+    "path": "",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "resident_mb": 64,
+    "request_mb": 8,
+    "max_input_bytes": 1048576,
+    "options": {},
+    "validation_input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "你好"
+        }
+      ],
+      "max_new_tokens": 8
+    }
+  },
+  {
+    "name": "mock-asr",
+    "version": "1",
+    "capabilities": [
+      "asr"
+    ],
+    "task": "mock",
+    "backend": "mock",
+    "path": "",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "resident_mb": 64,
+    "request_mb": 8,
+    "max_input_bytes": 1048576,
+    "options": {},
+    "validation_input": {
+      "audio_base64": "UklGRmQBAABXQVZFZm10IBAAAAABAAEAgD4AAAB9AAACABAAZGF0YUABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
+    }
+  },
+  {
+    "name": "mock-tts",
+    "version": "1",
+    "capabilities": [
+      "tts"
+    ],
+    "task": "mock",
+    "backend": "mock",
+    "path": "",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "resident_mb": 64,
+    "request_mb": 8,
+    "max_input_bytes": 1048576,
+    "options": {},
+    "validation_input": {
+      "text": "你好，世界。"
+    }
+  }
+]

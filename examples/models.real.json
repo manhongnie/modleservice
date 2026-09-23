@@ -1,0 +1,81 @@
+[
+  {
+    "name": "qwen3.5-0.8b",
+    "version": "2fc06364715b",
+    "capabilities": [
+      "chat"
+    ],
+    "task": "qwen_chat",
+    "backend": "transformers",
+    "path": "models/qwen3.5-0.8b",
+    "resident_mb": 5500,
+    "request_mb": 512,
+    "options": {
+      "threads": 4,
+      "max_input_tokens": 1024,
+      "max_new_tokens": 128
+    },
+    "validation_input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "请只回答：你好"
+        }
+      ],
+      "max_new_tokens": 8
+    },
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "max_input_bytes": 2097152
+  },
+  {
+    "name": "whisper-tiny",
+    "version": "169d4a4341b3",
+    "capabilities": [
+      "asr"
+    ],
+    "task": "whisper_asr",
+    "backend": "transformers",
+    "path": "models/whisper-tiny",
+    "resident_mb": 768,
+    "request_mb": 128,
+    "options": {
+      "threads": 4,
+      "language": "zh",
+      "max_audio_seconds": 30,
+      "max_new_tokens": 128
+    },
+    "validation_input": {
+      "audio_base64": "UklGRmQBAABXQVZFZm10IBAAAAABAAEAgD4AAAB9AAACABAAZGF0YUABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
+    },
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "max_input_bytes": 2097152
+  },
+  {
+    "name": "vits-zh-aishell3",
+    "version": "icefall-2024-04-06",
+    "capabilities": [
+      "tts"
+    ],
+    "task": "vits_tts",
+    "backend": "sherpa_tts",
+    "path": "models/vits-icefall-zh-aishell3",
+    "resident_mb": 512,
+    "request_mb": 128,
+    "options": {
+      "threads": 2,
+      "max_text_chars": 300,
+      "speakers": 174
+    },
+    "validation_input": {
+      "text": "你好，世界。"
+    },
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "max_input_bytes": 2097152
+  }
+]

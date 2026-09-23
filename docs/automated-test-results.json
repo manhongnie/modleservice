@@ -1,0 +1,16 @@
+{
+  "command": ".venv/bin/python -m pytest -q --junitxml=var/pytest-results.xml",
+  "timestamp_utc": "2026-09-23T07:39:35.163353+00:00",
+  "python": "3.13.13",
+  "results": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "169",
+    "time": "19.087",
+    "timestamp": "2026-09-23T15:39:02.081756+08:00",
+    "hostname": "ManhongNie"
+  },
+  "scope": "Full framework suite, controlled fault injection, real TCP tests and real OpenVINO small tensor graph. Qwen/ASR/TTS evidence is recorded separately."
+}

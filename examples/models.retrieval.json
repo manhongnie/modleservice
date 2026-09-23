@@ -1,0 +1,126 @@
+[
+  {
+    "name": "bge-m3",
+    "version": "local-export-v1",
+    "capabilities": [
+      "embeddings"
+    ],
+    "task": "bge_m3_dense",
+    "backend": "openvino",
+    "path": "models/bge-m3/model.xml",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "resident_mb": 3072,
+    "request_mb": 128,
+    "options": {
+      "output_name": "last_hidden_state",
+      "max_length": 512
+    },
+    "validation_input": {
+      "texts": [
+        "你好，世界"
+      ]
+    }
+  },
+  {
+    "name": "bge-reranker-v2-m3",
+    "version": "local-export-v1",
+    "capabilities": [
+      "rerank"
+    ],
+    "task": "bge_reranker",
+    "backend": "openvino",
+    "path": "models/bge-reranker-v2-m3/model.xml",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "resident_mb": 3072,
+    "request_mb": 128,
+    "options": {
+      "output_name": "logits",
+      "max_length": 512,
+      "sigmoid": true
+    },
+    "validation_input": {
+      "query": "中国首都",
+      "documents": [
+        "北京",
+        "上海"
+      ]
+    }
+  },
+  {
+    "name": "chinese-clip-text",
+    "version": "local-export-v1",
+    "capabilities": [
+      "embeddings"
+    ],
+    "task": "chinese_clip",
+    "backend": "openvino",
+    "path": "models/chinese-clip-text/model.xml",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "resident_mb": 1024,
+    "request_mb": 128,
+    "options": {
+      "mode": "text",
+      "output_name": "text_embeds"
+    },
+    "validation_input": {
+      "texts": [
+        "你好，世界"
+      ]
+    }
+  },
+  {
+    "name": "chinese-clip-image",
+    "version": "local-export-v1",
+    "capabilities": [
+      "image_embeddings"
+    ],
+    "task": "chinese_clip",
+    "backend": "openvino",
+    "path": "models/chinese-clip-image/model.xml",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "concurrency": 1,
+    "resident_mb": 1024,
+    "request_mb": 128,
+    "options": {
+      "mode": "image",
+      "output_name": "image_embeds"
+    },
+    "validation_input": {
+      "images": [
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aWQ0AAAAASUVORK5CYII="
+      ]
+    }
+  },
+  {
+    "name": "bm42",
+    "version": "remote-v1",
+    "capabilities": [
+      "sparse_embeddings"
+    ],
+    "task": "bm42_http",
+    "backend": "http",
+    "path": "",
+    "device": "EXTERNAL",
+    "load_policy": "on_demand",
+    "concurrency": 2,
+    "resident_mb": 0,
+    "request_mb": 8,
+    "options": {
+      "base_url": "http://127.0.0.1:9010",
+      "infer_path": "/sparse-embeddings",
+      "timeout_s": 30
+    },
+    "validation_input": {
+      "texts": [
+        "hello world"
+      ]
+    }
+  }
+]

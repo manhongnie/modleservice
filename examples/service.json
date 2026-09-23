@@ -1,0 +1,15 @@
+{
+  "database": "var/models.sqlite3",
+  "model_roots": ["models"],
+  "total_memory_mb": 4096,
+  "max_executions": 4,
+  "queue_size": 16,
+  "queue_timeout_s": 10,
+  "execution_timeout_s": 120,
+  "load_timeout_s": 180,
+  "drain_timeout_s": 30,
+  "max_body_bytes": 2097152,
+  "max_output_bytes": 8388608,
+  "maintenance_interval_s": 1,
+  "http_allowed_hosts": ["127.0.0.1", "localhost"]
+}
