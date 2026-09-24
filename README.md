@@ -1,171 +1,195 @@
-# 单机共享多模型推理服务
+# Shared Model Service
 
-一个 FastAPI 控制进程、SQLite 登记表，模型按需启动独立执行进程并复用。已实现模型增加、验证、加载、仅卸载、启用、停用、移除；业务按能力和名称/别名访问，模型路径与后端只在管理配置中出现。
+**单机、进程隔离、可扩展的多模型推理服务。**
 
-本仓库开始为空，没有可复用的现有服务。工程根据用户提供的 REQUEST / ADD / REMOVE 流程图实现；骨架、接口和分阶段说明见 [实施计划](docs/implementation-plan.md)，实际验证记录见 [验证报告](docs/verification.md)。
+通过一套 HTTP API 为多个业务提供对话、视觉问答、检索、语音、图片和短视频生成能力。服务使用 FastAPI 接收请求、SQLite 保存模型登记，并按需启动和复用独立的模型执行进程，适合在一台机器上共享有限的 CPU、内存和 GPU 资源。
 
-**当前工作区已准备好 `.venv`、三个真实模型权重和登记表。** Qwen3.5-0.8B、Whisper Tiny、中文 VITS 已实测、启用并设默认别名，验证后已卸载。直接设置两组不同的密钥并用 `examples/service.production.json` 启动即可按需调用，无需重新下载或登记。
+## 核心能力
 
-```bash
-export BUSINESS_API_KEY="$(openssl rand -hex 24)"
-export ADMIN_API_KEY="$(openssl rand -hex 24)"
-.venv/bin/python -m model_service --config examples/service.production.json
-```
+- **统一调用**：业务只指定能力、模型名称或别名和输入，无需了解模型路径与推理后端。
+- **按需加载与复用**：支持常驻、按需加载和空闲卸载；模型执行与 HTTP 控制进程隔离。
+- **资源准入**：统一管理内存、显存、模型并发、全局执行名额和有界等待队列。
+- **模型生命周期**：登记时实际加载并验证，验证通过才允许启用；支持版本、别名、依赖检查和等待在途请求结束后卸载。
+- **流式输出与取消**：对话支持 SSE 增量文本；执行停止并完成输出清理后才归还请求额度。
+- **可扩展插件**：任务插件负责输入输出，后端负责加载、推理和释放；兼容模型可仅通过配置接入。
+- **运维接口**：独立的业务与管理密钥、健康检查、队列与进程状态、Prometheus 格式指标和 SQLite 在线备份。
 
-生产加固后全量 **169 项测试通过**，证据见 [验证报告](docs/verification.md)；Qwen/ASR/TTS 真实推理和取消均实测。ASR 有识别错误，BGE/CLIP/BM42 未完成真实模型验证，详细边界请见验证报告。启动、添加/删除模型和备份的完整步骤见 [操作手册](docs/operations.md)，模块依赖见 [架构说明](docs/architecture.md)。
+## 支持的模型与能力
 
-## 快速启动（明确标记的 Mock）
+下表列出仓库提供的插件和配置示例。模型权重需要单独准备，克隆源码不会自动安装或登记这些模型。
 
-Linux、Python 3.11+。所有命令在仓库根目录执行；配置中的相对路径以工作目录为基准。
+| 能力 | 模型示例 | 推理后端 | 配置与说明 |
+| --- | --- | --- | --- |
+| 对话、看图问答 | Qwen3.5-4B AWQ、Qwen2.5-VL-7B INT4 | OpenVINO GenAI，CPU | [配置](examples/models.genai.json) · [指南](docs/genai-models.md) |
+| 稠密检索、重排序 | BGE-M3、BGE Reranker、Qwen3 Embedding / Reranker | OpenVINO，CPU | [配置](examples/models.retrieval-migrated.json) · [指南](docs/retrieval-migration.md) |
+| 图文检索、稀疏检索 | Chinese-CLIP、OpenAI CLIP、BM42 | OpenVINO，CPU | [配置](examples/models.retrieval-migrated.json) · [指南](docs/retrieval-migration.md) |
+| 语音识别、合成、声纹、声音克隆 | SenseVoice、Matcha、ERes2Net、ZipVoice | sherpa-onnx，CPU | [配置](examples/models.sherpa.json) · [指南](docs/sherpa-models.md) |
+| 图片生成 | SD-Turbo | OpenVINO GenAI，CPU | [配置](examples/models.media.json) · [指南](docs/media-models.md) |
+| 短视频生成 | AnimateDiff-Lightning + epiCRealism | Diffusers / PyTorch，CUDA | [配置](examples/models.media.json) · [指南](docs/media-models.md) |
 
-```bash
-python -m venv .venv
-.venv/bin/python -m pip install -e '.[test]'
-export BUSINESS_API_KEY="$(openssl rand -hex 24)"
-export ADMIN_API_KEY="$(openssl rand -hex 24)"
-.venv/bin/python -m model_service --config examples/service.json --host 127.0.0.1 --port 8000
-```
+另提供 HTTP 后端用于对接外部推理服务，以及用于开发和接口联调的 Mock 后端。旧 Qwen3.5-0.8B、Whisper Tiny 和 VITS 示例保留在 [examples/legacy](examples/legacy/README.md)。
 
-另开终端，设置同一组环境变量（不要重新生成密钥），登记并执行 Mock 验证，再建立默认别名：
+## 快速开始
 
-```bash
-.venv/bin/python scripts/register_models.py examples/models.mock.json --defaults
-curl -s http://127.0.0.1:8000/v1/embeddings \
-  -H "Authorization: Bearer $BUSINESS_API_KEY" -H 'Content-Type: application/json' \
-  -d '{"input":{"texts":["多个业务共享一个模型实例"]}}'
-```
+### 1. 安装基础服务
 
-响应中 `mock:true` 及输出提示表示合成测试结果，不是模型真实推理。API 密钥必须非空且业务/管理集合互不重叠，无默认弱密钥。`/health` 和 `/ready` 公开，`/admin/status`、`/admin/models`、`/admin/metrics` 需管理密钥，公开 Swagger/OpenAPI 已关闭。
-
-当前开发环境使用 `uv` 建立了 `.venv`，其中可以没有 pip；继续安装可使用 `uv pip install --python .venv/bin/python -e '.[test]'`。
-
-`requirements-tested.txt` 保存本次 Linux / Python 3.13 的完整可选依赖版本快照；使用它重建时需要 CPU Torch 官方索引：`uv pip install --python .venv/bin/python -r requirements-tested.txt --extra-index-url https://download.pytorch.org/whl/cpu`。
-
-## 新增的三个真实模型
-
-提供 Qwen3.5-0.8B 文本对话、Whisper Tiny 多语种 ASR、中文 VITS Aishell3 TTS 的插件、固定来源配置及下载脚本。模型验证结果、精确版本和尚未验证项见 [模型接入说明](docs/model-plugins.md) 和 [实测数据](docs/models-validation.json)。
+需要 Python **3.11 或更高版本**；现有完整验证环境为 Linux / Python 3.13。以下命令均在下载或克隆后的仓库根目录执行。基础服务和 Mock 示例不需要模型权重或 GPU。
 
 ```bash
-# CPU torch 单独安装，避免默认拉取不需要的 CUDA 包。
-.venv/bin/python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
-.venv/bin/python -m pip install -e '.[generative,speech,openvino,text]'
-.venv/bin/python scripts/download_models.py qwen asr tts
-# 使用较大的明确预算；先正常停止旧控制进程。
-.venv/bin/python -m model_service --config examples/service.production.json
-# 另一终端，密钥相同：先验证各模型，登记默认别名，然后释放验证用驻留进程。
-.venv/bin/python scripts/register_models.py examples/models.real.json --defaults --unload-after-validation
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
 ```
 
-`service.real.json` 使用 8192 MiB 估算预算，部署时按实际可用内存调整；Qwen 的配置预算超过基础 4096 MiB 示例，所以不能用基础示例直接登记它。管理注册会实际加载并运行 `validation_input`，失败就保持禁用、记录原因。所有运行时加载都使用本地文件，不自动下载，也不执行模型自定义远程代码。
+也可以使用 `uv venv .venv --python 3.13` 创建环境，再运行 `uv pip install --python .venv/bin/python -e .`。
+
+### 2. 启动开发服务
+
+业务和管理密钥必须非空且不同。用 Python 生成随机密钥，在当前终端保留它们：
 
 ```bash
-curl -s http://127.0.0.1:8000/v1/chat \
-  -H "Authorization: Bearer $BUSINESS_API_KEY" -H 'Content-Type: application/json' \
-  -d '{"model":"qwen3.5-0.8b","input":{"messages":[{"role":"user","content":"请用一句话解释向量检索"}],"max_new_tokens":64}}'
+export BUSINESS_API_KEY="$(python -c 'import secrets; print(secrets.token_hex(24))')"
+export ADMIN_API_KEY="$(python -c 'import secrets; print(secrets.token_hex(24))')"
 
-curl -s http://127.0.0.1:8000/v1/tts \
-  -H "Authorization: Bearer $BUSINESS_API_KEY" -H 'Content-Type: application/json' \
-  -d '{"input":{"text":"你好，这里是共享模型服务。","speaker_id":0,"speed":1.0}}' > /tmp/tts-response.json
-.venv/bin/python -c 'import json,base64; r=json.load(open("/tmp/tts-response.json")); open("/tmp/speech.wav","wb").write(base64.b64decode(r["output"]["audio_base64"]))'
+python -m model_service --config examples/service.json --check-config
+python -m model_service --config examples/service.json
 ```
 
-ASR 接受 16 kHz 单声道 PCM16 WAV（30 秒上限），TTS 返回 WAV 的 base64。可用以下 Python 调用已有录音：
+默认监听 `127.0.0.1:8000`。相对路径以启动时的工作目录为基准，运行数据写入 `var/`，本地权重放在 `models/`。这两个目录中的运行产物不提交到 Git。
 
-```python
-import base64, os, httpx
-audio = base64.b64encode(open("input-16khz-mono.wav", "rb").read()).decode()
-r = httpx.post("http://127.0.0.1:8000/v1/asr",
-    headers={"Authorization": "Bearer " + os.environ["BUSINESS_API_KEY"]},
-    json={"input": {"audio_base64": audio}}, timeout=180)
-r.raise_for_status()
-print(r.json()["output"]["text"])
+### 3. 登记 Mock 模型并调用
+
+打开第二个终端，进入同一仓库并激活虚拟环境。设置**与服务终端相同**的密钥，不要重新生成：
+
+```bash
+source .venv/bin/activate
+export ADMIN_API_KEY='<服务终端使用的管理密钥>'
+export BUSINESS_API_KEY='<服务终端使用的业务密钥>'
+
+python scripts/register_models.py examples/models.mock.json --defaults --unload-after-validation
+
+curl --fail-with-body http://127.0.0.1:8000/ready
+
+curl --fail-with-body http://127.0.0.1:8000/v1/embeddings \
+  -H "Authorization: Bearer $BUSINESS_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"input":{"texts":["多个业务共享模型"]}}'
 ```
 
-## 业务接口
+响应包含 `request_id`、`model`、`output`、`mock` 和 `done`。这里的 `mock:true` 表示合成的联调结果，不是真实模型推理。`--defaults` 为每种能力设置默认别名，之后可省略请求中的 `model`。
 
-统一请求：`POST /v1/{capability}`，body 为 `{"model":"名称、名称@版本或别名，可省略", "input":{...}, "stream":false}`。省略模型时解析 `default:{capability}`；一个名称有多个版本时需指定版本或别名。输出包含 `request_id`、`model`（唯一版本）、`output`、`mock`、`done`。
+## 使用真实模型
 
-| 能力 | input | output 主要字段 |
+基础安装不包含机器学习运行时。按需要安装可选依赖，并使用显式准备脚本下载权重；模型加载与推理阶段只使用本地文件。
+
+| 使用场景 | 可选依赖组合 | 准备脚本 |
 | --- | --- | --- |
-| embeddings | `{"texts":["文本"]}` | `embeddings` 稠密向量 |
-| rerank | `{"query":"问题","documents":["文档"]}` | `results` 下的 index、score |
-| image_embeddings | `{"images":["图片base64"]}` | `embeddings` |
-| sparse_embeddings | `{"texts":["text"]}` | BM42 HTTP 服务约定的稀疏向量 |
-| chat | `messages`、可选 `max_new_tokens` | text、usage |
-| asr | `audio_base64` | text |
-| tts | text、可选 speaker_id/speed | audio_base64、sample_rate、format |
+| 对话、视觉问答 | `.[openvino,genai,text]` | `scripts/prepare_genai_models.py` |
+| 向量、排序、图文与稀疏检索 | `.[openvino,retrieval,generative]` | `scripts/prepare_retrieval_models.py` |
+| 语音与声纹 | `.[speech]` | `scripts/prepare_sherpa_models.py` |
+| 图片与视频生成 | `.[openvino,genai,text,media]` | `scripts/prepare_media_models.py` |
 
-`stream:true` 使用 SSE：`chunk`、最终 `result`（`done:true`）、异常 `error`。Qwen 已提供真实增量文字块（`output.delta`、`streaming_mode:incremental`），末个内容块包含完整 `text`、`usage` 和 `finish_reason`，之后发送终止帧。ASR/TTS 仍完整计算后返回一块（`streaming_mode:buffered`），不支持逐块语音输出。慢读者超过有界缓冲会明确失败并确认停止，无静默丢块。
+下载默认使用系统 `curl`；视频编码还需要 `ffmpeg`。CUDA 视频需要匹配硬件与驱动的 PyTorch CUDA 构建。准备脚本固定模型来源版本，校验文件长度及上游提供的 SHA256，并记录本地文件摘要。
 
-```bash
-curl -N http://127.0.0.1:8000/v1/chat \
-  -H "Authorization: Bearer $BUSINESS_API_KEY" -H 'Content-Type: application/json' \
-  -d '{"input":{"messages":[{"role":"user","content":"你好"}],"max_new_tokens":16},"stream":true}'
-```
+CLIP 首次准备需使用 `--export-clip`，通过 PyTorch 导出 OpenVINO IR；已有 IR 的检索推理只需 `.[openvino,retrieval]`。
 
-无静默重试。SSE 已输出后发生错误会发送 `error`，不会重新执行。普通返回和流式返回均在传输期间持有执行许可；断连设置取消信号，等待底层停止。某些编译/推理实现无法立即中断，超时表示提出取消，资源在停止确认之前仍被占用，响应清理可能超过配置时限。
-
-## 管理接口
-
-所有管理调用使用 `Authorization: Bearer $ADMIN_API_KEY`。配置及变更即时持久化，无需重启来增加兼容模型配置。新增代码插件需要重启。
-
-| 操作 | 方法及路径 | 输入/规则 |
-| --- | --- | --- |
-| 增加并验证 | `POST /admin/models` | `{"config":ModelConfig,"enable":true}` |
-| 重新验证 | `POST /admin/models/{name@version}/validate?enable=true` | 验证失败保留登记，禁用 |
-| 加载/启用 | `POST /admin/models/{id}/load` 或 `/enable` | 已验证模型可预热；加载不改变启用状态 |
-| 仅卸载 | `POST /admin/models/{id}/unload` | 保留登记/启用状态，下次重新加载 |
-| 停用 | `POST /admin/models/{id}/disable` | 保留登记，禁止业务调用 |
-| 移除 | `DELETE /admin/models/{id}` 或 `POST .../remove` | 默认不删除磁盘文件 |
-| 别名 | `PUT /admin/aliases/{alias}` | `{"model_id":"name@version"}` |
-| 删除别名 | `DELETE /admin/aliases/{alias}` | 移除前需迁移/删除关联别名 |
-| 登记依赖 | `PUT /admin/dependencies/{business}` | `{"model_id":"name@version"}` |
-| 删除依赖 | `DELETE /admin/dependencies/{business}` | 仅处理已登记依赖 |
-| 就绪与指标 | `GET /ready`、`GET /admin/metrics` | 就绪返回 200/503；指标需管理密钥 |
-| 模型列表 | `GET /admin/models` | 配置、启用与加载态 |
-| 状态 | `GET /admin/status` | 启用/加载态、队列、预算、PID/RSS、耗时、近期事件 |
-| 远端停止确认 | `POST /admin/requests/{request_id}/reconcile` | `{"confirmed_stopped":true}`，仅在管理员已核实远端停止后调用 |
+例如，准备对话与视觉模型：
 
 ```bash
-curl -s http://127.0.0.1:8000/admin/status -H "Authorization: Bearer $ADMIN_API_KEY"
-curl -s -X PUT http://127.0.0.1:8000/admin/aliases/search-embedding \
-  -H "Authorization: Bearer $ADMIN_API_KEY" -H 'Content-Type: application/json' \
-  -d '{"model_id":"mock-embeddings@1"}'
-curl -s -X POST 'http://127.0.0.1:8000/admin/models/mock-embeddings@1/unload?timeout_s=10' \
-  -H "Authorization: Bearer $ADMIN_API_KEY"
+python -m pip install -e '.[openvino,genai,text]'
+python scripts/prepare_genai_models.py chat vision
 ```
 
-移除/停用前检查别名和已登记业务依赖，有引用则返回 `model_referenced`，要求先迁移或删除关联。随后暂停新请求、拒绝排队请求，等待在途请求结束；`drain_timeout` 保留暂停状态，不自动强杀。可重试管理操作；若决定恢复业务，调用 `enable`。卸载已启用的 `resident` 模型后，常驻策略会在下一次维护时重新加载；长期释放请停用或创建采用按需策略的新版本。
-
-## 后端与插件
-
-`contracts.py` 定义稳定契约，`service.py` 是兼容入口。`coordinator.py` 协调业务请求，`management.py` 负责模型管理，`runtime.py` 负责组装与恢复；`configuration.py` 管策略，`observability.py` 管审计与指标。SQLite 只由登记表访问；调度器通过公开接口独占预算账本；重型模型 SDK 和推理只在子进程中运行。`tasks/__init__.py` 和 `backends/__init__.py` 显式登记实现，未知名称失败。
-
-- 任务插件负责格式检查、预处理、后处理；后端负责加载、推理、释放。
-- OpenVINO 是首个本地通用张量后端，通过 `Core.compile_model` 和 `InferRequest` 执行，无 OVMS 依赖。
-- Transformers 后端接入 Qwen/Whisper，Sherpa ONNX 后端接入中文 VITS；这两个是已有库适配，不要求导出所有模型为同一格式。
-- HTTP 适配器向 allowlist 内 `base_url + infer_path` 发送同步 JSON。任务 `http_json` 保留请求/结果对象；现有服务协议不同则新增兼容任务/后端适配器。密钥从 `auth_env` 读取，不写入模型配置。
-- HTTP 模型状态明确是 `external`，加载/卸载只建立/关闭本地适配器。取消等待同步远端响应；网络故障、远端状态未知时持久化隔离占用，需人工确认停止才能释放。不能通过 HTTP 202 接受异步任务后假定推理结束，异步任务服务需实现专门的完成/取消协议。
-
-原需求的 BGE-M3 Dense、BGE Reranker、Chinese-CLIP、BM42 配置在 [models.retrieval.json](examples/models.retrieval.json)。BM42 仅提供真实 HTTP 服务边界，未用词频/hash 模拟 BM42；缺少权重、导出或服务时明确失败。插件规范和来源参见 [模型接入说明](docs/model-plugins.md)。
-
-## 资源、运行及恢复边界
-
-- 原子预留：驻留预算按实例一次，临时预算按每个请求；并同时检查模型并发和全局名额。模型版本/执行配置不可变，同一实例有单加载锁。
-- FIFO 有界等待队列，支持队列超时/取消。超出总预算直接拒绝；暂时不足排队。空闲按 `idle_seconds` 回收；首版不做抢占或按内存压力淘汰，必要时主动卸载空闲模型。
-- RSS 是实际进程观测，MiB 预算是准入估算，不是硬内存隔离；未实现 GPU 显存统计、cgroup 限额或自适应预算。请为控制进程和操作系统预留余量。
-- 请求体按实际接收字节限制；模型另有输入限制；输出按请求累计限制。业务输入不能指定文件/URL。模型目录和辅助文件受 allowlist 与符号链接检查，管理员应确保这些目录不能由不可信业务写入。
-- 单数据库独占文件锁拒绝重复控制进程；不要运行 `uvicorn --workers N`。Linux 子进程在父进程异常退出时收到 parent-death signal，避免重启后重复驻留。
-- 重启恢复模型配置、验证、启用、别名、依赖和未完成管理暂停；不会把旧的本地加载态恢复成已加载。远端在途意图先写 SQLite，崩溃后恢复为隔离占用。
-- JSON 请求/管理日志不记录输入、输出或密钥；SQLite 保留最近 10000 条事件。`/admin/status` 同时给出加载/推理耗时、队列长度、预算、进程 RSS。
-- 提供 systemd/nginx TLS 部署模板但未实际部署；无多租户配额、按模型 ACL、内置 TLS 终结、批调度、硬件设备池或分布式组件。多业务凭业务密钥共享已启用能力；需要额外隔离可在 API 鉴权边界扩展。
-
-## 测试
+停止开发服务后，按硬件条件调整 [多模态服务配置](examples/service.multimodal.json)。该配置启用生产模式并禁止 Mock；两组密钥均需至少 32 个字符，上文生成的密钥符合此要求。开发示例与多模态示例默认共用 `var/models.sqlite3`；若已经登记 Mock 模型，请先为多模态配置设置一个独立的 `database` 路径，再启动：
 
 ```bash
-.venv/bin/python -m pytest -q
+python -m model_service --config examples/service.multimodal.json
 ```
 
-已准备真实权重和登记表后，还可运行 `.venv/bin/python scripts/smoke_http_models.py`，它会按生产配置临时启动 CLI 服务，经真实 HTTP 调用三个模型、验证 Qwen SSE/断连/复用并卸载，最后关闭服务。明确使用 Mock 的有界过载测试为 `scripts/validate_http_load.py`；真实执行器增量测试为 `scripts/validate_real_streaming.py`。完整控制流程可用 `scripts/validate_service_models.py` 重跑，纯执行器实测使用 `scripts/validate_real_models.py`。
+**一个数据库只能由一个控制进程使用**，不要启动多个 Web worker 或开启自动 reload。
 
-覆盖重复加载、队列满/超时、资源不足、流式取消与发送期间持有许可、移除/依赖/排空超时、进程故障、重启恢复、外部 HTTP 生命周期与未知执行、目录白名单、分离鉴权。实际执行结果与未验证范围见 [验证报告](docs/verification.md)；有测试代码并不等于真实模型质量已经验收。
+服务启动后，在另一个终端登记已经准备好的模型：
+
+```bash
+python scripts/register_models.py examples/models.genai.json --defaults --unload-after-validation
+
+curl --fail-with-body http://127.0.0.1:8000/v1/chat \
+  -H "Authorization: Bearer $BUSINESS_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"input":{"messages":[{"role":"user","content":"请用一句话解释向量检索"}],"max_new_tokens":64}}'
+```
+
+登记会实际加载模型并执行 `validation_input`。成功后才启用，失败时保留禁用登记和错误原因；`--unload-after-validation` 在验证后释放模型进程，业务调用时再按需加载。
+
+多模态示例采用 **12288 MiB 内存预算、10240 MiB 显存预算和 1 个执行名额**，来自一台 16 GiB RAM / 12 GiB NVIDIA GPU 的验证机器。它是部署参考，不是所有模型的统一硬件要求；请按所选模型调整预算，并为操作系统、控制进程和其他应用留出空间。[多模态部署指南](docs/multimodal-deployment.md)包含完整准备、离线登记和默认别名设置步骤。
+
+## API 概览
+
+业务统一使用 `POST /v1/{capability}`，并携带 `Authorization: Bearer $BUSINESS_API_KEY`：
+
+```json
+{
+  "model": "模型名称、name@version 或别名",
+  "input": {},
+  "stream": false
+}
+```
+
+`model` 可省略，此时解析 `default:{capability}`。`input` 由对应任务插件校验，具体字段见各模型指南。音频、图片和视频通过 Base64 传输，业务接口不接受本地权重路径。
+
+将 `stream` 设为 `true`，使用 `curl -N` 接收 SSE 的 `chunk`、`result` 或 `error` 事件。GenAI 对话提供真实增量文字；其他能力目前整段计算后返回。请求在输出和底层执行均结束前持续占用许可，已输出部分内容的失败请求不会静默重试。
+
+管理接口使用 `Authorization: Bearer $ADMIN_API_KEY`：
+
+| 操作 | 方法及路径 |
+| --- | --- |
+| 健康、就绪检查，无需密钥 | `GET /health`、`GET /ready` |
+| 模型列表、运行状态、指标 | `GET /admin/models`、`GET /admin/status`、`GET /admin/metrics` |
+| 登记并验证模型 | `POST /admin/models`，输入 `{"config": ModelConfig, "enable": true}` |
+| 验证、加载、卸载、启用、停用 | `POST /admin/models/{name@version}/{operation}`，operation 为 `validate`、`load`、`unload`、`enable`、`disable` |
+| 移除模型登记 | `DELETE /admin/models/{name@version}` |
+| 设置、删除别名 | `PUT /admin/aliases/{alias}`、`DELETE /admin/aliases/{alias}` |
+| 设置、删除业务依赖 | `PUT /admin/dependencies/{business}`、`DELETE /admin/dependencies/{business}` |
+| 确认未知远端执行已停止 | `POST /admin/requests/{request_id}/reconcile` |
+
+卸载保留登记与启用状态，下次请求可重新加载；停用或移除前需要处理别名和已登记业务依赖。移除默认保留磁盘权重。等待在途请求结束超时会保留暂停状态，不自动强杀。完整操作、故障处理和备份方法见 [操作手册](docs/operations.md)。
+
+## 配置与扩展
+
+模型配置包含唯一版本、能力、路径、任务、后端、设备、加载策略、并发、内存与显存预算，以及真实验证输入 `validation_input`。模型文件必须位于服务配置的 `model_roots` 中。
+
+同一个 `name@version` 的配置不可原地修改。升级时登记新版本、验证、切换别名，再卸载或移除旧版本；保留旧版本可用于回滚。
+
+兼容现有任务和后端的模型只需添加 JSON 配置。新的推理实现分为两层：
+
+- `model_service/tasks/`：实现 `validate → prepare → finish`，负责输入校验、预处理和后处理。
+- `model_service/backends/`：实现 `load → infer → close`，负责模型运行时；增量推理可实现 `stream`，任务可实现 `finish_chunk`。
+
+插件在各自的 `__init__.py` 中登记，代码更新后重启服务。设计与示例见 [架构说明](docs/architecture.md)、[插件指南](docs/model-plugins.md)和[执行语义](docs/execution.md)。
+
+## 开发与验证
+
+```bash
+python -m pip install -e '.[test]' 'numpy>=2,<3' 'pillow>=11,<13' 'mmh3>=5,<6'
+python -m pytest -q
+```
+
+上述安装覆盖基础测试的直接依赖。部分测试需要 OpenVINO、PyTorch 或系统 `ffmpeg` / `ffprobe`，缺少时会跳过；完整环境安装方式见 [部署指南](docs/multimodal-deployment.md)。[requirements-tested.txt](requirements-tested.txt) 是已验证 Linux / Python 3.13 / CUDA 环境的版本快照，不是跨平台通用安装清单。
+
+仓库保存了 326 项自动化测试和 15 个真实模型的历史验证记录，详见 [验证说明](docs/verification.md)、[自动化结果](docs/automated-test-results.json)和[部署报告](docs/deployment-validation.json)。这些报告记录特定环境、版本与输入下的结果；Mock 和受控管线测试用于检查框架行为，真实效果与容量由独立模型报告说明。
+
+欢迎通过 Issue 提交问题或通过 Pull Request 贡献改进。问题报告请附上环境、模型与后端版本、最小复现步骤及脱敏日志；增加插件时请补充输入输出、取消和失败场景测试，声明依赖与模型来源，并单独记录真实模型验证结果。
+
+## 部署边界
+
+- 服务面向单机、单控制进程，暂不提供分布式调度、高可用、多租户配额或模型级 ACL。
+- 内存与显存预算用于准入估算，不是操作系统或 GPU 的硬隔离；FIFO 队列可能队头阻塞，不抢占执行中的模型。
+- 原生编译、预处理或编码无法立即中断时，取消会等待底层真正停止；HTTP 后端无法确认远端停止时保留隔离额度。
+- 当前图片与短视频示例有尺寸、帧数限制，音频按整段 WAV 处理；暂不支持实时音频流、长视频或插件热更新。
+- 默认仅监听本机。生产部署请配置独立密钥、可信模型目录和反向代理，参考 [systemd 模板](deploy/model-service.service)与 [nginx 模板](deploy/nginx.conf.example)。
+
+## 许可证与模型权重
+
+项目源码的开源许可证尚待确定，仓库目前未附 `LICENSE` 文件。
+
+模型权重不随源码分发，其许可证与使用条件由各自的上游项目规定。模型准备脚本及对应指南记录来源、版本和可获得的许可证元数据；部分量化或转换仓库没有完整许可证声明，技术验证结果不代表模型授权结论。

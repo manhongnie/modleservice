@@ -1,3 +1,5 @@
+> 当前多模态部署使用 `examples/service.multimodal.json`。下文旧模型名称示例属于先前版本，新增模型与调用清单见 [README](../README.md)。
+
 # 启动、调用和管理模型
 
 这份手册适用于单机单控制进程部署。当前工作区已有 Qwen3.5-0.8B、Whisper Tiny ASR、中文 VITS TTS 的权重和持久化登记，正常启动即可按需加载。生产配置启用更严格的密钥检查并拒绝 Mock；它不等于已经完成真实机器的容量、安全或质量验收。实测范围见 [验证报告](verification.md)。
@@ -28,7 +30,7 @@ curl --fail-with-body http://127.0.0.1:8000/admin/models \
 
 ```bash
 .venv/bin/python scripts/download_models.py qwen asr tts
-.venv/bin/python scripts/register_models.py examples/models.real.json --defaults --unload-after-validation
+.venv/bin/python scripts/register_models.py examples/legacy/models.real.json --defaults --unload-after-validation
 ```
 
 第二条命令要求服务已启动。它通过管理 API 实际验证模型，再设置默认别名；已有相同版本且配置一致时会重新验证；配置不同则明确拒绝并要求新版本，不能把文件存在当成可用。当前 8192 MiB 是准入估算预算，不是操作系统硬限制；Qwen 实测驻留约 5.3 GiB，机器还需给控制进程、临时输入和操作系统留余量。
@@ -85,7 +87,7 @@ print(response.json()['output']['text'])
 
 把兼容模型的权重放在 `model_roots` 允许目录中。当前为 `models/`；业务调用方不得有该目录的写权限。配置中的 `path` 指向服务器上的本地文件，不能是客户端路径或任意下载 URL。已有任务插件和后端能处理的模型，只需增加配置；新的处理协议/预后处理方式要新增受信任插件代码，并重启控制服务。
 
-配置示例位于 `examples/models.real.json`（对话/ASR/TTS）、`examples/models.retrieval.json`（BGE-M3 Dense、Reranker、Chinese-CLIP、BM42 边界）。检索模型示例不代表真实模型已完成验收。
+配置示例位于 `examples/legacy/models.real.json`（对话/ASR/TTS）、`examples/models.retrieval.json`（BGE-M3 Dense、Reranker、Chinese-CLIP、BM42 边界）。检索模型示例不代表真实模型已完成验收。
 
 首次登记已有示例文件中的 Qwen 配置，可以生成单模型请求并提交：
 
@@ -93,7 +95,7 @@ print(response.json()['output']['text'])
 .venv/bin/python - <<'PY'
 import json
 from pathlib import Path
-config = json.loads(Path('examples/models.real.json').read_text())[0]
+config = json.loads(Path('examples/legacy/models.real.json').read_text())[0]
 Path('/tmp/add-model.json').write_text(json.dumps({'config': config, 'enable': True}))
 PY
 curl --fail-with-body http://127.0.0.1:8000/admin/models \

@@ -1,0 +1,661 @@
+{
+  "status": "completed_real_memory_probe",
+  "started_unix": 1790213609.9738915,
+  "python": "3.13.13",
+  "model_id": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+  "runtime": "sherpa-onnx CPU, actual installed version recorded at load",
+  "configuration": {
+    "name": "sensevoice-small-int8",
+    "version": "2024-07-17-c71f0ce00bec",
+    "capabilities": [
+      "asr"
+    ],
+    "task": "sherpa_sensevoice",
+    "backend": "sherpa_onnx",
+    "path": "models/sherpa/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "idle_seconds": 60.0,
+    "concurrency": 1,
+    "resident_mb": 768,
+    "request_mb": 256,
+    "gpu_resident_mb": 0,
+    "gpu_request_mb": 0,
+    "max_input_bytes": 2097152,
+    "options": {
+      "threads": 2,
+      "max_audio_seconds": 30
+    }
+  },
+  "scope": "Real production Service and reusable spawned worker, isolated temporary SQLite. Tiled synthetic speech tests allocation shapes; not an ASR accuracy or multi-day endurance benchmark.",
+  "reference_sha256": "7521e8dd107ac70c5ecefc94e148ecccf1150628afffc6e51e1b49c7cc5078aa",
+  "samples_path": "var/sensevoice-memory/samples.jsonl",
+  "phases": [
+    {
+      "name": "warmup",
+      "audio_durations_s": [
+        1,
+        5,
+        15,
+        30
+      ],
+      "seconds": 9.823403335991316,
+      "requests": 40,
+      "rss_first_mb": 374.8828125,
+      "rss_last_mb": 483.2578125,
+      "rss_min_mb": 374.8828125,
+      "rss_max_mb": 483.2578125,
+      "first_window_median_mb": 482.1328125,
+      "last_window_median_mb": 482.1328125,
+      "window_median_growth_mb": 0.0,
+      "linear_slope_mb_per_request": 1.0805347091932458,
+      "control_rss_first_mb": 43.2890625,
+      "control_rss_last_mb": 42.91796875,
+      "worker_memory": {
+        "rss_mb": 483.2578125,
+        "uss_mb": 467.98828125,
+        "pss_mb": 474.1201171875
+      },
+      "worker_completed": 41
+    },
+    {
+      "name": "fixed_short",
+      "audio_durations_s": [
+        1
+      ],
+      "seconds": 11.444595747976564,
+      "requests": 300,
+      "rss_first_mb": 483.2578125,
+      "rss_last_mb": 483.4453125,
+      "rss_min_mb": 483.2578125,
+      "rss_max_mb": 483.4453125,
+      "first_window_median_mb": 483.2578125,
+      "last_window_median_mb": 483.4453125,
+      "window_median_growth_mb": 0.1875,
+      "linear_slope_mb_per_request": 0.0007093412149023878,
+      "control_rss_first_mb": 42.91796875,
+      "control_rss_last_mb": 43.29296875,
+      "worker_memory": {
+        "rss_mb": 483.4453125,
+        "uss_mb": 468.015625,
+        "pss_mb": 474.150390625
+      },
+      "worker_completed": 341
+    },
+    {
+      "name": "fixed_maximum",
+      "audio_durations_s": [
+        30
+      ],
+      "seconds": 58.77521856201929,
+      "requests": 100,
+      "rss_first_mb": 483.4453125,
+      "rss_last_mb": 485.8828125,
+      "rss_min_mb": 483.4453125,
+      "rss_max_mb": 485.8828125,
+      "first_window_median_mb": 484.7578125,
+      "last_window_median_mb": 485.8828125,
+      "window_median_growth_mb": 1.125,
+      "linear_slope_mb_per_request": 0.019195544554455445,
+      "control_rss_first_mb": 43.2421875,
+      "control_rss_last_mb": 43.31640625,
+      "worker_memory": {
+        "rss_mb": 485.8828125,
+        "uss_mb": 470.56640625,
+        "pss_mb": 476.701171875
+      },
+      "worker_completed": 441
+    },
+    {
+      "name": "mixed_durations",
+      "audio_durations_s": [
+        1,
+        5,
+        15,
+        30
+      ],
+      "seconds": 73.36123302401393,
+      "requests": 300,
+      "rss_first_mb": 485.8828125,
+      "rss_last_mb": 485.8828125,
+      "rss_min_mb": 485.8828125,
+      "rss_max_mb": 485.8828125,
+      "first_window_median_mb": 485.8828125,
+      "last_window_median_mb": 485.8828125,
+      "window_median_growth_mb": 0.0,
+      "linear_slope_mb_per_request": 0.0,
+      "control_rss_first_mb": 43.31640625,
+      "control_rss_last_mb": 43.61328125,
+      "worker_memory": {
+        "rss_mb": 485.8828125,
+        "uss_mb": 470.65234375,
+        "pss_mb": 476.787109375
+      },
+      "worker_completed": 741
+    },
+    {
+      "name": "short_after_maximum",
+      "audio_durations_s": [
+        1
+      ],
+      "seconds": 11.11722111000563,
+      "requests": 300,
+      "rss_first_mb": 485.8828125,
+      "rss_last_mb": 485.8828125,
+      "rss_min_mb": 485.8828125,
+      "rss_max_mb": 485.8828125,
+      "first_window_median_mb": 485.8828125,
+      "last_window_median_mb": 485.8828125,
+      "window_median_growth_mb": 0.0,
+      "linear_slope_mb_per_request": 0.0,
+      "control_rss_first_mb": 43.80078125,
+      "control_rss_last_mb": 44.17578125,
+      "worker_memory": {
+        "rss_mb": 485.8828125,
+        "uss_mb": 470.6796875,
+        "pss_mb": 476.814453125
+      },
+      "worker_completed": 1041
+    },
+    {
+      "name": "maximum_repeat",
+      "audio_durations_s": [
+        30
+      ],
+      "seconds": 59.29429380700458,
+      "requests": 100,
+      "rss_first_mb": 485.8828125,
+      "rss_last_mb": 485.8828125,
+      "rss_min_mb": 485.8828125,
+      "rss_max_mb": 485.8828125,
+      "first_window_median_mb": 485.8828125,
+      "last_window_median_mb": 485.8828125,
+      "window_median_growth_mb": 0.0,
+      "linear_slope_mb_per_request": 0.0,
+      "control_rss_first_mb": 44.0234375,
+      "control_rss_last_mb": 44.41015625,
+      "worker_memory": {
+        "rss_mb": 485.8828125,
+        "uss_mb": 455.0,
+        "pss_mb": 464.75
+      },
+      "worker_completed": 1141
+    }
+  ],
+  "unload_cycles": [
+    {
+      "cycle": 0,
+      "pid": 80322,
+      "memory_before": {
+        "rss_mb": 439.43359375,
+        "uss_mb": 424.34375,
+        "pss_mb": 430.4658203125
+      },
+      "unload_seconds": 0.0659351369831711,
+      "process_exited": true,
+      "release": {
+        "model_id": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+        "operation": "unload",
+        "files_deleted": false,
+        "release": {
+          "released": true,
+          "state": "unloaded",
+          "process_exited": true
+        },
+        "state": {
+          "model_id": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+          "config": {
+            "name": "sensevoice-small-int8",
+            "version": "2024-07-17-c71f0ce00bec",
+            "capabilities": [
+              "asr"
+            ],
+            "task": "sherpa_sensevoice",
+            "backend": "sherpa_onnx",
+            "path": "models/sherpa/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17",
+            "device": "CPU",
+            "load_policy": "on_demand",
+            "idle_seconds": 60.0,
+            "concurrency": 1,
+            "resident_mb": 768,
+            "request_mb": 256,
+            "gpu_resident_mb": 0,
+            "gpu_request_mb": 0,
+            "max_input_bytes": 2097152,
+            "options": {
+              "threads": 2,
+              "max_audio_seconds": 30
+            }
+          },
+          "enabled": true,
+          "validated": true,
+          "validation_error": null,
+          "management_state": "ready",
+          "created_at": 1790213610.0070913,
+          "load": {
+            "state": "unloaded",
+            "last_release": {
+              "released": true,
+              "state": "unloaded",
+              "process_exited": true
+            }
+          },
+          "active_requests": 0,
+          "references": {
+            "aliases": [],
+            "dependencies": []
+          }
+        }
+      }
+    },
+    {
+      "cycle": 1,
+      "pid": 80349,
+      "memory_before": {
+        "rss_mb": 441.2578125,
+        "uss_mb": 426.30078125,
+        "pss_mb": 432.4189453125
+      },
+      "unload_seconds": 0.0642212139791809,
+      "process_exited": true,
+      "release": {
+        "model_id": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+        "operation": "unload",
+        "files_deleted": false,
+        "release": {
+          "released": true,
+          "state": "unloaded",
+          "process_exited": true
+        },
+        "state": {
+          "model_id": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+          "config": {
+            "name": "sensevoice-small-int8",
+            "version": "2024-07-17-c71f0ce00bec",
+            "capabilities": [
+              "asr"
+            ],
+            "task": "sherpa_sensevoice",
+            "backend": "sherpa_onnx",
+            "path": "models/sherpa/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17",
+            "device": "CPU",
+            "load_policy": "on_demand",
+            "idle_seconds": 60.0,
+            "concurrency": 1,
+            "resident_mb": 768,
+            "request_mb": 256,
+            "gpu_resident_mb": 0,
+            "gpu_request_mb": 0,
+            "max_input_bytes": 2097152,
+            "options": {
+              "threads": 2,
+              "max_audio_seconds": 30
+            }
+          },
+          "enabled": true,
+          "validated": true,
+          "validation_error": null,
+          "management_state": "ready",
+          "created_at": 1790213610.0070913,
+          "load": {
+            "state": "unloaded",
+            "last_release": {
+              "released": true,
+              "state": "unloaded",
+              "process_exited": true
+            }
+          },
+          "active_requests": 0,
+          "references": {
+            "aliases": [],
+            "dependencies": []
+          }
+        }
+      }
+    },
+    {
+      "cycle": 2,
+      "pid": 80382,
+      "memory_before": {
+        "rss_mb": 444.4453125,
+        "uss_mb": 429.38671875,
+        "pss_mb": 435.5068359375
+      },
+      "unload_seconds": 0.06795281398808584,
+      "process_exited": true,
+      "release": {
+        "model_id": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+        "operation": "unload",
+        "files_deleted": false,
+        "release": {
+          "released": true,
+          "state": "unloaded",
+          "process_exited": true
+        },
+        "state": {
+          "model_id": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+          "config": {
+            "name": "sensevoice-small-int8",
+            "version": "2024-07-17-c71f0ce00bec",
+            "capabilities": [
+              "asr"
+            ],
+            "task": "sherpa_sensevoice",
+            "backend": "sherpa_onnx",
+            "path": "models/sherpa/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17",
+            "device": "CPU",
+            "load_policy": "on_demand",
+            "idle_seconds": 60.0,
+            "concurrency": 1,
+            "resident_mb": 768,
+            "request_mb": 256,
+            "gpu_resident_mb": 0,
+            "gpu_request_mb": 0,
+            "max_input_bytes": 2097152,
+            "options": {
+              "threads": 2,
+              "max_audio_seconds": 30
+            }
+          },
+          "enabled": true,
+          "validated": true,
+          "validation_error": null,
+          "management_state": "ready",
+          "created_at": 1790213610.0070913,
+          "load": {
+            "state": "unloaded",
+            "last_release": {
+              "released": true,
+              "state": "unloaded",
+              "process_exited": true
+            }
+          },
+          "active_requests": 0,
+          "references": {
+            "aliases": [],
+            "dependencies": []
+          }
+        }
+      }
+    },
+    {
+      "cycle": 3,
+      "pid": 80420,
+      "memory_before": {
+        "rss_mb": 441.63671875,
+        "uss_mb": 426.34375,
+        "pss_mb": 432.4814453125
+      },
+      "unload_seconds": 0.06925086700357497,
+      "process_exited": true,
+      "release": {
+        "model_id": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+        "operation": "unload",
+        "files_deleted": false,
+        "release": {
+          "released": true,
+          "state": "unloaded",
+          "process_exited": true
+        },
+        "state": {
+          "model_id": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+          "config": {
+            "name": "sensevoice-small-int8",
+            "version": "2024-07-17-c71f0ce00bec",
+            "capabilities": [
+              "asr"
+            ],
+            "task": "sherpa_sensevoice",
+            "backend": "sherpa_onnx",
+            "path": "models/sherpa/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17",
+            "device": "CPU",
+            "load_policy": "on_demand",
+            "idle_seconds": 60.0,
+            "concurrency": 1,
+            "resident_mb": 768,
+            "request_mb": 256,
+            "gpu_resident_mb": 0,
+            "gpu_request_mb": 0,
+            "max_input_bytes": 2097152,
+            "options": {
+              "threads": 2,
+              "max_audio_seconds": 30
+            }
+          },
+          "enabled": true,
+          "validated": true,
+          "validation_error": null,
+          "management_state": "ready",
+          "created_at": 1790213610.0070913,
+          "load": {
+            "state": "unloaded",
+            "last_release": {
+              "released": true,
+              "state": "unloaded",
+              "process_exited": true
+            }
+          },
+          "active_requests": 0,
+          "references": {
+            "aliases": [],
+            "dependencies": []
+          }
+        }
+      }
+    },
+    {
+      "cycle": 4,
+      "pid": 80447,
+      "memory_before": {
+        "rss_mb": 441.5078125,
+        "uss_mb": 426.3125,
+        "pss_mb": 432.4208984375
+      },
+      "unload_seconds": 0.07561855600215495,
+      "process_exited": true,
+      "release": {
+        "model_id": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+        "operation": "unload",
+        "files_deleted": false,
+        "release": {
+          "released": true,
+          "state": "unloaded",
+          "process_exited": true
+        },
+        "state": {
+          "model_id": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+          "config": {
+            "name": "sensevoice-small-int8",
+            "version": "2024-07-17-c71f0ce00bec",
+            "capabilities": [
+              "asr"
+            ],
+            "task": "sherpa_sensevoice",
+            "backend": "sherpa_onnx",
+            "path": "models/sherpa/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17",
+            "device": "CPU",
+            "load_policy": "on_demand",
+            "idle_seconds": 60.0,
+            "concurrency": 1,
+            "resident_mb": 768,
+            "request_mb": 256,
+            "gpu_resident_mb": 0,
+            "gpu_request_mb": 0,
+            "max_input_bytes": 2097152,
+            "options": {
+              "threads": 2,
+              "max_audio_seconds": 30
+            }
+          },
+          "enabled": true,
+          "validated": true,
+          "validation_error": null,
+          "management_state": "ready",
+          "created_at": 1790213610.0070913,
+          "load": {
+            "state": "unloaded",
+            "last_release": {
+              "released": true,
+              "state": "unloaded",
+              "process_exited": true
+            }
+          },
+          "active_requests": 0,
+          "references": {
+            "aliases": [],
+            "dependencies": []
+          }
+        }
+      }
+    }
+  ],
+  "cancellations": [
+    {
+      "confirmed_after_s": 0.5510060450178571,
+      "rss_mb": 485.8828125
+    },
+    {
+      "confirmed_after_s": 0.5829061180120334,
+      "rss_mb": 485.8828125
+    },
+    {
+      "confirmed_after_s": 0.53260223500547,
+      "rss_mb": 485.8828125
+    },
+    {
+      "confirmed_after_s": 0.5430985650164075,
+      "rss_mb": 485.8828125
+    },
+    {
+      "confirmed_after_s": 0.5604944810038432,
+      "rss_mb": 485.8828125
+    },
+    {
+      "confirmed_after_s": 0.5609419830143452,
+      "rss_mb": 485.8828125
+    },
+    {
+      "confirmed_after_s": 0.5461954160127789,
+      "rss_mb": 485.8828125
+    },
+    {
+      "confirmed_after_s": 0.5400886250135954,
+      "rss_mb": 485.8828125
+    },
+    {
+      "confirmed_after_s": 0.5726971780241001,
+      "rss_mb": 485.8828125
+    },
+    {
+      "confirmed_after_s": 0.5682715630100574,
+      "rss_mb": 485.8828125
+    }
+  ],
+  "initial_worker": {
+    "backend": "sherpa_onnx",
+    "runtime_version": "1.13.8",
+    "task": "sherpa_sensevoice",
+    "streaming": "buffered",
+    "load_seconds": 0.8847733599832281,
+    "pid": 78832,
+    "state": "loaded",
+    "alive": true,
+    "rss_bytes": 393093120,
+    "rss_mb": 374.883,
+    "load_count": 1,
+    "output_buffer_limit": 8,
+    "buffered_chunks": 0,
+    "busy": 0,
+    "inference_seconds": 0.17691826898953877,
+    "completed": 1
+  },
+  "control_before": {
+    "rss_mb": 43.2890625,
+    "uss_mb": 27.6171875,
+    "pss_mb": 33.73046875
+  },
+  "after_cancellation": {
+    "text": "你好，欢迎。",
+    "same_pid": true
+  },
+  "before_idle": {
+    "worker": {
+      "backend": "sherpa_onnx",
+      "runtime_version": "1.13.8",
+      "task": "sherpa_sensevoice",
+      "streaming": "buffered",
+      "load_seconds": 0.8847733599832281,
+      "pid": 78832,
+      "state": "loaded",
+      "alive": true,
+      "rss_bytes": 509485056,
+      "rss_mb": 485.883,
+      "load_count": 1,
+      "output_buffer_limit": 8,
+      "buffered_chunks": 0,
+      "busy": 0,
+      "inference_seconds": 0.03184685399173759,
+      "completed": 1152
+    },
+    "memory": {
+      "rss_mb": 485.8828125,
+      "uss_mb": 447.421875,
+      "pss_mb": 460.873046875
+    }
+  },
+  "idle_unload": {
+    "configured_seconds": 60.0,
+    "observed_seconds": 60.57139236200601,
+    "pid_exited": true,
+    "scheduler": {
+      "queue_length": 0,
+      "queue_capacity": 8,
+      "active_count": 0,
+      "execution_capacity": 1,
+      "resident_mb": 0,
+      "temporary_mb": 0,
+      "reserved_mb": 0,
+      "budget_mb": 12288,
+      "gpu_resident_mb": 0,
+      "gpu_temporary_mb": 0,
+      "gpu_reserved_mb": 0,
+      "gpu_budget_mb": 10240,
+      "resident_instances": 0,
+      "quarantined_requests": [],
+      "active_by_model": {}
+    }
+  },
+  "requests_including_cancelled": 1161,
+  "control_after": {
+    "rss_mb": 46.15625,
+    "uss_mb": 39.7890625,
+    "pss_mb": 42.2021484375
+  },
+  "scheduler_final": {
+    "queue_length": 0,
+    "queue_capacity": 8,
+    "active_count": 0,
+    "execution_capacity": 1,
+    "resident_mb": 0,
+    "temporary_mb": 0,
+    "reserved_mb": 0,
+    "budget_mb": 12288,
+    "gpu_resident_mb": 0,
+    "gpu_temporary_mb": 0,
+    "gpu_reserved_mb": 0,
+    "gpu_budget_mb": 10240,
+    "resident_instances": 0,
+    "quarantined_requests": [],
+    "active_by_model": {}
+  },
+  "finished_unix": 1790213924.6013412,
+  "sampled_worker_peak_rss_mb": 485.8828125,
+  "measurement_notes": [
+    "Memory fields ending in _mb use MiB (1024 ** 2 bytes).",
+    "Per-request RSS is sampled after inference completion; it is not a native allocation trace.",
+    "The 20ms worker peak sampler attaches after initial validation and after each reload inference; cold loading is excluded.",
+    "Validation audio is omitted from saved snapshots; its SHA256 is recorded separately.",
+    "No per-request gc.collect(), malloc_trim(), provider changes, or production database writes.",
+    "After the completed run, embedded validation audio was removed and the sampled peak field was renamed to clarify its scope; numerical observations are unchanged."
+  ]
+}

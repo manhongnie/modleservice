@@ -2,6 +2,10 @@
 from model_service.contracts import ModelConfig, ServiceError, TaskPlugin
 from .core import MockTask, PassthroughTask, SpeechTask, ChatTask
 from .embeddings import DenseTask, RerankTask, ChineseClipTask
+from .ov_genai import GenAITask
+from .sherpa_tasks import SherpaSpeechTask
+from .retrieval_ov import BM42Task, DualClipTask, BoundedDenseTask, BoundedRerankTask, QwenEmbeddingTask, QwenRerankerTask
+from .media_generation import ImageGenerationTask, VideoGenerationTask
 
 
 TASKS = {
@@ -14,6 +18,20 @@ TASKS = {
     "qwen_chat": ChatTask,
     "whisper_asr": SpeechTask,
     "vits_tts": SpeechTask,
+    "ov_chat": GenAITask,
+    "ov_vision_chat": GenAITask,
+    "sherpa_sensevoice": SherpaSpeechTask,
+    "sherpa_matcha": SherpaSpeechTask,
+    "sherpa_speaker": SherpaSpeechTask,
+    "sherpa_zipvoice": SherpaSpeechTask,
+    "bge_m3_bounded": BoundedDenseTask,
+    "bge_reranker_bounded": BoundedRerankTask,
+    "qwen3_embedding_ov": QwenEmbeddingTask,
+    "qwen3_reranker_ov": QwenRerankerTask,
+    "bm42_local": BM42Task,
+    "dual_clip": DualClipTask,
+    "text_to_image": ImageGenerationTask,
+    "text_to_video": VideoGenerationTask,
 }
 
 
@@ -26,11 +44,18 @@ def create_task(config: ModelConfig, backend_family: str | None = None) -> TaskP
     if config.task == "mock" and family != "mock":
         raise ServiceError("invalid_task_backend", "Mock task requires explicitly selected mock backend")
     if config.task == "bm42_http" and family != "http":
-        raise ServiceError("unsupported_format", "BM42 requires a genuine BM42 HTTP implementation; local BM42 is not implemented")
+        raise ServiceError("unsupported_format", "bm42_http requires an HTTP backend; select bm42_local for genuine local OpenVINO BM42 inference")
     supported_backends = {
         "http_json": {"http"}, "bge_m3_dense": {"openvino"}, "bge_reranker": {"openvino"},
         "chinese_clip": {"openvino"}, "qwen_chat": {"transformers"},
         "whisper_asr": {"transformers"}, "vits_tts": {"sherpa_tts"},
+        "ov_chat": {"openvino_genai"}, "ov_vision_chat": {"openvino_genai"},
+        "sherpa_sensevoice": {"sherpa_onnx"}, "sherpa_matcha": {"sherpa_onnx"},
+        "sherpa_speaker": {"sherpa_onnx"}, "sherpa_zipvoice": {"sherpa_onnx"},
+        "bge_m3_bounded": {"openvino"}, "bge_reranker_bounded": {"openvino"},
+        "qwen3_embedding_ov": {"openvino"}, "qwen3_reranker_ov": {"openvino"},
+        "bm42_local": {"openvino"}, "dual_clip": {"openvino_clip"},
+        "text_to_image": {"openvino_image"}, "text_to_video": {"diffusers_video"},
     }
     if config.task in supported_backends and family not in supported_backends[config.task]:
         raise ServiceError("unsupported_format", f"Task {config.task} does not support backend {config.backend}")

@@ -4,7 +4,7 @@
 Run from the repository root:
     PYTHONPATH=. .venv/bin/python scripts/validate_real_streaming.py
 This checks the process execution boundary, not HTTP transport or ASR/TTS quality.
-The Qwen files listed in examples/models.real.json must already be available.
+The Qwen files listed in examples/legacy/models.real.json must already be available.
 """
 import asyncio
 import json
@@ -14,7 +14,7 @@ from model_service.contracts import ModelConfig, ServiceError
 from model_service.executor import ProcessExecutor
 
 async def main():
-    cfg=ModelConfig(**json.loads(Path('examples/models.real.json').read_text())[0])
+    cfg=ModelConfig(**json.loads(Path('examples/legacy/models.real.json').read_text())[0])
     executor=ProcessExecutor(load_timeout_s=180)
     report={'model':cfg.model_id,'test':'real_qwen_incremental_stream', 'boundary':'ProcessExecutor (not HTTP)', 'timestamp_utc':__import__('datetime').datetime.now(__import__('datetime').timezone.utc).isoformat()}
     try:

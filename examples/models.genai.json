@@ -1,0 +1,70 @@
+[
+  {
+    "name": "qwen3.5-4b-ov-awq",
+    "version": "0baf3dbd8812",
+    "capabilities": [
+      "chat"
+    ],
+    "task": "ov_chat",
+    "backend": "openvino_genai",
+    "path": "models/imported/qwen3.5-4b-ov-awq",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "idle_seconds": 10,
+    "concurrency": 1,
+    "resident_mb": 6400,
+    "request_mb": 768,
+    "max_input_bytes": 2097152,
+    "options": {
+      "pipeline": "vlm",
+      "threads": 4,
+      "max_input_tokens": 1024,
+      "max_new_tokens": 128,
+      "max_text_chars": 4096,
+      "max_images": 1,
+      "image_edge": 448
+    },
+    "validation_input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "请只回答：你好"
+        }
+      ],
+      "max_new_tokens": 16
+    }
+  },
+  {
+    "name": "qwen2.5-vl-7b-int4-ov",
+    "version": "48494b1aceaf",
+    "capabilities": [
+      "vision_chat"
+    ],
+    "task": "ov_vision_chat",
+    "backend": "openvino_genai",
+    "path": "models/imported/qwen2.5-vl-7b-int4-ov",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "idle_seconds": 10,
+    "concurrency": 1,
+    "resident_mb": 10240,
+    "request_mb": 1024,
+    "max_input_bytes": 2097152,
+    "options": {
+      "pipeline": "vlm",
+      "threads": 4,
+      "max_input_tokens": 1024,
+      "max_new_tokens": 128,
+      "max_text_chars": 4096,
+      "max_images": 1,
+      "image_edge": 448
+    },
+    "validation_input": {
+      "prompt": "图中方块是什么颜色？只回答颜色。",
+      "images": [
+        "iVBORw0KGgoAAAANSUhEUgAAAOAAAADgCAIAAACVT/22AAACf0lEQVR4nO3doQ3EUAwFwfun9N+yg8KiUC+YqeCBlanPzPyg6r89AL4IlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0q7tAY9zthfwZvvXsAtKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBkiZQ0gRKmkBJEyhpAiVNoKQJlDSBknZtD3jMbC+gyAUlTaCkCZQ0gZImUNIESppASRMoaQIlTaCkCZQ0gZImUNIESppASRMoaQIlTaCkCZQ0gZImUNIESppASRMoaQIlTaCkCZQ0gZImUNIESppASRMoaQIlTaCkCZQ0gZImUNIESppASRMoaQIlTaCk3aVsCL99w5AwAAAAAElFTkSuQmCC"
+      ],
+      "max_new_tokens": 16
+    }
+  }
+]

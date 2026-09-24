@@ -167,3 +167,31 @@ register_backend("http", "model_service.backends.http:HTTPBackend", features=Bac
 register_backend("openvino", "model_service.backends.openvino:OpenVINOBackend", features=BackendFeatures(), validator=_openvino_config)
 register_backend("transformers", "model_service.backends.generative:TransformersBackend", features=_transformers_features, validator=_local_config)
 register_backend("sherpa_tts", "model_service.backends.speech:SherpaTTSBackend", features=BackendFeatures(), validator=_local_config)
+
+# New provider modules contain only light contracts at import time. Their native
+# SDKs and model weights are initialized inside the isolated execution process.
+from .ov_genai import validate_genai
+from .sherpa_models import validate_sherpa
+from .media_generation import validate_image_config, validate_video_config
+
+
+def _clip_config(config, settings):
+    _openvino_config(config, settings)
+    from pathlib import Path
+    root = Path(config.path).resolve()
+    for name in ('text_model_file', 'image_model_file'):
+        value = config.options.get(name, 'openvino_text.xml' if name.startswith('text') else 'openvino_image.xml')
+        if not isinstance(value, str) or not (root / value).resolve().is_relative_to(root):
+            raise ServiceError('path_forbidden', 'CLIP model components must stay in their model directory', 403)
+
+
+register_backend('openvino_genai', 'model_service.backends.ov_genai:OpenVINOGenAIBackend',
+                 features=BackendFeatures(incremental_output=True), validator=validate_genai)
+register_backend('sherpa_onnx', 'model_service.backends.sherpa_models:SherpaONNXBackend',
+                 features=BackendFeatures(), validator=validate_sherpa)
+register_backend('openvino_clip', 'model_service.backends.retrieval_ov:DualClipOpenVINOBackend',
+                 features=BackendFeatures(), validator=_clip_config)
+register_backend('openvino_image', 'model_service.backends.media_generation:OpenVINOImageBackend',
+                 features=BackendFeatures(), validator=validate_image_config)
+register_backend('diffusers_video', 'model_service.backends.media_generation:DiffusersVideoBackend',
+                 features=BackendFeatures(), validator=validate_video_config)

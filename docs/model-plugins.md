@@ -1,90 +1,67 @@
-# 模型与插件接入
+# 添加模型与具体推理过程
 
-任务插件只负责校验、准备输入和整理输出；后端只负责加载、执行和释放。控制进程构造插件时不导入 NumPy、Torch、Transformers、OpenVINO 或 sherpa-onnx。分词器和处理器在执行进程第一次 `prepare` 时加载，模型权重由后端 `load` 加载。模型目录只由管理员配置，业务请求不能指定路径、URL、后端或设备。所有 Transformers 加载均使用 `local_files_only=True`，不执行远程模型代码。
+新增模型分为两种情况：输入输出及推理方式与已有插件兼容时，只添加配置；新架构、新预后处理或新推理 SDK 才增加代码。业务继续调用 `POST /v1/{capability}`，不需要新增一个按模型名称命名的 Web 接口。
 
-## 配置示例与真实支持边界
+## 已有推理代码在哪里
 
-| 模型 | 任务插件 | 后端 | 输入与导出约定 |
-| --- | --- | --- | --- |
-| BGE-M3 Dense | `bge_m3_dense` | `openvino` | `texts` 字符串数组；IR 输出 `last_hidden_state[batch,tokens,hidden]`，取 CLS 并做 L2 归一化。只支持 Dense，不声称支持 M3 sparse/multivector。 |
-| BGE Reranker v2 M3 | `bge_reranker` | `openvino` | `query` + `documents`；成对分词，输出 `logits[batch,1]`；可配置 sigmoid，结果按分数降序并保留原索引。 |
-| Chinese-CLIP | `chinese_clip` | `openvino` | 文本塔和图像塔分别登记；使用 ChineseCLIPProcessor，IR 须输出投影后的 `text_embeds` 或 `image_embeds`，然后归一化。不是任意 hidden state。图像只接收 base64，无远程取图。 |
-| BM42 | `bm42_http` | `http` | `texts` → 真正 BM42 服务的 JSON 响应。模型注意力聚合、词项映射、IDF/检索语义留在远端实现；本项目没有本地 BM42 实现，也没有提供运行中的 BM42 服务。 |
-| Qwen3.5-0.8B | `qwen_chat` | `transformers` | `messages` 只接受文本；使用官方 chat template、关闭 thinking、限制输入 token 数和新 token 数；CPU 贪心生成。首版不提供图像/视频输入或工具调用。 |
-| Whisper tiny multilingual | `whisper_asr` | `transformers` | `audio_base64` 是 mono PCM16、16kHz WAV，默认最多 30 秒；固定中文转写，可通过管理员配置语言。 |
-| VITS icefall zh aishell3 | `vits_tts` | `sherpa_tts` | 中文 `text`、可选 `speaker_id` 0..173、`speed` 0.5..2；返回 base64 PCM16 WAV。模型自带词典/FST 前端由 sherpa Runtime 执行。 |
-| 明确的测试替身 | `mock` | `mock` | 覆盖上述 7 类业务能力；所有响应含 `mock:true` 和 Synthetic notice，不加载任何真实模型。 |
+| 能力 | 任务：校验、预处理、后处理 | 后端：加载、执行、释放 |
+|---|---|---|
+| Qwen 对话、图片问答 | [ov_genai.py](../model_service/tasks/ov_genai.py)：模板、token/图片限制、结果块 | [ov_genai.py](../model_service/backends/ov_genai.py)：GenAI pipeline、原生生成、取消等待 |
+| BGE、Qwen 检索、BM42 | [retrieval_ov.py](../model_service/tasks/retrieval_ov.py)、[embeddings.py](../model_service/tasks/embeddings.py)：分词、池化、排序、稀疏词项 | [openvino.py](../model_service/backends/openvino.py)：IR 编译及张量推理 |
+| Chinese-CLIP / OpenAI CLIP | `DualClipTask`：文本/图片处理、归一化 | [retrieval_ov.py](../model_service/backends/retrieval_ov.py)：同实例的两个 OpenVINO 塔 |
+| ASR、TTS、声纹、克隆 | [sherpa_tasks.py](../model_service/tasks/sherpa_tasks.py)：WAV、文字、参考语音、输出编码 | [sherpa_models.py](../model_service/backends/sherpa_models.py)：各类 sherpa-onnx Runtime |
+| 生图、视频 | [media_generation.py](../model_service/tasks/media_generation.py)：参数、PNG/MP4 编码 | [media_generation.py](../model_service/backends/media_generation.py)：OpenVINO GenAI / Diffusers CUDA |
 
-`examples/models.mock.json` 可用于框架测试。`examples/models.real.json` 包含用户新增的 Qwen/ASR/TTS，`examples/models.retrieval.json` 是四类检索模型的接入模板，不能直接视作已下载的模型。BGE/CLIP 需先由管理员导出符合上表的 OpenVINO IR，并将分词器/processor 文件放在 XML 同目录。缺少输出名或形状不符会明确失败，不猜测池化方式。HTTP 通用插件要求远端已经使用这里的业务 JSON 格式，现有服务格式不同时应增加任务适配器。
+精确模型配置和真实验证报告见 [README](../README.md)。旧 0.8B / Whisper / VITS 的资料移至 [历史文档](model-plugins-legacy.md)，不属于当前部署。
 
-## 准备三个真实模型
+## 只添加模型配置
 
-在仓库根目录运行，下载是明确的部署准备步骤，服务请求不会自动下载：
+1. 将完整权重放在 `model_roots` 下的新目录，固定来源版本；不要覆盖正在使用的旧版本文件。
+2. 从对应 `examples/models.*.json` 复制一个对象，修改 `name`、唯一 `version`、`path` 和实际执行选项；检查任务输入/模型输出布局兼容。
+3. 按本机实测设置 `resident_mb` / `request_mb`，CUDA 模型还需要 `gpu_resident_mb` / `gpu_request_mb`。驻留包括运行后保留的编译缓存，不仅是权重文件大小。
+4. 设置有代表性的 `validation_input`。登记后服务会实际加载和执行，失败保持禁用。
 
-```bash
-uv pip install --python .venv/bin/python 'torch>=2.6,<3' --index-url https://download.pytorch.org/whl/cpu
-uv pip install --python .venv/bin/python -e '.[generative,speech]'
-python scripts/download_models.py qwen asr tts
-```
-
-Qwen、Whisper 下载脚本固定上游 commit，`source.json` 记录来源和权重 SHA256。大权重采用有文件锁的分段下载，中断后可补齐稀疏文件中尚未完成的区间，必须匹配上游总 SHA256 后才改名为正式文件。小文件中断后重新下载。TTS 使用上游命名发布包；该 URL 不等于不可变内容哈希，正式部署应把包纳入自己的制品库并校验哈希。
-
-示例 Qwen CPU FP32 常驻预算为 5500 MiB，临时预算 512 MiB；这是保守配置值，需以实际进程 RSS 校准，并非硬内存隔离。默认服务 4096 MiB 会明确拒绝该配置，运行三个真实模型请把 `total_memory_mb` 调到宿主机可承受的值（例如 8192），并按需加载。每个真实模型示例 `concurrency=1`，避免分词/生成状态被多个线程并发使用。
-
-管理新增、验证、启用仍走统一 API：不会因为下载完成或存在配置就自动启用。Whisper 的默认验证输入为极短静音 WAV，只验证加载、输入输出和推理路径，不证明转写质量。TTS 验证输入为“你好，世界”。Qwen 验证输入为短问候。
-
-## 业务输入例子
-
-以下是统一推理请求中的 `input` 内容（外层 URL、模型选择、鉴权见 README）：
-
-```json
-{"messages":[{"role":"user","content":"用一句话介绍北京"}],"max_new_tokens":48}
-```
-
-```json
-{"audio_base64":"<16kHz mono PCM16 WAV 文件的 base64>"}
-```
-
-```json
-{"text":"你好，欢迎使用语音服务。","speaker_id":10,"speed":1.0}
-```
-
-Qwen 的 HTTP SSE 已支持真实增量文字；ASR/TTS 仍缓冲完成后返回一块，没有音频增量输出。Qwen/Whisper 使用 generation stopping criteria 响应取消；TTS 在分段回调处响应取消。若当前算子不能即时停止，则等待实际执行结束后才返还许可，不强杀模型进程，不在部分输出后重试。
-
-## 扩展入口
-
-实现 `TaskPlugin.validate/prepare/finish` 后注册到 `tasks.TASKS`。`prepare` 返回 `Prepared(inputs,context)`，`context` 只在同一次请求使用。后端实现 `load/infer/close` 并在 `backends.create_backend` 注册。兼容插件增加模型只需配置；新增 Python 插件代码需重启控制服务，不提供运行时代码热更新。任务必须拒绝自己不支持的能力，后端取消结束前不得报告成功停止。
-
-## 官方资料
-
-- [BGE-M3 官方模型卡](https://huggingface.co/BAAI/bge-m3)
-- [BGE Reranker v2 M3 官方模型卡](https://huggingface.co/BAAI/bge-reranker-v2-m3)
-- [Chinese-CLIP 官方仓库](https://github.com/OFA-Sys/Chinese-CLIP)
-- [BM42 / FastEmbed 官方说明](https://qdrant.tech/articles/bm42/)
-- [Qwen3.5-0.8B 官方模型卡](https://huggingface.co/Qwen/Qwen3.5-0.8B)
-- [Transformers Qwen3.5 文档](https://huggingface.co/docs/transformers/model_doc/qwen3_5)
-- [Whisper tiny 官方模型卡](https://huggingface.co/openai/whisper-tiny)
-- [sherpa-onnx VITS aishell3 模型与下载](https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/vits.html)
-- [sherpa-onnx Python TTS 示例](https://github.com/k2-fsa/sherpa-onnx/blob/master/python-api-examples/offline-tts.py)
-
-## 本机真实验证结果
-
-已在本机下载实际权重并通过 `ProcessExecutor` 子进程执行。原始记录见 [models-validation.json](models-validation.json)，可用以下命令重跑：
+例如保存为 `examples/my-model.json`（JSON 配置列表，即外层使用数组）后，在服务运行时执行：
 
 ```bash
-.venv/bin/python scripts/validate_real_models.py --cancel
+.venv/bin/python scripts/register_models.py examples/my-model.json --unload-after-validation
 ```
 
-| 模型 | 加载耗时 | 本次推理耗时 | 执行后进程 RSS | 结果与限制 |
-| --- | --- | --- | --- | --- |
-| Qwen3.5-0.8B | 2.27 秒 | 0.84 秒 | 5453 MiB | 短提示得到“你好”；17 输入 token、4 输出 token；CPU FP32、含官方视觉权重但仅开放文本。 |
-| Whisper tiny | 1.91 秒 | 0.34 秒 | 577 MiB | 极短静音样例跑通，但输出“你”，不能作为识别质量依据。 |
-| VITS zh aishell3 | 0.38 秒 | 0.12 秒 | 145 MiB | 实际生成约 1.65 秒、8kHz PCM16 WAV，保存在 `var/real-tts-smoke.wav`。 |
+脚本从 `ADMIN_API_KEY` 读取管理密钥。首次成功后用 `PUT /admin/aliases/{alias}` 选择业务默认版本；不要盲目给多种检索模型同时使用 `--defaults`，它会依次更新同能力默认别名。
 
-三个模型均完成 warm 请求取消测试，返回 `cancelled` 后执行进程 `busy=0`；取消确认耗时依次约 0.104、0.182、0.022 秒。这些数值是本次小样例观察值，不是延迟保证。首次加载、不同输入和宿主机负载会改变耗时及内存。
+同版本配置不可变。模型升级时先新增版本并验证，切换别名，再按 [移除流程](multimodal-deployment.md#调用和删除) 排空旧实例、移除旧登记；默认保留磁盘文件。
 
-还将真实 TTS 的“你好，世界。”重采样成 16kHz 后交给 Whisper tiny，识别为“你好事件”，存在同音字错误。见 [speech-roundtrip-validation.json](speech-roundtrip-validation.json)。链路已运行，语音质量与识别准确率尚未验收。
+## 添加新的具体推理逻辑
 
-BGE-M3、BGE Reranker、Chinese-CLIP 没有下载实际权重或完成真实导出验证；BM42 没有可用远端服务。对应插件边界、配置和张量/JSON 合约单测不构成真实模型已验证。OpenVINO 的真实 Runtime 小图测试也不等于这些检索模型已经实测。
+稳定契约定义在 [contracts.py](../model_service/contracts.py)。代码执行顺序由 [worker.py](../model_service/worker.py) 统一维护：
 
-本次依赖为 Torch 2.14.0+cpu、Transformers 5.17.0、sherpa-onnx 1.13.8、NumPy 2.5.3。任务插件 23 项单测通过，包括控制进程不加载 ML 库、HTTP 结果形状校验、Dense CLS 池化、reranker 排序、WAV 输入输出及明确 Mock 标识。
+```text
+控制进程：task.validate(payload, capability) → 原子准入 → 加载/复用 worker
+执行进程：backend.load()                         # 每实例一次
+         task.prepare(payload) → Prepared(inputs, context)
+         backend.infer(inputs, cancel) → outputs
+         task.finish(outputs, context) → 业务 JSON
+卸载时： backend.close() → 确认 worker 退出 → 释放驻留预算
+```
+
+任务负责业务输入、预后处理，不自行创建模型执行进程或操作登记表。`validate` 和构造函数只能执行轻量校验；分词器、NumPy 等在 `prepare/finish` 中延迟导入。`context` 仅属于本次请求，不把可变解码状态挂在共享单例上。
+
+后端负责 SDK 及模型对象。只加载管理员提供的本地文件；原生调用结束之前，`infer` 不得因取消事件直接返回“已停止”。有原生取消方法则发出取消并等待；没有则等待调用结束。取消发生在后处理时，也会等后处理结束再确认，且不再发送成功结果。
+
+真正增量生成实现 `backend.stream(inputs, cancel)` 和 `task.finish_chunk(outputs, context)`，并声明 `BackendFeatures(incremental_output=True)`。生成器关闭必须等待底层线程停止；不允许将整个成功结果先计算完再宣称增量推理，或在输出一部分后静默重试。
+
+组装时只改以下受信任注册位置：
+
+- [tasks/__init__.py](../model_service/tasks/__init__.py)：加入任务工厂及支持的后端 family、能力约束。
+- [backends/__init__.py](../model_service/backends/__init__.py)：用 `register_backend` 登记可导入的工厂、配置校验和 `BackendFeatures`。仅换张量模型时继续复用 `openvino`，不必新建后端。
+- 增加配置和测试，然后重启控制服务。管理 JSON 不接受任意 Python 模块路径，新增代码不热更新。
+
+后端若连接外部 HTTP 服务，必须声明 `management="external"` 和 `execution_may_outlive_worker=True`。无法确定远端已停止时返回 `execution_unknown`，由核心保留隔离预算；断开 HTTP 连接不等于远端停止。
+
+无需修改 API、请求协调器、SQLite、资源调度或模型生命周期。若新实现无法满足上述取消、资源与错误契约，应先明确扩展契约，再接入。
+
+## 怎么验证
+
+先运行 `pytest` 中相关插件和框架测试，覆盖输入上限、输出形状、取消、失败和重复使用；确保控制进程不导入 ML Runtime。再通过真实权重执行准备脚本和服务登记，保留输出样例、来源摘要、峰值与稳定 RSS/显存、取消停止及卸载记录。
+
+Mock 或受控管线通过，只能说明框架和协议行为通过。实际模型结果仍需检查：如视频应有可识别的内容与变化，不能把成功编码的噪声 MP4 算作已支持。

@@ -1,0 +1,1355 @@
+{
+  "results": {
+    "bge-m3-int4-ov@d50a3650d1f6": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "embeddings",
+          "output": {
+            "pooling": "cls_l2",
+            "embeddings": {
+              "count": 1,
+              "dimension": 1024,
+              "first_values": [
+                -0.014340019784867764,
+                0.02783803641796112,
+                -0.034414663910865784,
+                0.005158612970262766
+              ]
+            }
+          }
+        }
+      ],
+      "tested_at_unix": 1790157778.3386898,
+      "elapsed_s": 5.494382732023951,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids",
+          "attention_mask"
+        ],
+        "outputs": [
+          "last_hidden_state"
+        ],
+        "load_seconds": 0.7293889849970583,
+        "pid": 97691,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1536692224,
+        "rss_mb": 1465.504,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 3.899829742993461,
+        "completed": 1
+      },
+      "unload": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "bge-reranker-v2-m3-int4-ov@2252a9a291c5": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "rerank",
+          "output": {
+            "results": [
+              {
+                "index": 0,
+                "score": 0.9828113317489624
+              },
+              {
+                "index": 1,
+                "score": 1.715851976769045e-05
+              }
+            ]
+          }
+        }
+      ],
+      "tested_at_unix": 1790157783.3026998,
+      "elapsed_s": 4.963700833002804,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids",
+          "attention_mask"
+        ],
+        "outputs": [
+          "logits"
+        ],
+        "load_seconds": 0.7159230750112329,
+        "pid": 97767,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1536827392,
+        "rss_mb": 1465.633,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 3.443077642004937,
+        "completed": 1
+      },
+      "unload": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "bm42-all-minilm-l6-v2-attentions@9695632d760b": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "sparse_embeddings",
+          "output": {
+            "sparse_embeddings": [
+              {
+                "indices": [
+                  733618285,
+                  1008800696,
+                  1117393019,
+                  1849833631,
+                  2090661150
+                ],
+                "values": [
+                  0.3832005215371356,
+                  0.18017510364775613,
+                  0.13735551153892764,
+                  0.2545313612939179,
+                  0.3043262055751676
+                ]
+              }
+            ],
+            "requires_idf": true,
+            "language": "english",
+            "algorithm": "bm42_attention"
+          }
+        }
+      ],
+      "elapsed_s": 3.6631009920092765,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids"
+        ],
+        "outputs": [
+          "last_hidden_state",
+          "embedding",
+          "attention_1",
+          "attention_2",
+          "attention_3",
+          "attention_4",
+          "attention_5",
+          "attention_6"
+        ],
+        "load_seconds": 0.3326765619858634,
+        "pid": 85249,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 931790848,
+        "rss_mb": 888.625,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 1.732798453012947,
+        "completed": 1
+      },
+      "unload": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "chinese-clip-vit-base-patch16@36e679e65c2a": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "embeddings",
+          "output": {
+            "text_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                0.061004336923360825,
+                0.026771308854222298,
+                0.03913751244544983,
+                -0.012923591770231724
+              ]
+            },
+            "image_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                0.010679301805794239,
+                -0.023117564618587494,
+                -0.032204050570726395,
+                0.00880516692996025
+              ]
+            }
+          }
+        },
+        {
+          "capability": "image_embeddings",
+          "output": {
+            "text_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                0.061004336923360825,
+                0.026771308854222298,
+                0.03913751244544983,
+                -0.012923591770231724
+              ]
+            },
+            "image_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                0.010679301805794239,
+                -0.023117564618587494,
+                -0.032204050570726395,
+                0.00880516692996025
+              ]
+            }
+          }
+        }
+      ],
+      "elapsed_s": 3.6433558900025673,
+      "worker": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "device": "CPU",
+        "towers": {
+          "text": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "input_ids",
+              "attention_mask",
+              "token_type_ids"
+            ],
+            "outputs": [
+              "text_embeds"
+            ]
+          },
+          "image": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "pixel_values"
+            ],
+            "outputs": [
+              "image_embeds"
+            ]
+          }
+        },
+        "load_seconds": 0.4809203470067587,
+        "pid": 85352,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1872187392,
+        "rss_mb": 1785.457,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 0.17250860598869622,
+        "completed": 2
+      },
+      "unload": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "unloaded": true,
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "clip-vit-base-patch16@57c216476eef": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "embeddings",
+          "output": {
+            "text_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                -0.004852479323744774,
+                -0.012153435498476028,
+                0.01530957780778408,
+                0.005597119685262442
+              ]
+            },
+            "image_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                0.022161828354001045,
+                -0.04723763093352318,
+                -0.005592073779553175,
+                0.03394373133778572
+              ]
+            }
+          }
+        },
+        {
+          "capability": "image_embeddings",
+          "output": {
+            "text_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                -0.004852479323744774,
+                -0.012153435498476028,
+                0.01530957780778408,
+                0.005597119685262442
+              ]
+            },
+            "image_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                0.022161828354001045,
+                -0.04723763093352318,
+                -0.005592073779553175,
+                0.03394373133778572
+              ]
+            }
+          }
+        }
+      ],
+      "elapsed_s": 3.4510423629835714,
+      "worker": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "device": "CPU",
+        "towers": {
+          "text": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "input_ids",
+              "attention_mask"
+            ],
+            "outputs": [
+              "text_embeds"
+            ]
+          },
+          "image": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "pixel_values"
+            ],
+            "outputs": [
+              "image_embeds"
+            ]
+          }
+        },
+        "load_seconds": 0.49389716499717906,
+        "pid": 85453,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1619132416,
+        "rss_mb": 1544.125,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 0.17085711201070808,
+        "completed": 2
+      },
+      "unload": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "unloaded": true,
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "eres2net-speaker-zh@3dspeaker-16k": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "speaker_embeddings",
+          "output": {
+            "dimension": 512,
+            "cosine_similarity": 1.0,
+            "embedding": {
+              "dimension": 512,
+              "first_values": [
+                0.03333408012986183,
+                0.001898647751659155,
+                0.015315869823098183,
+                -0.0027156344149261713
+              ]
+            }
+          }
+        }
+      ],
+      "tested_at_unix": 1790157794.6752791,
+      "elapsed_s": 0.656033816980198,
+      "worker": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_speaker",
+        "streaming": "buffered",
+        "load_seconds": 0.29252546100178733,
+        "pid": 98025,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 216064000,
+        "rss_mb": 206.055,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 0.21635145600885153,
+        "completed": 1
+      },
+      "unload": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "matcha-zh-en@271b804af570": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "tts",
+          "output": {
+            "format": "wav",
+            "sample_rate": 16000,
+            "duration_s": 2.7784375,
+            "streaming_mode": "buffered",
+            "audio_base64": {
+              "artifact": "var/http-artifacts/matcha-zh-en.wav",
+              "bytes": 88954,
+              "sha256": "e836a9abbc84372794af65d10bdc0274d5468d648d8c6b5b9eb3e171ba72042a"
+            }
+          }
+        }
+      ],
+      "tested_at_unix": 1790157796.1459994,
+      "elapsed_s": 1.4701768039958552,
+      "worker": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_matcha",
+        "streaming": "buffered",
+        "load_seconds": 1.0478598090121523,
+        "pid": 98052,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 258310144,
+        "rss_mb": 246.344,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 0.22060785398934968,
+        "completed": 1
+      },
+      "unload": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "qwen3-embedding-0.6b-int8-ov@dfe67308c933": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "embeddings",
+          "output": {
+            "pooling": "last_token_l2",
+            "embeddings": {
+              "count": 1,
+              "dimension": 1024,
+              "first_values": [
+                -0.0347682423889637,
+                -0.009410150349140167,
+                0.004397663287818432,
+                -0.039186011999845505
+              ]
+            }
+          }
+        }
+      ],
+      "elapsed_s": 3.859037393005565,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids",
+          "attention_mask"
+        ],
+        "outputs": [
+          "last_hidden_state"
+        ],
+        "load_seconds": 0.994115890993271,
+        "pid": 85569,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1902534656,
+        "rss_mb": 1814.398,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 2.2137395180179738,
+        "completed": 1
+      },
+      "unload": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "qwen3-reranker-0.6b-int8-ov@d7dd424f08cb": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "rerank",
+          "output": {
+            "results": [
+              {
+                "index": 0,
+                "score": 0.9983610510826111
+              },
+              {
+                "index": 1,
+                "score": 3.234465839341283e-05
+              }
+            ]
+          }
+        }
+      ],
+      "elapsed_s": 4.481376940995688,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids",
+          "attention_mask",
+          "position_ids"
+        ],
+        "outputs": [
+          "logits"
+        ],
+        "load_seconds": 1.0285134500009008,
+        "pid": 85658,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 2303787008,
+        "rss_mb": 2197.062,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 2.751812559989048,
+        "completed": 1
+      },
+      "unload": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "zipvoice-distill-int8@77219c8b40f4": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "voice_clone",
+          "output": {
+            "format": "wav",
+            "sample_rate": 24000,
+            "duration_s": 2.00875,
+            "streaming_mode": "buffered",
+            "audio_base64": {
+              "artifact": "var/http-artifacts/zipvoice-distill-int8.wav",
+              "bytes": 96464,
+              "sha256": "b48842e1ebe21d66e75ce9163186c6c26e9d3795a9955ed7d05b8f132b83ef79"
+            }
+          }
+        }
+      ],
+      "tested_at_unix": 1790157853.006144,
+      "elapsed_s": 2.2850923520163633,
+      "worker": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_zipvoice",
+        "streaming": "buffered",
+        "load_seconds": 1.0078680739970878,
+        "pid": 98757,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 442535936,
+        "rss_mb": 422.035,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 1.0323527170112357,
+        "completed": 1
+      },
+      "unload": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "sensevoice-small-int8@2024-07-17-c71f0ce00bec": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "asr",
+          "output": {
+            "text": "你好，欢迎使用本地语音服务。",
+            "language": "zh",
+            "streaming_mode": "buffered"
+          }
+        }
+      ],
+      "tested_at_unix": 1790157850.7199845,
+      "elapsed_s": 1.20584758601035,
+      "worker": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_sensevoice",
+        "streaming": "buffered",
+        "load_seconds": 0.8445948279986624,
+        "pid": 98725,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 370233344,
+        "rss_mb": 353.082,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 0.14949581900145859,
+        "completed": 1
+      },
+      "unload": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "sd-turbo@b261bac6-ov-fp16": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "image_generation",
+          "output": {
+            "format": "png",
+            "width": 512,
+            "height": 512,
+            "seed": 42,
+            "image_base64": {
+              "artifact": "var/http-artifacts/sd-turbo.png",
+              "bytes": 389737,
+              "sha256": "c9388949b3f0615ecbb326cde48435a96969b497d6ee5dcd5053246c2631c8d2"
+            }
+          }
+        }
+      ],
+      "tested_at_unix": 1790157849.5136862,
+      "elapsed_s": 14.88548562300275,
+      "worker": {
+        "backend": "openvino_image",
+        "device": "CPU",
+        "management": "local",
+        "pipeline": "SD-Turbo",
+        "streaming": "buffered",
+        "load_seconds": 3.0451229280151892,
+        "pid": 98539,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 8882008064,
+        "rss_mb": 8470.543,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 11.27014806101215,
+        "completed": 1
+      },
+      "unload": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "qwen3.5-4b-ov-awq@0baf3dbd8812": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "chat",
+          "output": {
+            "text": "你好\n",
+            "usage": {
+              "prompt_tokens": 17,
+              "completion_tokens": 4
+            },
+            "finish_reason": "stop"
+          }
+        }
+      ],
+      "tested_at_unix": 1790157833.9903307,
+      "elapsed_s": 14.273907738999696,
+      "worker": {
+        "backend": "openvino_genai",
+        "device": "CPU",
+        "runtime_version": "2026.4.0.0-3407-7ea2546852a",
+        "pipeline": "vlm",
+        "streaming": "incremental",
+        "load_seconds": 2.884911609988194,
+        "pid": 98354,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 6104850432,
+        "rss_mb": 5822.039,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 0.6381734520255122,
+        "completed": 4
+      },
+      "unload": {
+        "released": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "qwen3-reranker-0.6b-int8-ov@d7dd424f08cb-m2560": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "rerank",
+          "output": {
+            "results": [
+              {
+                "index": 0,
+                "score": 0.9983610510826111
+              },
+              {
+                "index": 1,
+                "score": 3.234465839341283e-05
+              }
+            ]
+          }
+        }
+      ],
+      "tested_at_unix": 1790157819.715644,
+      "elapsed_s": 4.856920160993468,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids",
+          "attention_mask",
+          "position_ids"
+        ],
+        "outputs": [
+          "logits"
+        ],
+        "load_seconds": 1.0946463060099632,
+        "pid": 98296,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 2303467520,
+        "rss_mb": 2196.758,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 3.008188569016056,
+        "completed": 1
+      },
+      "unload": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "animatediff-lightning@027c893e-epic6522-4step": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "video_generation",
+          "output": {
+            "format": "mp4",
+            "width": 512,
+            "height": 512,
+            "frames": 16,
+            "fps": 8,
+            "duration_s": 2.0,
+            "seed": 42,
+            "video_base64": {
+              "artifact": "var/http-artifacts/animatediff-lightning.mp4",
+              "bytes": 365307,
+              "sha256": "7ad03af0ebfb22a3b72a288db7975fbc97c9310aa6810dc311a4af5a5a34a436"
+            }
+          }
+        }
+      ],
+      "tested_at_unix": 1790157772.8437648,
+      "elapsed_s": 25.038211623003008,
+      "worker": {
+        "backend": "diffusers_video",
+        "device": "cuda:0",
+        "management": "local",
+        "pipeline": "AnimateDiff-Lightning-4step",
+        "temporal_model": true,
+        "streaming": "buffered",
+        "gpu_allocated_mb": 3813.711,
+        "gpu_reserved_mb": 3904.0,
+        "load_seconds": 11.64357214901247,
+        "pid": 97462,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 6892339200,
+        "rss_mb": 6573.047,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 11.921508989005815,
+        "completed": 1
+      },
+      "unload": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "bm42-all-minilm-l6-v2-attentions@9695632d760b-m1536": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "sparse_embeddings",
+          "output": {
+            "sparse_embeddings": [
+              {
+                "indices": [
+                  733618285,
+                  1008800696,
+                  1117393019,
+                  1849833631,
+                  2090661150
+                ],
+                "values": [
+                  0.3832005215371356,
+                  0.18017510364775613,
+                  0.13735551153892764,
+                  0.2545313612939179,
+                  0.3043262055751676
+                ]
+              }
+            ],
+            "requires_idf": true,
+            "language": "english",
+            "algorithm": "bm42_attention"
+          }
+        }
+      ],
+      "tested_at_unix": 1790157786.5300827,
+      "elapsed_s": 3.0387622700072825,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids"
+        ],
+        "outputs": [
+          "last_hidden_state",
+          "embedding",
+          "attention_1",
+          "attention_2",
+          "attention_3",
+          "attention_4",
+          "attention_5",
+          "attention_6"
+        ],
+        "load_seconds": 0.38808112501283176,
+        "pid": 97825,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 931659776,
+        "rss_mb": 888.5,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 1.9490519849932753,
+        "completed": 1
+      },
+      "unload": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "chinese-clip-vit-base-patch16@36e679e65c2a-m2560-r1024": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "embeddings",
+          "output": {
+            "text_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                0.061004336923360825,
+                0.026771308854222298,
+                0.03913751244544983,
+                -0.012923591770231724
+              ]
+            },
+            "image_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                0.010679301805794239,
+                -0.023117564618587494,
+                -0.032204050570726395,
+                0.00880516692996025
+              ]
+            }
+          }
+        },
+        {
+          "capability": "image_embeddings",
+          "output": {
+            "text_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                0.061004336923360825,
+                0.026771308854222298,
+                0.03913751244544983,
+                -0.012923591770231724
+              ]
+            },
+            "image_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                0.010679301805794239,
+                -0.023117564618587494,
+                -0.032204050570726395,
+                0.00880516692996025
+              ]
+            }
+          }
+        }
+      ],
+      "tested_at_unix": 1790157790.285875,
+      "elapsed_s": 3.7554207060020417,
+      "worker": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "device": "CPU",
+        "towers": {
+          "text": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "input_ids",
+              "attention_mask",
+              "token_type_ids"
+            ],
+            "outputs": [
+              "text_embeds"
+            ]
+          },
+          "image": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "pixel_values"
+            ],
+            "outputs": [
+              "image_embeds"
+            ]
+          }
+        },
+        "load_seconds": 0.5241747279942501,
+        "pid": 97883,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1872531456,
+        "rss_mb": 1785.785,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 0.2047072049754206,
+        "completed": 2
+      },
+      "unload": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "unloaded": true,
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "clip-vit-base-patch16@57c216476eef-r1024": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "embeddings",
+          "output": {
+            "text_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                -0.004852479323744774,
+                -0.012153435498476028,
+                0.01530957780778408,
+                0.005597119685262442
+              ]
+            },
+            "image_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                0.022161828354001045,
+                -0.04723763093352318,
+                -0.005592073779553175,
+                0.03394373133778572
+              ]
+            }
+          }
+        },
+        {
+          "capability": "image_embeddings",
+          "output": {
+            "text_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                -0.004852479323744774,
+                -0.012153435498476028,
+                0.01530957780778408,
+                0.005597119685262442
+              ]
+            },
+            "image_embeddings": {
+              "count": 1,
+              "dimension": 512,
+              "first_values": [
+                0.022161828354001045,
+                -0.04723763093352318,
+                -0.005592073779553175,
+                0.03394373133778572
+              ]
+            }
+          }
+        }
+      ],
+      "tested_at_unix": 1790157794.0188472,
+      "elapsed_s": 3.7325933999964036,
+      "worker": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "device": "CPU",
+        "towers": {
+          "text": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "input_ids",
+              "attention_mask"
+            ],
+            "outputs": [
+              "text_embeds"
+            ]
+          },
+          "image": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "pixel_values"
+            ],
+            "outputs": [
+              "image_embeds"
+            ]
+          }
+        },
+        "load_seconds": 0.5161863730172627,
+        "pid": 97947,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1617424384,
+        "rss_mb": 1542.496,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 0.19241704797605053,
+        "completed": 2
+      },
+      "unload": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "unloaded": true,
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "qwen2.5-vl-7b-int4-ov@48494b1aceaf": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "vision_chat",
+          "output": {
+            "text": "红色",
+            "usage": {
+              "prompt_tokens": 96,
+              "completion_tokens": 2
+            },
+            "finish_reason": "stop"
+          }
+        }
+      ],
+      "tested_at_unix": 1790157809.6556273,
+      "elapsed_s": 13.508758295996813,
+      "worker": {
+        "backend": "openvino_genai",
+        "device": "CPU",
+        "runtime_version": "2026.4.0.0-3407-7ea2546852a",
+        "pipeline": "vlm",
+        "streaming": "incremental",
+        "load_seconds": 3.0290475980145857,
+        "pid": 98079,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 9944084480,
+        "rss_mb": 9483.418,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 9.864197921007872,
+        "completed": 1
+      },
+      "unload": {
+        "released": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      }
+    },
+    "qwen3-embedding-0.6b-int8-ov@dfe67308c933-m2560": {
+      "status": "passed_real_http",
+      "outputs": [
+        {
+          "capability": "embeddings",
+          "output": {
+            "pooling": "last_token_l2",
+            "embeddings": {
+              "count": 1,
+              "dimension": 1024,
+              "first_values": [
+                -0.0347682423889637,
+                -0.009410150349140167,
+                0.004397663287818432,
+                -0.039186011999845505
+              ]
+            }
+          }
+        }
+      ],
+      "tested_at_unix": 1790157814.2222786,
+      "elapsed_s": 4.565813180000987,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids",
+          "attention_mask"
+        ],
+        "outputs": [
+          "last_hidden_state"
+        ],
+        "load_seconds": 1.124244570004521,
+        "pid": 98239,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1902399488,
+        "rss_mb": 1814.27,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 2.5937273429881316,
+        "completed": 1
+      },
+      "unload": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      }
+    }
+  },
+  "timestamp_unix": 1790157746.862735,
+  "transport": "real TCP HTTP / production CLI",
+  "allow_mock": false,
+  "restart": {
+    "restored_models": 15,
+    "workers_initially_empty": true,
+    "aliases": {
+      "default:embeddings": "bge-m3-int4-ov@d50a3650d1f6",
+      "default:rerank": "bge-reranker-v2-m3-int4-ov@2252a9a291c5",
+      "default:sparse_embeddings": "bm42-all-minilm-l6-v2-attentions@9695632d760b-m1536",
+      "default:image_embeddings": "chinese-clip-vit-base-patch16@36e679e65c2a-m2560-r1024",
+      "default:tts": "matcha-zh-en@271b804af570",
+      "default:speaker_embeddings": "eres2net-speaker-zh@3dspeaker-16k",
+      "default:voice_clone": "zipvoice-distill-int8@77219c8b40f4",
+      "default:asr": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+      "default:image_generation": "sd-turbo@b261bac6-ov-fp16",
+      "default:chat": "qwen3.5-4b-ov-awq@0baf3dbd8812",
+      "default:video_generation": "animatediff-lightning@027c893e-epic6522-4step",
+      "default:vision_chat": "qwen2.5-vl-7b-int4-ov@48494b1aceaf"
+    }
+  },
+  "scheduler_after_unload": {
+    "queue_length": 0,
+    "queue_capacity": 8,
+    "active_count": 0,
+    "execution_capacity": 1,
+    "resident_mb": 0,
+    "temporary_mb": 0,
+    "reserved_mb": 0,
+    "budget_mb": 12288,
+    "gpu_resident_mb": 0,
+    "gpu_temporary_mb": 0,
+    "gpu_reserved_mb": 0,
+    "gpu_budget_mb": 10240,
+    "resident_instances": 0,
+    "quarantined_requests": [],
+    "active_by_model": {}
+  },
+  "metrics": "# TYPE model_service_up gauge\nmodel_service_up 1\n# TYPE model_service_started_timestamp_seconds gauge\nmodel_service_started_timestamp_seconds 1790157747.082517\n# TYPE model_service_requests_total counter\nmodel_service_requests_total{outcome=\"cancelled\"} 1\nmodel_service_requests_total{outcome=\"completed\"} 19\n# TYPE model_service_queue_length gauge\nmodel_service_queue_length 0\n# TYPE model_service_active_requests gauge\nmodel_service_active_requests 0\n# TYPE model_service_resident_bytes gauge\nmodel_service_resident_bytes 0\n# TYPE model_service_temporary_bytes gauge\nmodel_service_temporary_bytes 0\n# TYPE model_service_budget_bytes gauge\nmodel_service_budget_bytes 12884901888\n# TYPE model_service_gpu_resident_bytes gauge\nmodel_service_gpu_resident_bytes 0\n# TYPE model_service_gpu_temporary_bytes gauge\nmodel_service_gpu_temporary_bytes 0\n# TYPE model_service_gpu_budget_bytes gauge\nmodel_service_gpu_budget_bytes 10737418240\n# TYPE model_service_quarantined_requests gauge\nmodel_service_quarantined_requests 0\n# TYPE model_service_worker_rss_bytes gauge\nmodel_service_worker_rss_bytes 0\n# TYPE model_service_workers gauge\nmodel_service_workers 0\n# TYPE model_service_request_duration_seconds_sum counter\nmodel_service_request_duration_seconds_sum 95.7884528269933\n# TYPE model_service_execution_duration_seconds_sum counter\nmodel_service_execution_duration_seconds_sum 95.66522005401202\n# TYPE model_service_executions_total counter\nmodel_service_executions_total 20\n",
+  "separate_authentication": true,
+  "shutdown": {
+    "returncode": -15,
+    "graceful": true
+  },
+  "status": "passed_selected_real_models",
+  "chat_streaming": {
+    "frames": 61,
+    "chunks": 60,
+    "first_chunk_seconds": 0.564,
+    "terminal_seconds": 5.252,
+    "output": {
+      "text": "**机器学习**（Machine Learning）是人工智能（AI）的核心分支之一。简单来说，它是一种让计算机通过**数据**来“学习”规律，从而自动改进性能的技术，而无需被明确编程每一步的具体规则。\n\n你可以这样理解它的核心逻辑：\n> **传统编程**：人告诉计算机",
+      "usage": {
+        "prompt_tokens": 18,
+        "completion_tokens": 64
+      },
+      "finish_reason": "length",
+      "delta": "",
+      "streaming_mode": "incremental"
+    },
+    "disconnect_stop_seconds": 0.156,
+    "cancelled_worker": {
+      "backend": "openvino_genai",
+      "device": "CPU",
+      "runtime_version": "2026.4.0.0-3407-7ea2546852a",
+      "pipeline": "vlm",
+      "streaming": "incremental",
+      "load_seconds": 2.884911609988194,
+      "pid": 98354,
+      "state": "loaded",
+      "alive": true,
+      "rss_bytes": 6102294528,
+      "rss_mb": 5819.602,
+      "load_count": 1,
+      "output_buffer_limit": 8,
+      "buffered_chunks": 0,
+      "busy": 0,
+      "inference_seconds": 0.7592340099799912,
+      "completed": 3
+    },
+    "reuse": {
+      "request_id": "a032439834ce46c5851fdf487f0cbb10",
+      "model": "qwen3.5-4b-ov-awq@0baf3dbd8812",
+      "output": {
+        "text": "你好\n",
+        "usage": {
+          "prompt_tokens": 17,
+          "completion_tokens": 4
+        },
+        "finish_reason": "stop"
+      },
+      "mock": false,
+      "done": true
+    },
+    "permit_held_during_output": true
+  },
+  "registered_model_ids": [
+    "animatediff-lightning@027c893e-epic6522-4step",
+    "bge-m3-int4-ov@d50a3650d1f6",
+    "bge-reranker-v2-m3-int4-ov@2252a9a291c5",
+    "bm42-all-minilm-l6-v2-attentions@9695632d760b-m1536",
+    "chinese-clip-vit-base-patch16@36e679e65c2a-m2560-r1024",
+    "clip-vit-base-patch16@57c216476eef-r1024",
+    "eres2net-speaker-zh@3dspeaker-16k",
+    "matcha-zh-en@271b804af570",
+    "qwen2.5-vl-7b-int4-ov@48494b1aceaf",
+    "qwen3-embedding-0.6b-int8-ov@dfe67308c933-m2560",
+    "qwen3-reranker-0.6b-int8-ov@d7dd424f08cb-m2560",
+    "qwen3.5-4b-ov-awq@0baf3dbd8812",
+    "sd-turbo@b261bac6-ov-fp16",
+    "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+    "zipvoice-distill-int8@77219c8b40f4"
+  ]
+}

@@ -13,7 +13,7 @@ from model_service.tasks import validate_input
 
 
 async def main(args):
-    rows = json.loads(Path("examples/models.real.json").read_text())
+    rows = json.loads(Path("examples/legacy/models.real.json").read_text())
     destination = Path(args.report)
     report = json.loads(destination.read_text()) if destination.exists() else {}
     for row in rows:

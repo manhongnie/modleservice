@@ -1,0 +1,323 @@
+{
+  "status": "real_models_validated",
+  "framework_tests": {
+    "command": ".venv/bin/pytest -q tests/test_media_generation.py",
+    "passed": 57,
+    "note": "Synthetic task/backend contracts plus real ffmpeg codec and Linux child-process cleanup; not evidence of real model content."
+  },
+  "real_image_inference": {
+    "status": "passed",
+    "tested_at": "2026-09-23T09:07:44.504546+00:00",
+    "model_id": "sd-turbo@b261bac6-ov-fp16",
+    "device": "CPU",
+    "input": {
+      "prompt": "A red ceramic teapot on a wooden table, studio photograph",
+      "width": 512,
+      "height": 512,
+      "steps": 1,
+      "seed": 42
+    },
+    "test_scope": "real local backend and task postprocessing; service HTTP is validated separately",
+    "load_seconds": 2.445,
+    "loaded_rss_mb": 2382.531,
+    "backend": {
+      "backend": "openvino_image",
+      "device": "CPU",
+      "management": "local",
+      "pipeline": "SD-Turbo",
+      "streaming": "buffered"
+    },
+    "inference_seconds": 8.859,
+    "artifact": "var/media/sd-turbo.png",
+    "bytes": 389737,
+    "sha256": "c9388949b3f0615ecbb326cde48435a96969b497d6ee5dcd5053246c2631c8d2",
+    "output": {
+      "format": "png",
+      "width": 512,
+      "height": 512,
+      "seed": 42
+    },
+    "pixel_stddev": 44.6269,
+    "rss_after_inference_mb": 8674.379,
+    "cold_peak_rss_mb": 8668.258,
+    "warm_inference_seconds": 7.726,
+    "repeated_seed_same_pixels": true,
+    "rss_after_warm_inference_mb": 8674.379,
+    "warm_peak_rss_mb": 8674.379,
+    "real_cancellation": {
+      "status": "passed",
+      "error_code": "cancelled",
+      "stop_acknowledged_seconds": 7.795
+    },
+    "rss_after_cancellation_mb": 8674.379,
+    "peak_rss_mb": 8674.379,
+    "visual_review": "Confirmed red ceramic teapot on wooden table, matching test prompt."
+  },
+  "real_video_inference": {
+    "status": "passed",
+    "tested_at": "2026-09-23T09:50:57.693176+00:00",
+    "model_id": "animatediff-lightning@027c893e-epic6522-4step",
+    "device": "CUDA",
+    "input": {
+      "prompt": "A small sailboat moving on a calm blue lake, cinematic",
+      "width": 512,
+      "height": 512,
+      "frames": 16,
+      "fps": 8,
+      "steps": 4,
+      "seed": 42
+    },
+    "test_scope": "real local backend and task postprocessing; service HTTP is validated separately",
+    "load_seconds": 10.953,
+    "loaded_rss_mb": 5767.805,
+    "backend": {
+      "backend": "diffusers_video",
+      "device": "cuda:0",
+      "management": "local",
+      "pipeline": "AnimateDiff-Lightning-4step",
+      "temporal_model": true,
+      "streaming": "buffered",
+      "gpu_allocated_mb": 3813.711,
+      "gpu_reserved_mb": 3904.0
+    },
+    "loaded_gpu_allocated_mb": 3813.711,
+    "inference_seconds": 14.566,
+    "runtime_checks": "passed",
+    "artifact": "var/media/animatediff-lightning.mp4",
+    "bytes": 365307,
+    "sha256": "7ad03af0ebfb22a3b72a288db7975fbc97c9310aa6810dc311a4af5a5a34a436",
+    "output": {
+      "format": "mp4",
+      "width": 512,
+      "height": 512,
+      "frames": 16,
+      "fps": 8,
+      "duration_s": 2.0,
+      "seed": 42
+    },
+    "pixel_stddev": 49.0235,
+    "distinct_generated_frames": 16,
+    "adjacent_frame_mean_absolute_difference": 4.2022,
+    "peak_gpu_allocated_mb": 4471.752,
+    "peak_gpu_reserved_mb": 5670.0,
+    "rss_after_inference_mb": 5874.68,
+    "cold_peak_rss_mb": 8658.043,
+    "warm_inference_seconds": 14.39,
+    "repeated_seed_same_pixels": true,
+    "rss_after_warm_inference_mb": 5874.68,
+    "warm_peak_rss_mb": 8658.043,
+    "real_cancellation": {
+      "status": "passed",
+      "error_code": "cancelled",
+      "stop_acknowledged_seconds": 3.398
+    },
+    "rss_after_cancellation_mb": 5874.68,
+    "peak_rss_mb": 8658.043,
+    "visual_review": {
+      "status": "passed",
+      "reviewed_artifact": "var/media/animatediff-lightning-contact.png",
+      "findings": "Clear sailboat, lake and reflection match the prompt across all 16 temporal-model generated frames. Water/sail details change subtly. Motion is limited; this is not a long-video or large-motion quality guarantee."
+    },
+    "resources": {
+      "configured_resident_mb": 6144,
+      "configured_request_mb": 4096,
+      "configured_gpu_resident_mb": 6144,
+      "configured_gpu_request_mb": 2048,
+      "shape_policy": "fixed 512x512, at most 16 frames, one request per worker"
+    }
+  },
+  "note": "Real generated content was inspected after execution, encoding, repeat-seed and cancellation checks. Previous failed SD1.5 combination remains recorded, and is not the supplied video configuration. HTTP service validation is recorded separately by the deployment tests.",
+  "source_manifests": [
+    "models/media/sd-turbo-source/source.json",
+    "models/media/sd-turbo-ov/export.json",
+    "models/media/animatediff-lightning-epic/base/source.json",
+    "models/media/animatediff-lightning-epic/source.json"
+  ],
+  "previous_real_runs": [
+    {
+      "status": "failed",
+      "tested_at": "2026-09-23T09:17:59.621031+00:00",
+      "model_id": "animatediff-lightning@027c893e-sd15-4step",
+      "device": "CUDA",
+      "input": {
+        "prompt": "A small sailboat moving on a calm blue lake, cinematic",
+        "width": 256,
+        "height": 256,
+        "frames": 8,
+        "fps": 8,
+        "steps": 4,
+        "seed": 42
+      },
+      "test_scope": "real local backend and task postprocessing; service HTTP is validated separately",
+      "error": "AttributeError: 'AnimateDiffPipeline' object has no attribute 'enable_vae_slicing'",
+      "peak_rss_mb": 8253.75
+    },
+    {
+      "status": "failed",
+      "tested_at": "2026-09-23T09:18:49.554705+00:00",
+      "model_id": "animatediff-lightning@027c893e-sd15-4step",
+      "device": "CUDA",
+      "input": {
+        "prompt": "A small sailboat moving on a calm blue lake, cinematic",
+        "width": 256,
+        "height": 256,
+        "frames": 8,
+        "fps": 8,
+        "steps": 4,
+        "seed": 42
+      },
+      "test_scope": "real local backend and task postprocessing; service HTTP is validated separately",
+      "load_seconds": 10.181,
+      "loaded_rss_mb": 4186.004,
+      "backend": {
+        "backend": "diffusers_video",
+        "device": "cuda:0",
+        "management": "local",
+        "pipeline": "AnimateDiff-Lightning-4step",
+        "temporal_model": true,
+        "streaming": "buffered",
+        "gpu_allocated_mb": 3813.711,
+        "gpu_reserved_mb": 3904.0
+      },
+      "loaded_gpu_allocated_mb": 3813.711,
+      "inference_seconds": 3.963,
+      "artifact": "var/media/diagnostic-sd15-noise.mp4",
+      "bytes": 125907,
+      "sha256": "10565fd4a1a34564ffa389bdd9057affebe746c955cbac9f1d64edfe20230153",
+      "output": {
+        "format": "mp4",
+        "width": 256,
+        "height": 256,
+        "frames": 8,
+        "fps": 8,
+        "duration_s": 1.0,
+        "seed": 42
+      },
+      "pixel_stddev": 95.94,
+      "distinct_generated_frames": 8,
+      "adjacent_frame_mean_absolute_difference": 85.213,
+      "peak_gpu_allocated_mb": 3980.622,
+      "peak_gpu_reserved_mb": 4204.0,
+      "rss_after_inference_mb": 4295.504,
+      "real_cancellation": {
+        "status": "passed",
+        "error_code": "cancelled",
+        "stop_acknowledged_seconds": 0.82
+      },
+      "rss_after_cancellation_mb": 4295.504,
+      "peak_rss_mb": 8273.988,
+      "visual_review": "Execution and encoding completed, but manual frame inspection found colored noise rather than a sailboat. Not accepted as usable video inference."
+    }
+  ],
+  "video_diagnostics": {
+    "base_sd15_20_steps": "Recognizable sailboat generated by ordinary SD1.5 pipeline using same base weights and CUDA; var/media/sd15-base-probe.png",
+    "vae_reconstruction_mse": {
+      "cuda_fp16": 0.00283,
+      "cuda_fp32": 0.002829,
+      "cpu_fp32": 0.002829
+    },
+    "motion_tensors_verified_equal": 567,
+    "base_tensors_verified_equal": 686,
+    "unsuccessful_variations": [
+      "512x512 8 frames",
+      "256x256 16 frames",
+      "AttnProcessor instead of SDPA",
+      "guidance_scale 1, 2, 7.5",
+      "forward chunking disabled"
+    ],
+    "next_validation": "Official AnimateDiff-Lightning example epiCRealism base at revision 6522cf856b8c8e14638a0aaa7bd89b1b098aed17",
+    "cpu_fp32_vs_cuda_fp16_one_step": {
+      "width": 128,
+      "height": 128,
+      "frames": 4,
+      "mean_absolute_error": 0.0004962242,
+      "max_absolute_error": 0.00449663,
+      "relative_l2": 0.000719146
+    },
+    "resolution": {
+      "status": "resolved",
+      "cause": "Original SD1.5 base was incompatible with useful 4-step Lightning generation in tested configurations. The exact epiCRealism base linked by the official model card produces recognizable temporal output under the same scheduler and execution backend.",
+      "base_repo": "emilianJR/epiCRealism",
+      "base_revision": "6522cf856b8c8e14638a0aaa7bd89b1b098aed17",
+      "official_settings_probe": {
+        "prompt": "A girl smiling",
+        "shape": [
+          512,
+          512,
+          16
+        ],
+        "artifact": "var/media/epic-official-probe.mp4",
+        "contact_sheet": "var/media/epic-official-probe.png",
+        "load_seconds": 8.802,
+        "inference_seconds": 15.176,
+        "peak_rss_mb": 8547.484,
+        "steady_rss_mb": 5770.027,
+        "peak_gpu_allocated_mb": 4471.752,
+        "peak_gpu_reserved_mb": 5670.0,
+        "adjacent_frame_mean_absolute_difference": 3.1511,
+        "visual_review": "Clear smiling person with coherent appearance and subtle face/posture changes across temporal frames; parent and media agent both inspected."
+      }
+    }
+  },
+  "sources": [
+    {
+      "repo": "stabilityai/sd-turbo",
+      "revision": "b261bac6fd2cf515557d5d0707481eafa0485ec2",
+      "license": "stabilityai-community (see pinned LICENSE.md)",
+      "url": "https://huggingface.co/stabilityai/sd-turbo",
+      "weight_files": [
+        {
+          "path": "text_encoder/model.fp16.safetensors",
+          "size_bytes": 680820392,
+          "sha256": "bc1827c465450322616f06dea41596eac7d493f4e95904dcb51f0fc745c4e13f"
+        },
+        {
+          "path": "unet/diffusion_pytorch_model.fp16.safetensors",
+          "size_bytes": 1731904736,
+          "sha256": "40ec400881e27d1376c7c95c5bd495f407b33756e80eb6365e301c33a07af6e5"
+        },
+        {
+          "path": "vae/diffusion_pytorch_model.fp16.safetensors",
+          "size_bytes": 167335342,
+          "sha256": "3e4c08995484ee61270175e9e7a072b66a6e4eeb5f0c266667fe1f45b90daf9a"
+        }
+      ]
+    },
+    {
+      "repo": "emilianJR/epiCRealism",
+      "revision": "6522cf856b8c8e14638a0aaa7bd89b1b098aed17",
+      "license": "creativeml-openrail-m",
+      "url": "https://huggingface.co/emilianJR/epiCRealism",
+      "weight_files": [
+        {
+          "path": "text_encoder/model.safetensors",
+          "size_bytes": 492265880,
+          "sha256": "1524df10d41745755db685e7ab407d9873a2020e71a34087c155dd97de10647d"
+        },
+        {
+          "path": "unet/diffusion_pytorch_model.safetensors",
+          "size_bytes": 3438167536,
+          "sha256": "657a6b9cf3594b1c30f1b7bc35418e07caaaa0ca668fbefb13bbecc5391181e0"
+        },
+        {
+          "path": "vae/diffusion_pytorch_model.safetensors",
+          "size_bytes": 334643268,
+          "sha256": "38983115b60006fefd134fe118e46275fbc692615cac5b774f7a64654418e7ec"
+        }
+      ]
+    },
+    {
+      "repo": "ByteDance/AnimateDiff-Lightning",
+      "revision": "027c893eec01df7330f5d4b733bc9485ee02e8b2",
+      "license": "creativeml-openrail-m",
+      "url": "https://huggingface.co/ByteDance/AnimateDiff-Lightning",
+      "weight_files": [
+        {
+          "path": "animatediff_lightning_4step_diffusers.safetensors",
+          "size_bytes": 907702248,
+          "sha256": "8f3330914edd8fc2ee5659e6944323858feb0ec21cc913789202d043f69b5e17"
+        }
+      ]
+    }
+  ]
+}

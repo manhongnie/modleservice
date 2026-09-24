@@ -38,6 +38,9 @@ class Observability:
                   "resident_bytes": scheduler["resident_mb"] * 1048576,
                   "temporary_bytes": scheduler["temporary_mb"] * 1048576,
                   "budget_bytes": scheduler["budget_mb"] * 1048576,
+                  "gpu_resident_bytes": scheduler["gpu_resident_mb"] * 1048576,
+                  "gpu_temporary_bytes": scheduler["gpu_temporary_mb"] * 1048576,
+                  "gpu_budget_bytes": scheduler["gpu_budget_mb"] * 1048576,
                   "quarantined_requests": len(scheduler["quarantined_requests"]),
                   "worker_rss_bytes": sum(worker.get("rss_bytes", 0) for worker in workers.values()),
                   "workers": sum(bool(worker.get("alive")) for worker in workers.values())}

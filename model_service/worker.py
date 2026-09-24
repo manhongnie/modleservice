@@ -66,6 +66,10 @@ def worker_main(connection: Connection, raw_config: dict[str, Any], parent_pid: 
 
             def emit(result: dict[str, Any]) -> None:
                 nonlocal emitted_bytes
+                # Postprocessing/encoding may take time; cancellation during it
+                # must not become a successful buffered or streaming result.
+                if cancel.is_set():
+                    raise ServiceError("cancelled", "Execution stopped after cancellation", 499)
                 emitted_bytes += len(json.dumps(result, ensure_ascii=False).encode())
                 if emitted_bytes > max_output_bytes:
                     raise ServiceError("output_too_large", "Model output exceeds the configured limit", 413)

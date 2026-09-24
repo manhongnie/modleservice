@@ -1,16 +1,17 @@
 {
-  "command": ".venv/bin/python -m pytest -q --junitxml=var/pytest-results.xml",
-  "timestamp_utc": "2026-09-23T07:39:35.163353+00:00",
+  "publication_note": "The machine hostname has been generalized for publication; test results are unchanged.",
+  "command": ".venv/bin/python -m pytest -q --junitxml=var/pytest-multimodal-results.xml",
+  "timestamp_utc": "2026-09-23T10:02:19.383382+00:00",
   "python": "3.13.13",
   "results": {
     "name": "pytest",
     "errors": "0",
     "failures": "0",
     "skipped": "0",
-    "tests": "169",
-    "time": "19.087",
-    "timestamp": "2026-09-23T15:39:02.081756+08:00",
-    "hostname": "ManhongNie"
+    "tests": "326",
+    "time": "23.185",
+    "timestamp": "2026-09-23T17:56:27.603068+08:00",
+    "hostname": "local-validation-host"
   },
-  "scope": "Full framework suite, controlled fault injection, real TCP tests and real OpenVINO small tensor graph. Qwen/ASR/TTS evidence is recorded separately."
+  "scope": "Framework, controlled failure/cancellation, real TCP, real OpenVINO small graph and ffmpeg. Real model quality and service validation are separate reports."
 }

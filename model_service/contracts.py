@@ -30,6 +30,8 @@ class ModelConfig(BaseModel):
     concurrency: int = Field(default=1, ge=1, le=64)
     resident_mb: int = Field(default=256, ge=0)
     request_mb: int = Field(default=32, ge=0)
+    gpu_resident_mb: int = Field(default=0, ge=0)
+    gpu_request_mb: int = Field(default=0, ge=0)
     max_input_bytes: int = Field(default=1048576, ge=1, le=67108864)
     options: dict[str, Any] = Field(default_factory=dict)
     validation_input: dict[str, Any]
@@ -52,6 +54,7 @@ class Settings(BaseModel):
     business_keys: list[str] = Field(min_length=1)
     admin_keys: list[str] = Field(min_length=1)
     total_memory_mb: int = Field(default=4096, ge=1)
+    total_gpu_memory_mb: int = Field(default=0, ge=0)
     max_executions: int = Field(default=4, ge=1)
     queue_size: int = Field(default=32, ge=0)
     queue_timeout_s: float = Field(default=10, gt=0)

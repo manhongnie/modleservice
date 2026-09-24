@@ -88,7 +88,7 @@ def main():
                     if process.poll() is not None or time.monotonic() > deadline:
                         raise RuntimeError(f"CLI failed to start; inspect {log_path}")
                     time.sleep(.05)
-                for config in json.loads(Path("examples/models.real.json").read_text()):
+                for config in json.loads(Path("examples/legacy/models.real.json").read_text()):
                     capability = config["capabilities"][0]
                     began = time.monotonic()
                     response = client.post("/v1/" + capability, headers={"Authorization": "Bearer " + env["BUSINESS_API_KEY"]},

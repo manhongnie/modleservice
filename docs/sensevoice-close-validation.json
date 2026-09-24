@@ -1,0 +1,240 @@
+{
+  "publication_note": "Machine-specific path prefixes have been removed; paths are relative to the project root and validation results are unchanged.",
+  "status": "completed",
+  "started_at_utc": "2026-09-24T01:37:26.186048+00:00",
+  "python": "3.13.13",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "scope": "Three real load/infer/close cycles in one spawned process; no production database or HTTP service",
+  "configuration": {
+    "name": "sensevoice-small-int8",
+    "version": "2024-07-17-c71f0ce00bec",
+    "capabilities": [
+      "asr"
+    ],
+    "task": "sherpa_sensevoice",
+    "backend": "sherpa_onnx",
+    "path": "models/sherpa/sherpa-onnx-sense-voice-zh-en-ja-ko-yue-int8-2024-07-17",
+    "device": "CPU",
+    "concurrency": 1,
+    "resident_mb": 768,
+    "request_mb": 256,
+    "max_input_bytes": 2097152,
+    "load_policy": "on_demand",
+    "idle_seconds": 60,
+    "options": {
+      "threads": 2,
+      "max_audio_seconds": 30
+    }
+  },
+  "measurement_notes": [
+    "RSS and USS are point-in-time psutil readings in MiB, not inference peak measurements.",
+    "Each cycle baseline includes imported native libraries and the same retained 30-second float32 waveform.",
+    "backend.close() clears its model reference and invokes gc.collect(); garbage collection does not guarantee RSS returns to the OS.",
+    "No per-inference collection, malloc_trim, or provider/arena setting changes are used.",
+    "Residual RSS after close may include allocator caches or fragmentation; it alone does not prove a leak.",
+    "Process exit confirmation is separate from direct-close readings. Three cycles do not establish long-run leak absence."
+  ],
+  "controller_before_spawn": {
+    "rss_bytes": 23289856,
+    "uss_bytes": 11583488,
+    "rss_mib": 22.2109375,
+    "uss_mib": 11.046875
+  },
+  "cycles": [
+    {
+      "cycle": 1,
+      "pid": 79920,
+      "before_load": {
+        "rss_bytes": 57176064,
+        "uss_bytes": 29630464,
+        "rss_mib": 54.52734375,
+        "uss_mib": 28.2578125
+      },
+      "load_metadata": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_sensevoice",
+        "streaming": "buffered"
+      },
+      "load_seconds": 0.783409814001061,
+      "after_load": {
+        "rss_bytes": 427999232,
+        "uss_bytes": 389529600,
+        "rss_mib": 408.171875,
+        "uss_mib": 371.484375
+      },
+      "inference_seconds": 0.6342688050062861,
+      "output_text_chars": 150,
+      "output_text_sha256": "da922274eb65009fa63ba00abf54a95c8d417bf78a6058feb7e062b9e46dac99",
+      "after_inference": {
+        "rss_bytes": 499367936,
+        "uss_bytes": 459825152,
+        "rss_mib": 476.234375,
+        "uss_mib": 438.5234375
+      },
+      "close_result": {
+        "released": true
+      },
+      "close_seconds": 0.028471922007156536,
+      "model_reference_cleared": true,
+      "immediately_after_close": {
+        "rss_bytes": 361750528,
+        "uss_bytes": 321855488,
+        "rss_mib": 344.9921875,
+        "uss_mib": 306.9453125
+      },
+      "one_second_after_close": {
+        "rss_bytes": 361750528,
+        "uss_bytes": 321855488,
+        "rss_mib": 344.9921875,
+        "uss_mib": 306.9453125
+      },
+      "rss_remaining_above_cycle_baseline_mib": 290.46484375,
+      "uss_remaining_above_cycle_baseline_mib": 278.6875
+    },
+    {
+      "cycle": 2,
+      "pid": 79920,
+      "before_load": {
+        "rss_bytes": 361750528,
+        "uss_bytes": 321855488,
+        "rss_mib": 344.9921875,
+        "uss_mib": 306.9453125
+      },
+      "load_metadata": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_sensevoice",
+        "streaming": "buffered"
+      },
+      "load_seconds": 0.5403924730198923,
+      "after_load": {
+        "rss_bytes": 390651904,
+        "uss_bytes": 350760960,
+        "rss_mib": 372.5546875,
+        "uss_mib": 334.51171875
+      },
+      "inference_seconds": 0.5950560239725746,
+      "output_text_chars": 150,
+      "output_text_sha256": "da922274eb65009fa63ba00abf54a95c8d417bf78a6058feb7e062b9e46dac99",
+      "after_inference": {
+        "rss_bytes": 451207168,
+        "uss_bytes": 411537408,
+        "rss_mib": 430.3046875,
+        "uss_mib": 392.47265625
+      },
+      "close_result": {
+        "released": true
+      },
+      "close_seconds": 0.026342765981098637,
+      "model_reference_cleared": true,
+      "immediately_after_close": {
+        "rss_bytes": 371482624,
+        "uss_bytes": 331415552,
+        "rss_mib": 354.2734375,
+        "uss_mib": 316.0625
+      },
+      "one_second_after_close": {
+        "rss_bytes": 371482624,
+        "uss_bytes": 331415552,
+        "rss_mib": 354.2734375,
+        "uss_mib": 316.0625
+      },
+      "rss_remaining_above_cycle_baseline_mib": 9.28125,
+      "uss_remaining_above_cycle_baseline_mib": 9.1171875
+    },
+    {
+      "cycle": 3,
+      "pid": 79920,
+      "before_load": {
+        "rss_bytes": 371482624,
+        "uss_bytes": 331415552,
+        "rss_mib": 354.2734375,
+        "uss_mib": 316.0625
+      },
+      "load_metadata": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_sensevoice",
+        "streaming": "buffered"
+      },
+      "load_seconds": 0.5098649069841485,
+      "after_load": {
+        "rss_bytes": 393699328,
+        "uss_bytes": 353914880,
+        "rss_mib": 375.4609375,
+        "uss_mib": 337.51953125
+      },
+      "inference_seconds": 0.6130883920122869,
+      "output_text_chars": 150,
+      "output_text_sha256": "da922274eb65009fa63ba00abf54a95c8d417bf78a6058feb7e062b9e46dac99",
+      "after_inference": {
+        "rss_bytes": 454451200,
+        "uss_bytes": 414687232,
+        "rss_mib": 433.3984375,
+        "uss_mib": 395.4765625
+      },
+      "close_result": {
+        "released": true
+      },
+      "close_seconds": 0.027853392995893955,
+      "model_reference_cleared": true,
+      "immediately_after_close": {
+        "rss_bytes": 370487296,
+        "uss_bytes": 330366976,
+        "rss_mib": 353.32421875,
+        "uss_mib": 315.0625
+      },
+      "one_second_after_close": {
+        "rss_bytes": 370487296,
+        "uss_bytes": 330366976,
+        "rss_mib": 353.32421875,
+        "uss_mib": 315.0625
+      },
+      "rss_remaining_above_cycle_baseline_mib": -0.94921875,
+      "uss_remaining_above_cycle_baseline_mib": -1.0
+    }
+  ],
+  "child_pid": 79920,
+  "runtime": {
+    "sherpa_onnx_version": "1.13.8",
+    "onnxruntime": {
+      "version": "1.28.2",
+      "library": ".venv/lib/python3.13/site-packages/sherpa_onnx/lib/libonnxruntime.so",
+      "method": "Bundled libonnxruntime.so OrtGetApiBase()->GetVersionString()"
+    },
+    "provider": "cpu",
+    "threads": 2,
+    "torch_imported": false,
+    "funasr_imported": false
+  },
+  "input": {
+    "duration_seconds": 30,
+    "sample_rate": 16000,
+    "samples": 480000,
+    "reference_wav_sha256": "7521e8dd107ac70c5ecefc94e148ecccf1150628afffc6e51e1b49c7cc5078aa",
+    "tiled_pcm16_sha256": "b3b628614ac702fcafb7cc7bba6d7ad6de1f7cb97dc5e3782fe609b93c1a32c9",
+    "construction": "Repeat and truncate the registered synthetic speech reference to 30 seconds"
+  },
+  "process_exit": {
+    "pid": 79920,
+    "exitcode": 0,
+    "multiprocessing_alive": false,
+    "original_pid_identity_running": false,
+    "forced_termination": false
+  },
+  "controller_after_child_exit": {
+    "rss_bytes": 23683072,
+    "uss_bytes": 12062720,
+    "rss_mib": 22.5859375,
+    "uss_mib": 11.50390625
+  },
+  "finished_at_utc": "2026-09-24T01:37:33.164661+00:00",
+  "observations": {
+    "same_child_pid_all_cycles": true,
+    "last_close_rss_above_initial_baseline_mib": 298.796875,
+    "last_close_uss_above_initial_baseline_mib": 286.8046875,
+    "process_exit_confirmed": true,
+    "interpretation": "Report observed close residuals separately from confirmed process exit; no conclusion about unbounded leaks from three cycles alone."
+  }
+}

@@ -24,7 +24,7 @@ async def run(args):
     destination = Path("docs/real-service-validation.json")
     report = json.loads(destination.read_text()) if destination.exists() else {}
     try:
-        configs = json.loads(Path("examples/models.real.json").read_text())
+        configs = json.loads(Path("examples/legacy/models.real.json").read_text())
         for raw in configs:
             if args.models and raw["name"] not in args.models:
                 continue

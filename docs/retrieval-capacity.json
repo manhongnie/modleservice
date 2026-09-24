@@ -1,0 +1,372 @@
+{
+  "results": {
+    "bge-m3-int4-ov@d50a3650d1f6": {
+      "model_id": "bge-m3-int4-ov@d50a3650d1f6",
+      "timestamp_unix": 1790156881.3387191,
+      "batch": 8,
+      "max_length": 512,
+      "payload_bytes": 167979,
+      "resident_budget_mb": 1800,
+      "request_budget_mb": 512,
+      "runs": [
+        {
+          "index": 0,
+          "seconds": 9.183830027992371,
+          "steady_rss_mb": 1667.55078125
+        },
+        {
+          "index": 1,
+          "seconds": 5.5910087850061245,
+          "steady_rss_mb": 1672.05078125
+        }
+      ],
+      "load_seconds": 0.7062649849976879,
+      "input_shape": [
+        8,
+        512
+      ],
+      "peak_rss_mb": 1672.05078125,
+      "resident_budget_covers_observed": true,
+      "total_budget_covers_observed": true,
+      "status": "passed_real_capacity_sample"
+    },
+    "bge-reranker-v2-m3-int4-ov@2252a9a291c5": {
+      "model_id": "bge-reranker-v2-m3-int4-ov@2252a9a291c5",
+      "timestamp_unix": 1790157178.0654242,
+      "batch": 8,
+      "max_length": 512,
+      "payload_bytes": 168020,
+      "resident_budget_mb": 1800,
+      "request_budget_mb": 512,
+      "runs": [
+        {
+          "index": 0,
+          "seconds": 9.825026409002021,
+          "steady_rss_mb": 1647.875
+        },
+        {
+          "index": 1,
+          "seconds": 6.722437585995067,
+          "steady_rss_mb": 1656.125
+        }
+      ],
+      "load_seconds": 0.8607628859754186,
+      "input_shape": [
+        8,
+        512
+      ],
+      "peak_rss_mb": 1656.125,
+      "resident_budget_covers_observed": true,
+      "total_budget_covers_observed": true,
+      "status": "passed_real_capacity_sample"
+    },
+    "chinese-clip-vit-base-patch16@36e679e65c2a": {
+      "model_id": "chinese-clip-vit-base-patch16@36e679e65c2a",
+      "timestamp_unix": 1790157196.3858237,
+      "batch": 8,
+      "max_length": 52,
+      "payload_bytes": 642615,
+      "resident_budget_mb": 2000,
+      "request_budget_mb": 512,
+      "runs": [
+        {
+          "index": 0,
+          "seconds": 5.954938795010094,
+          "steady_rss_mb": 2293.1796875
+        },
+        {
+          "index": 1,
+          "seconds": 3.760052850993816,
+          "steady_rss_mb": 2294.90625
+        }
+      ],
+      "load_seconds": 0.4831665539823007,
+      "input_shape": [
+        8,
+        52
+      ],
+      "decoded_image_pixels_each": 16777216,
+      "image_tensor_shape": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "peak_rss_mb": 2988.5078125,
+      "resident_budget_covers_observed": false,
+      "total_budget_covers_observed": false,
+      "status": "budget_needs_calibration"
+    },
+    "bm42-all-minilm-l6-v2-attentions@9695632d760b": {
+      "model_id": "bm42-all-minilm-l6-v2-attentions@9695632d760b",
+      "timestamp_unix": 1790157207.1876965,
+      "batch": 8,
+      "max_length": 256,
+      "payload_bytes": 84011,
+      "resident_budget_mb": 1000,
+      "request_budget_mb": 512,
+      "runs": [
+        {
+          "index": 0,
+          "seconds": 2.37029572299798,
+          "steady_rss_mb": 1159.78125
+        },
+        {
+          "index": 1,
+          "seconds": 0.41882983600953594,
+          "steady_rss_mb": 1169.01953125
+        }
+      ],
+      "load_seconds": 0.3383730709902011,
+      "input_shape": [
+        8,
+        256
+      ],
+      "peak_rss_mb": 1303.4375,
+      "resident_budget_covers_observed": false,
+      "total_budget_covers_observed": true,
+      "status": "budget_needs_calibration"
+    },
+    "qwen3-embedding-0.6b-int8-ov@dfe67308c933": {
+      "model_id": "qwen3-embedding-0.6b-int8-ov@dfe67308c933",
+      "timestamp_unix": 1790157211.0966277,
+      "batch": 4,
+      "max_length": 512,
+      "payload_bytes": 83995,
+      "resident_budget_mb": 2000,
+      "request_budget_mb": 512,
+      "runs": [
+        {
+          "index": 0,
+          "seconds": 7.770614907989511,
+          "steady_rss_mb": 2054.5703125
+        },
+        {
+          "index": 1,
+          "seconds": 5.136299041012535,
+          "steady_rss_mb": 2058.6953125
+        }
+      ],
+      "load_seconds": 1.0334324150171597,
+      "input_shape": [
+        4,
+        512
+      ],
+      "peak_rss_mb": 2058.6953125,
+      "resident_budget_covers_observed": false,
+      "total_budget_covers_observed": true,
+      "status": "budget_needs_calibration"
+    },
+    "qwen3-reranker-0.6b-int8-ov@d7dd424f08cb-m2560": {
+      "model_id": "qwen3-reranker-0.6b-int8-ov@d7dd424f08cb-m2560",
+      "timestamp_unix": 1790157225.835047,
+      "batch": 2,
+      "max_length": 256,
+      "payload_bytes": 21052,
+      "resident_budget_mb": 2560,
+      "request_budget_mb": 1024,
+      "runs": [
+        {
+          "index": 0,
+          "seconds": 4.407113667984959,
+          "steady_rss_mb": 2420.5546875
+        },
+        {
+          "index": 1,
+          "seconds": 1.5515315050142817,
+          "steady_rss_mb": 2421.51171875
+        }
+      ],
+      "load_seconds": 0.9896371260110755,
+      "input_shape": [
+        2,
+        256
+      ],
+      "peak_rss_mb": 2712.95703125,
+      "resident_budget_covers_observed": true,
+      "total_budget_covers_observed": true,
+      "status": "passed_real_capacity_sample"
+    },
+    "clip-vit-base-patch16@57c216476eef": {
+      "model_id": "clip-vit-base-patch16@57c216476eef",
+      "timestamp_unix": 1790157233.7029078,
+      "batch": 8,
+      "max_length": 77,
+      "payload_bytes": 650815,
+      "resident_budget_mb": 2000,
+      "request_budget_mb": 512,
+      "runs": [
+        {
+          "index": 0,
+          "seconds": 6.1961731420014985,
+          "steady_rss_mb": 1665.984375
+        },
+        {
+          "index": 1,
+          "seconds": 3.929017852002289,
+          "steady_rss_mb": 1667.859375
+        }
+      ],
+      "load_seconds": 0.5297144539945293,
+      "input_shape": [
+        8,
+        77
+      ],
+      "decoded_image_pixels_each": 16777216,
+      "image_tensor_shape": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "peak_rss_mb": 2739.70703125,
+      "resident_budget_covers_observed": true,
+      "total_budget_covers_observed": false,
+      "status": "budget_needs_calibration"
+    },
+    "chinese-clip-vit-base-patch16@36e679e65c2a-m2560-r1024": {
+      "model_id": "chinese-clip-vit-base-patch16@36e679e65c2a-m2560-r1024",
+      "timestamp_unix": 1790157362.273897,
+      "batch": 8,
+      "max_length": 52,
+      "payload_bytes": 642615,
+      "resident_budget_mb": 2560,
+      "request_budget_mb": 1024,
+      "runs": [
+        {
+          "index": 0,
+          "seconds": 5.835861177009065,
+          "steady_rss_mb": 2293.8828125
+        },
+        {
+          "index": 1,
+          "seconds": 3.6333600229991134,
+          "steady_rss_mb": 2295.41796875
+        }
+      ],
+      "load_seconds": 0.4709382569999434,
+      "input_shape": [
+        8,
+        52
+      ],
+      "decoded_image_pixels_each": 16777216,
+      "image_tensor_shape": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "peak_rss_mb": 2989.0078125,
+      "resident_budget_covers_observed": true,
+      "total_budget_covers_observed": true,
+      "status": "passed_real_capacity_sample"
+    },
+    "bm42-all-minilm-l6-v2-attentions@9695632d760b-m1536": {
+      "model_id": "bm42-all-minilm-l6-v2-attentions@9695632d760b-m1536",
+      "timestamp_unix": 1790157372.8279383,
+      "batch": 8,
+      "max_length": 256,
+      "payload_bytes": 84011,
+      "resident_budget_mb": 1536,
+      "request_budget_mb": 512,
+      "runs": [
+        {
+          "index": 0,
+          "seconds": 2.3554570569831412,
+          "steady_rss_mb": 1159.6171875
+        },
+        {
+          "index": 1,
+          "seconds": 0.47485748102189973,
+          "steady_rss_mb": 1168.6328125
+        }
+      ],
+      "load_seconds": 0.3490866110078059,
+      "input_shape": [
+        8,
+        256
+      ],
+      "peak_rss_mb": 1317.53125,
+      "resident_budget_covers_observed": true,
+      "total_budget_covers_observed": true,
+      "status": "passed_real_capacity_sample"
+    },
+    "qwen3-embedding-0.6b-int8-ov@dfe67308c933-m2560": {
+      "model_id": "qwen3-embedding-0.6b-int8-ov@dfe67308c933-m2560",
+      "timestamp_unix": 1790157376.6346984,
+      "batch": 4,
+      "max_length": 512,
+      "payload_bytes": 83995,
+      "resident_budget_mb": 2560,
+      "request_budget_mb": 512,
+      "runs": [
+        {
+          "index": 0,
+          "seconds": 7.304403885995271,
+          "steady_rss_mb": 2054.71875
+        },
+        {
+          "index": 1,
+          "seconds": 5.120975344994804,
+          "steady_rss_mb": 2058.46875
+        }
+      ],
+      "load_seconds": 1.0860659379977733,
+      "input_shape": [
+        4,
+        512
+      ],
+      "peak_rss_mb": 2058.46875,
+      "resident_budget_covers_observed": true,
+      "total_budget_covers_observed": true,
+      "status": "passed_real_capacity_sample"
+    },
+    "clip-vit-base-patch16@57c216476eef-r1024": {
+      "model_id": "clip-vit-base-patch16@57c216476eef-r1024",
+      "timestamp_unix": 1790157391.490969,
+      "batch": 8,
+      "max_length": 77,
+      "payload_bytes": 650815,
+      "resident_budget_mb": 2000,
+      "request_budget_mb": 1024,
+      "runs": [
+        {
+          "index": 0,
+          "seconds": 5.913299502019072,
+          "steady_rss_mb": 1666.62109375
+        },
+        {
+          "index": 1,
+          "seconds": 3.598428255005274,
+          "steady_rss_mb": 1667.91796875
+        }
+      ],
+      "load_seconds": 0.47284801199566573,
+      "input_shape": [
+        8,
+        77
+      ],
+      "decoded_image_pixels_each": 16777216,
+      "image_tensor_shape": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "peak_rss_mb": 2739.8125,
+      "resident_budget_covers_observed": true,
+      "total_budget_covers_observed": true,
+      "status": "passed_real_capacity_sample"
+    }
+  },
+  "scope": "Real configured maximum token/batch input and CLIP maximum decoded image pixels; two sequential requests per fresh process. No concurrent models or throughput/quality benchmark.",
+  "current_model_ids": [
+    "bge-m3-int4-ov@d50a3650d1f6",
+    "bge-reranker-v2-m3-int4-ov@2252a9a291c5",
+    "chinese-clip-vit-base-patch16@36e679e65c2a-m2560-r1024",
+    "bm42-all-minilm-l6-v2-attentions@9695632d760b-m1536",
+    "qwen3-embedding-0.6b-int8-ov@dfe67308c933-m2560",
+    "qwen3-reranker-0.6b-int8-ov@d7dd424f08cb-m2560",
+    "clip-vit-base-patch16@57c216476eef-r1024"
+  ]
+}

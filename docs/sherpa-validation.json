@@ -1,0 +1,138 @@
+{
+  "tested_at_utc": "2026-09-23T08:58:31Z",
+  "scope": "Real sherpa-onnx CPU inference through production task and backend, separate process per model; not HTTP or perceptual quality certification",
+  "reference_source": "Saved Matcha synthetic reference voice generated locally, not a recording of a real person; reference stays stable between runs",
+  "reference_audio_sha256": "7521e8dd107ac70c5ecefc94e148ecccf1150628afffc6e51e1b49c7cc5078aa",
+  "models": [
+    {
+      "model_id": "matcha-zh-en@271b804af570",
+      "real_model": true,
+      "metadata": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_matcha",
+        "streaming": "buffered"
+      },
+      "load_seconds": 0.9379488360136747,
+      "inference_seconds": 0.1571420069958549,
+      "peak_rss_mb": 241.55078125,
+      "output": {
+        "format": "wav",
+        "sample_rate": 16000,
+        "duration_s": 2.768,
+        "streaming_mode": "buffered"
+      },
+      "audio_sha256": "f7e3043421fad47260ce72b246145070b32489394bc69093f22355760e5c9597",
+      "rms": 0.14603260159492493,
+      "peak_amplitude": 0.90179443359375
+    },
+    {
+      "model_id": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+      "real_model": true,
+      "metadata": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_sensevoice",
+        "streaming": "buffered"
+      },
+      "load_seconds": 0.8104616969940253,
+      "inference_seconds": 0.12764708101167344,
+      "peak_rss_mb": 369.0859375,
+      "output": {
+        "text": "你好，欢迎使用本地语音服务。",
+        "language": "zh",
+        "streaming_mode": "buffered"
+      },
+      "audio_sha256": "7521e8dd107ac70c5ecefc94e148ecccf1150628afffc6e51e1b49c7cc5078aa"
+    },
+    {
+      "model_id": "eres2net-speaker-zh@3dspeaker-16k",
+      "real_model": true,
+      "metadata": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_speaker",
+        "streaming": "buffered"
+      },
+      "load_seconds": 0.19325865301652811,
+      "inference_seconds": 0.14417473698267713,
+      "peak_rss_mb": 184.69140625,
+      "output": {
+        "dimension": 512,
+        "cosine_similarity": 1.0
+      },
+      "audio_sha256": "7521e8dd107ac70c5ecefc94e148ecccf1150628afffc6e51e1b49c7cc5078aa",
+      "compare_audio_sha256": "7521e8dd107ac70c5ecefc94e148ecccf1150628afffc6e51e1b49c7cc5078aa",
+      "embedding_sha256": "9d082d273821e2eb34135e3c8e75e71a08049b1b6f2aa4d1534e9fe585249761"
+    },
+    {
+      "model_id": "zipvoice-distill-int8@77219c8b40f4",
+      "real_model": true,
+      "metadata": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_zipvoice",
+        "streaming": "buffered"
+      },
+      "load_seconds": 0.8160614650114439,
+      "inference_seconds": 0.8470147089974489,
+      "peak_rss_mb": 411.078125,
+      "output": {
+        "format": "wav",
+        "sample_rate": 24000,
+        "duration_s": 1.9919166666666666,
+        "streaming_mode": "buffered"
+      },
+      "reference_audio_sha256": "7521e8dd107ac70c5ecefc94e148ecccf1150628afffc6e51e1b49c7cc5078aa",
+      "audio_sha256": "5a23cedd4653ade4d6762b6d353670d4a92f42db204911237fa5b5631ec86021",
+      "rms": 0.12876106798648834,
+      "peak_amplitude": 0.682708740234375
+    }
+  ],
+  "roundtrip_checks": {
+    "tts_expected_text": "你好，欢迎使用本地语音服务。",
+    "clone_expected_text": "这是一段克隆语音测试。",
+    "clone_asr": {
+      "model_id": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+      "real_model": true,
+      "metadata": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_sensevoice",
+        "streaming": "buffered"
+      },
+      "load_seconds": 0.8423891610000283,
+      "inference_seconds": 0.1107840659969952,
+      "peak_rss_mb": 368.58984375,
+      "output": {
+        "text": "这是一段克隆语音测试。",
+        "language": "zh",
+        "streaming_mode": "buffered"
+      },
+      "audio_sha256": "5a23cedd4653ade4d6762b6d353670d4a92f42db204911237fa5b5631ec86021"
+    },
+    "reference_clone_similarity": {
+      "model_id": "eres2net-speaker-zh@3dspeaker-16k",
+      "real_model": true,
+      "metadata": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_speaker",
+        "streaming": "buffered"
+      },
+      "load_seconds": 0.19948691898025572,
+      "inference_seconds": 0.13298568801837973,
+      "peak_rss_mb": 160.5078125,
+      "output": {
+        "dimension": 512,
+        "cosine_similarity": 0.7383906841278076
+      },
+      "audio_sha256": "7521e8dd107ac70c5ecefc94e148ecccf1150628afffc6e51e1b49c7cc5078aa",
+      "compare_audio_sha256": "5a23cedd4653ade4d6762b6d353670d4a92f42db204911237fa5b5631ec86021",
+      "embedding_sha256": "9d082d273821e2eb34135e3c8e75e71a08049b1b6f2aa4d1534e9fe585249761"
+    },
+    "tts_asr_character_error_rate": 0.0,
+    "clone_asr_character_error_rate": 0.0,
+    "comparison_note": "Punctuation removed; one synthetic Chinese phrase per model; not a benchmark or human listening score"
+  }
+}

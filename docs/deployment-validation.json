@@ -1,0 +1,1258 @@
+{
+  "models": {
+    "bge-m3-int4-ov@d50a3650d1f6": {
+      "status": "passed_real_registration",
+      "backend": "openvino",
+      "elapsed_s": 5.31314186900272,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids",
+          "attention_mask"
+        ],
+        "outputs": [
+          "last_hidden_state"
+        ],
+        "load_seconds": 0.7120281259994954,
+        "pid": 48004,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1199456256,
+        "rss_mb": 1143.891,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 3.6822480999981053,
+        "completed": 1
+      },
+      "release": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 8192,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "bge-reranker-v2-m3-int4-ov@2252a9a291c5": {
+      "status": "passed_real_registration",
+      "backend": "openvino",
+      "elapsed_s": 5.055412553978385,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids",
+          "attention_mask"
+        ],
+        "outputs": [
+          "logits"
+        ],
+        "load_seconds": 0.7232373510196339,
+        "pid": 48139,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1198731264,
+        "rss_mb": 1143.199,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 3.453542743984144,
+        "completed": 1
+      },
+      "release": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 8192,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "bm42-all-minilm-l6-v2-attentions@9695632d760b": {
+      "status": "retired_after_validated_replacement",
+      "backend": "openvino",
+      "elapsed_s": 3.729899235011544,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids"
+        ],
+        "outputs": [
+          "last_hidden_state",
+          "embedding",
+          "attention_1",
+          "attention_2",
+          "attention_3",
+          "attention_4",
+          "attention_5",
+          "attention_6"
+        ],
+        "load_seconds": 0.3709994370001368,
+        "pid": 48257,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 591007744,
+        "rss_mb": 563.629,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 1.870650144002866,
+        "completed": 1
+      },
+      "release": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 8192,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "qwen3-embedding-0.6b-int8-ov@dfe67308c933": {
+      "status": "retired_after_validated_replacement",
+      "backend": "openvino",
+      "elapsed_s": 4.078523725998821,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids",
+          "attention_mask"
+        ],
+        "outputs": [
+          "last_hidden_state"
+        ],
+        "load_seconds": 1.0184967660170514,
+        "pid": 48372,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1582383104,
+        "rss_mb": 1509.078,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 2.3302711699798238,
+        "completed": 1
+      },
+      "release": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 8192,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "qwen3-reranker-0.6b-int8-ov@d7dd424f08cb": {
+      "status": "retired_after_validated_replacement",
+      "backend": "openvino",
+      "elapsed_s": 4.611398356995778,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids",
+          "attention_mask",
+          "position_ids"
+        ],
+        "outputs": [
+          "logits"
+        ],
+        "load_seconds": 0.9613957069814205,
+        "pid": 48508,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1984237568,
+        "rss_mb": 1892.316,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 2.89615289401263,
+        "completed": 1
+      },
+      "release": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 8192,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "clip-vit-base-patch16@57c216476eef": {
+      "status": "retired_after_validated_replacement",
+      "backend": "openvino_clip",
+      "elapsed_s": 3.7590742860047612,
+      "worker": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "device": "CPU",
+        "towers": {
+          "text": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "input_ids",
+              "attention_mask"
+            ],
+            "outputs": [
+              "text_embeds"
+            ]
+          },
+          "image": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "pixel_values"
+            ],
+            "outputs": [
+              "image_embeds"
+            ]
+          }
+        },
+        "load_seconds": 0.4470377170073334,
+        "pid": 48649,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1279205376,
+        "rss_mb": 1219.945,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 2.2357190230104607,
+        "completed": 1
+      },
+      "release": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "unloaded": true,
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 8192,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "chinese-clip-vit-base-patch16@36e679e65c2a": {
+      "status": "retired_after_validated_replacement",
+      "backend": "openvino_clip",
+      "elapsed_s": 3.725586629996542,
+      "worker": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "device": "CPU",
+        "towers": {
+          "text": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "input_ids",
+              "attention_mask",
+              "token_type_ids"
+            ],
+            "outputs": [
+              "text_embeds"
+            ]
+          },
+          "image": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "pixel_values"
+            ],
+            "outputs": [
+              "image_embeds"
+            ]
+          }
+        },
+        "load_seconds": 0.45988953197957017,
+        "pid": 55199,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1531297792,
+        "rss_mb": 1460.359,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 2.143629272992257,
+        "completed": 1
+      },
+      "release": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "unloaded": true,
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 8192,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "matcha-zh-en@271b804af570": {
+      "status": "passed_real_registration",
+      "backend": "sherpa_onnx",
+      "elapsed_s": 1.366083043976687,
+      "worker": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_matcha",
+        "streaming": "buffered",
+        "load_seconds": 0.9669636230100878,
+        "pid": 58364,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 262443008,
+        "rss_mb": 250.285,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 0.1996419040078763,
+        "completed": 1
+      },
+      "release": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 8192,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "eres2net-speaker-zh@3dspeaker-16k": {
+      "status": "passed_real_registration",
+      "backend": "sherpa_onnx",
+      "elapsed_s": 0.5885891010111663,
+      "worker": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_speaker",
+        "streaming": "buffered",
+        "load_seconds": 0.22554270800901577,
+        "pid": 58426,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 222707712,
+        "rss_mb": 212.391,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 0.1851189279987011,
+        "completed": 1
+      },
+      "release": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 8192,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "zipvoice-distill-int8@77219c8b40f4": {
+      "status": "passed_real_registration",
+      "backend": "sherpa_onnx",
+      "elapsed_s": 2.065781610988779,
+      "worker": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_zipvoice",
+        "streaming": "buffered",
+        "load_seconds": 0.9534755770000629,
+        "pid": 58457,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 445681664,
+        "rss_mb": 425.035,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 0.8900762690172996,
+        "completed": 1
+      },
+      "release": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 8192,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "sensevoice-small-int8@2024-07-17-c71f0ce00bec": {
+      "status": "passed_real_registration",
+      "backend": "sherpa_onnx",
+      "elapsed_s": 1.188742693979293,
+      "worker": {
+        "backend": "sherpa_onnx",
+        "runtime_version": "1.13.8",
+        "task": "sherpa_sensevoice",
+        "streaming": "buffered",
+        "load_seconds": 0.8661006069742143,
+        "pid": 63043,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 392368128,
+        "rss_mb": 374.191,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 0.1252434919879306,
+        "completed": 1
+      },
+      "release": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 8192,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "sd-turbo@b261bac6-ov-fp16": {
+      "status": "passed_real_registration",
+      "backend": "openvino_image",
+      "elapsed_s": 12.442501313984394,
+      "worker": {
+        "backend": "openvino_image",
+        "device": "CPU",
+        "management": "local",
+        "pipeline": "SD-Turbo",
+        "streaming": "buffered",
+        "load_seconds": 2.4792137969925534,
+        "pid": 71934,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 9101041664,
+        "rss_mb": 8679.43,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 9.47821165699861,
+        "completed": 1
+      },
+      "release": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 10240,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "qwen3.5-4b-ov-awq@0baf3dbd8812": {
+      "status": "passed_real_registration",
+      "backend": "openvino_genai",
+      "elapsed_s": 6.363802578009199,
+      "worker": {
+        "backend": "openvino_genai",
+        "device": "CPU",
+        "runtime_version": "2026.4.0.0-3407-7ea2546852a",
+        "pipeline": "vlm",
+        "streaming": "incremental",
+        "load_seconds": 2.416665483993711,
+        "pid": 74347,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 5977362432,
+        "rss_mb": 5700.457,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 3.5514822969853412,
+        "completed": 1
+      },
+      "release": {
+        "released": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 10240,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "qwen3-reranker-0.6b-int8-ov@d7dd424f08cb-m2560": {
+      "status": "passed_real_registration",
+      "backend": "openvino",
+      "elapsed_s": 4.265005411027232,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids",
+          "attention_mask",
+          "position_ids"
+        ],
+        "outputs": [
+          "logits"
+        ],
+        "load_seconds": 0.9661608749884181,
+        "pid": 86961,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 2303844352,
+        "rss_mb": 2197.117,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 2.6197053040086757,
+        "completed": 1
+      },
+      "release": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 10240,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "chinese-clip-vit-base-patch16@36e679e65c2a-m2560-r1024": {
+      "status": "passed_real_registration",
+      "backend": "openvino_clip",
+      "elapsed_s": 3.1274839660036378,
+      "worker": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "device": "CPU",
+        "towers": {
+          "text": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "input_ids",
+              "attention_mask",
+              "token_type_ids"
+            ],
+            "outputs": [
+              "text_embeds"
+            ]
+          },
+          "image": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "pixel_values"
+            ],
+            "outputs": [
+              "image_embeds"
+            ]
+          }
+        },
+        "load_seconds": 0.4271005909831729,
+        "pid": 94842,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1873276928,
+        "rss_mb": 1786.496,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 2.02248663501814,
+        "completed": 1
+      },
+      "release": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "unloaded": true,
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 10240,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "bm42-all-minilm-l6-v2-attentions@9695632d760b-m1536": {
+      "status": "passed_real_registration",
+      "backend": "openvino",
+      "elapsed_s": 2.577267123007914,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids"
+        ],
+        "outputs": [
+          "last_hidden_state",
+          "embedding",
+          "attention_1",
+          "attention_2",
+          "attention_3",
+          "attention_4",
+          "attention_5",
+          "attention_6"
+        ],
+        "load_seconds": 0.29034196099382825,
+        "pid": 94906,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 933318656,
+        "rss_mb": 890.082,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 1.5896246259799227,
+        "completed": 1
+      },
+      "release": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 10240,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "qwen3-embedding-0.6b-int8-ov@dfe67308c933-m2560": {
+      "status": "passed_real_registration",
+      "backend": "openvino",
+      "elapsed_s": 3.5098326450097375,
+      "worker": {
+        "backend": "openvino",
+        "management": "local",
+        "device": "CPU",
+        "inputs": [
+          "input_ids",
+          "attention_mask"
+        ],
+        "outputs": [
+          "last_hidden_state"
+        ],
+        "load_seconds": 0.8852007149835117,
+        "pid": 94965,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1903702016,
+        "rss_mb": 1815.512,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 1.9839297849975992,
+        "completed": 1
+      },
+      "release": {
+        "backend": "openvino",
+        "unloaded": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 10240,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "clip-vit-base-patch16@57c216476eef-r1024": {
+      "status": "passed_real_registration",
+      "backend": "openvino_clip",
+      "elapsed_s": 3.080091243988136,
+      "worker": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "device": "CPU",
+        "towers": {
+          "text": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "input_ids",
+              "attention_mask"
+            ],
+            "outputs": [
+              "text_embeds"
+            ]
+          },
+          "image": {
+            "backend": "openvino",
+            "management": "local",
+            "device": "CPU",
+            "inputs": [
+              "pixel_values"
+            ],
+            "outputs": [
+              "image_embeds"
+            ]
+          }
+        },
+        "load_seconds": 0.42217823400278576,
+        "pid": 95057,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 1619832832,
+        "rss_mb": 1544.793,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 2.0197454080043826,
+        "completed": 1
+      },
+      "release": {
+        "backend": "openvino_clip",
+        "management": "local",
+        "unloaded": true,
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 10240,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "animatediff-lightning@027c893e-epic6522-4step": {
+      "status": "passed_real_registration",
+      "backend": "diffusers_video",
+      "elapsed_s": 26.098879705998115,
+      "worker": {
+        "backend": "diffusers_video",
+        "device": "cuda:0",
+        "management": "local",
+        "pipeline": "AnimateDiff-Lightning-4step",
+        "temporal_model": true,
+        "streaming": "buffered",
+        "gpu_allocated_mb": 3813.711,
+        "gpu_reserved_mb": 3904.0,
+        "load_seconds": 10.336771639005747,
+        "pid": 95133,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 6763528192,
+        "rss_mb": 6450.203,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 14.093028189003235,
+        "completed": 1
+      },
+      "release": {
+        "released": true,
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 10240,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    },
+    "qwen2.5-vl-7b-int4-ov@48494b1aceaf": {
+      "status": "passed_real_registration",
+      "backend": "openvino_genai",
+      "elapsed_s": 11.358433641988086,
+      "worker": {
+        "backend": "openvino_genai",
+        "device": "CPU",
+        "runtime_version": "2026.4.0.0-3407-7ea2546852a",
+        "pipeline": "vlm",
+        "streaming": "incremental",
+        "load_seconds": 2.3261009190173354,
+        "pid": 96991,
+        "state": "loaded",
+        "alive": true,
+        "rss_bytes": 9946193920,
+        "rss_mb": 9485.43,
+        "load_count": 1,
+        "output_buffer_limit": 8,
+        "buffered_chunks": 0,
+        "busy": 0,
+        "inference_seconds": 8.537119532993529,
+        "completed": 1
+      },
+      "release": {
+        "released": true,
+        "management": "local",
+        "state": "unloaded",
+        "process_exited": true
+      },
+      "files_preserved": true,
+      "scheduler_after_unload": {
+        "queue_length": 0,
+        "queue_capacity": 8,
+        "active_count": 0,
+        "execution_capacity": 1,
+        "resident_mb": 0,
+        "temporary_mb": 0,
+        "reserved_mb": 0,
+        "budget_mb": 12288,
+        "gpu_resident_mb": 0,
+        "gpu_temporary_mb": 0,
+        "gpu_reserved_mb": 0,
+        "gpu_budget_mb": 10240,
+        "resident_instances": 0,
+        "quarantined_requests": [],
+        "active_by_model": {}
+      }
+    }
+  },
+  "timestamp_unix": 1790157702.8344195,
+  "retired_legacy": [
+    {
+      "model_id": "qwen3.5-0.8b@2fc06364715b",
+      "operation": "remove",
+      "files_deleted": false,
+      "release": {
+        "state": "unloaded",
+        "already_unloaded": true
+      },
+      "state": null
+    },
+    {
+      "model_id": "vits-zh-aishell3@icefall-2024-04-06",
+      "operation": "remove",
+      "files_deleted": false,
+      "release": {
+        "state": "unloaded",
+        "already_unloaded": true
+      },
+      "state": null
+    },
+    {
+      "model_id": "whisper-tiny@169d4a4341b3",
+      "operation": "remove",
+      "files_deleted": false,
+      "release": {
+        "state": "unloaded",
+        "already_unloaded": true
+      },
+      "state": null
+    }
+  ],
+  "aliases": {
+    "default:embeddings": "bge-m3-int4-ov@d50a3650d1f6",
+    "default:rerank": "bge-reranker-v2-m3-int4-ov@2252a9a291c5",
+    "default:sparse_embeddings": "bm42-all-minilm-l6-v2-attentions@9695632d760b-m1536",
+    "default:image_embeddings": "chinese-clip-vit-base-patch16@36e679e65c2a-m2560-r1024",
+    "default:tts": "matcha-zh-en@271b804af570",
+    "default:speaker_embeddings": "eres2net-speaker-zh@3dspeaker-16k",
+    "default:voice_clone": "zipvoice-distill-int8@77219c8b40f4",
+    "default:asr": "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+    "default:image_generation": "sd-turbo@b261bac6-ov-fp16",
+    "default:chat": "qwen3.5-4b-ov-awq@0baf3dbd8812",
+    "default:video_generation": "animatediff-lightning@027c893e-epic6522-4step",
+    "default:vision_chat": "qwen2.5-vl-7b-int4-ov@48494b1aceaf"
+  },
+  "registered_models": [
+    "animatediff-lightning@027c893e-epic6522-4step",
+    "bge-m3-int4-ov@d50a3650d1f6",
+    "bge-reranker-v2-m3-int4-ov@2252a9a291c5",
+    "bm42-all-minilm-l6-v2-attentions@9695632d760b-m1536",
+    "chinese-clip-vit-base-patch16@36e679e65c2a-m2560-r1024",
+    "clip-vit-base-patch16@57c216476eef-r1024",
+    "eres2net-speaker-zh@3dspeaker-16k",
+    "matcha-zh-en@271b804af570",
+    "qwen2.5-vl-7b-int4-ov@48494b1aceaf",
+    "qwen3-embedding-0.6b-int8-ov@dfe67308c933-m2560",
+    "qwen3-reranker-0.6b-int8-ov@d7dd424f08cb-m2560",
+    "qwen3.5-4b-ov-awq@0baf3dbd8812",
+    "sd-turbo@b261bac6-ov-fp16",
+    "sensevoice-small-int8@2024-07-17-c71f0ce00bec",
+    "zipvoice-distill-int8@77219c8b40f4"
+  ],
+  "retired_versions": [
+    {
+      "model_id": "qwen3-reranker-0.6b-int8-ov@d7dd424f08cb",
+      "replacement": "qwen3-reranker-0.6b-int8-ov@d7dd424f08cb-m2560",
+      "reason": "CUDA-enabled Torch increased steady worker RSS to 2197 MiB; resident budget raised to 2560 MiB via a new immutable configuration version.",
+      "operation": {
+        "model_id": "qwen3-reranker-0.6b-int8-ov@d7dd424f08cb",
+        "operation": "remove",
+        "files_deleted": false,
+        "release": {
+          "state": "unloaded",
+          "already_unloaded": true
+        },
+        "state": null
+      }
+    },
+    {
+      "model_id": "chinese-clip-vit-base-patch16@36e679e65c2a",
+      "replacement": "chinese-clip-vit-base-patch16@36e679e65c2a-m2560-r1024",
+      "reason": "Maximum configured input capacity test required recalibration of retained resident and temporary memory budgets.",
+      "operation": {
+        "model_id": "chinese-clip-vit-base-patch16@36e679e65c2a",
+        "operation": "remove",
+        "files_deleted": false,
+        "release": {
+          "state": "unloaded",
+          "already_unloaded": true
+        },
+        "state": null
+      }
+    },
+    {
+      "model_id": "bm42-all-minilm-l6-v2-attentions@9695632d760b",
+      "replacement": "bm42-all-minilm-l6-v2-attentions@9695632d760b-m1536",
+      "reason": "Maximum configured input capacity test required recalibration of retained resident and temporary memory budgets.",
+      "operation": {
+        "model_id": "bm42-all-minilm-l6-v2-attentions@9695632d760b",
+        "operation": "remove",
+        "files_deleted": false,
+        "release": {
+          "state": "unloaded",
+          "already_unloaded": true
+        },
+        "state": null
+      }
+    },
+    {
+      "model_id": "qwen3-embedding-0.6b-int8-ov@dfe67308c933",
+      "replacement": "qwen3-embedding-0.6b-int8-ov@dfe67308c933-m2560",
+      "reason": "Maximum configured input capacity test required recalibration of retained resident and temporary memory budgets.",
+      "operation": {
+        "model_id": "qwen3-embedding-0.6b-int8-ov@dfe67308c933",
+        "operation": "remove",
+        "files_deleted": false,
+        "release": {
+          "state": "unloaded",
+          "already_unloaded": true
+        },
+        "state": null
+      }
+    },
+    {
+      "model_id": "clip-vit-base-patch16@57c216476eef",
+      "replacement": "clip-vit-base-patch16@57c216476eef-r1024",
+      "reason": "Maximum configured input capacity test required recalibration of retained resident and temporary memory budgets.",
+      "operation": {
+        "model_id": "clip-vit-base-patch16@57c216476eef",
+        "operation": "remove",
+        "files_deleted": false,
+        "release": {
+          "state": "unloaded",
+          "already_unloaded": true
+        },
+        "state": null
+      }
+    }
+  ]
+}

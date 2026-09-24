@@ -1,0 +1,388 @@
+{
+  "bge-m3": {
+    "model": "bge-m3-int4-ov@d50a3650d1f6",
+    "backend": "openvino",
+    "device": "CPU",
+    "source_manifest": "models/retrieval/bge-m3/source-manifest.json",
+    "timestamp_unix": 1790151698.4742656,
+    "load": {
+      "backend": "openvino",
+      "management": "local",
+      "device": "CPU",
+      "inputs": [
+        "input_ids",
+        "attention_mask"
+      ],
+      "outputs": [
+        "last_hidden_state"
+      ]
+    },
+    "load_seconds": 0.7617477099993266,
+    "quality": {
+      "sample": "Chinese capital retrieval",
+      "cosine_scores": [
+        0.6621493432131953,
+        0.3481554159808537
+      ],
+      "dimensions": 1024,
+      "correct_first": true
+    },
+    "inference_seconds": 4.384452550002607,
+    "rss_peak_mb": 1126.57421875,
+    "status": "passed_real_weights_small_sample",
+    "close": {
+      "backend": "openvino",
+      "unloaded": true,
+      "management": "local"
+    },
+    "runtime_versions": {
+      "openvino": "2026.4.0",
+      "transformers": "5.17.0",
+      "torch": "2.14.0+cpu",
+      "numpy": "2.5.3"
+    }
+  },
+  "bge-reranker": {
+    "model": "bge-reranker-v2-m3-int4-ov@2252a9a291c5",
+    "backend": "openvino",
+    "device": "CPU",
+    "source_manifest": "models/retrieval/bge-reranker/source-manifest.json",
+    "timestamp_unix": 1790151704.377725,
+    "load": {
+      "backend": "openvino",
+      "management": "local",
+      "device": "CPU",
+      "inputs": [
+        "input_ids",
+        "attention_mask"
+      ],
+      "outputs": [
+        "logits"
+      ]
+    },
+    "load_seconds": 0.5767387060041074,
+    "quality": {
+      "sample": "Chinese capital reranking",
+      "results": [
+        {
+          "index": 0,
+          "score": 0.9828113317489624
+        },
+        {
+          "index": 1,
+          "score": 1.715851976769045e-05
+        }
+      ],
+      "correct_first": true
+    },
+    "inference_seconds": 3.318507318996126,
+    "rss_peak_mb": 1125.171875,
+    "status": "passed_real_weights_small_sample",
+    "close": {
+      "backend": "openvino",
+      "unloaded": true,
+      "management": "local"
+    },
+    "runtime_versions": {
+      "openvino": "2026.4.0",
+      "transformers": "5.17.0",
+      "torch": "2.14.0+cpu",
+      "numpy": "2.5.3"
+    }
+  },
+  "bm42": {
+    "model": "bm42-all-minilm-l6-v2-attentions@9695632d760b",
+    "backend": "openvino",
+    "device": "CPU",
+    "source_manifest": "models/retrieval/bm42/source-manifest.json",
+    "timestamp_unix": 1790151709.0804875,
+    "load": {
+      "backend": "openvino",
+      "management": "local",
+      "device": "CPU",
+      "inputs": [
+        "input_ids"
+      ],
+      "outputs": [
+        "last_hidden_state",
+        "embedding",
+        "attention_1",
+        "attention_2",
+        "attention_3",
+        "attention_4",
+        "attention_5",
+        "attention_6"
+      ]
+    },
+    "load_seconds": 0.26036972599104047,
+    "quality": {
+      "sample": "Official model-card examples",
+      "maximum_absolute_error": 1.2317629810576491e-07,
+      "matches_official_indices": true,
+      "sparse_embeddings": [
+        {
+          "indices": [
+            150760872,
+            1881538586,
+            1932363795
+          ],
+          "values": [
+            0.24662504511194727,
+            0.26399762682370187,
+            0.4707731890322659
+          ]
+        },
+        {
+          "indices": [
+            733618285,
+            1008800696,
+            1117393019,
+            1849833631,
+            2090661150
+          ],
+          "values": [
+            0.3832005215371356,
+            0.18017510364775613,
+            0.13735551153892764,
+            0.2545313612939179,
+            0.3043262055751676
+          ]
+        }
+      ],
+      "requires_idf": true,
+      "language": "english",
+      "algorithm": "bm42_attention"
+    },
+    "inference_seconds": 2.0896486929850653,
+    "rss_peak_mb": 582.03515625,
+    "status": "passed_real_weights_small_sample",
+    "close": {
+      "backend": "openvino",
+      "unloaded": true,
+      "management": "local"
+    },
+    "runtime_versions": {
+      "openvino": "2026.4.0",
+      "transformers": "5.17.0",
+      "torch": "2.14.0+cpu",
+      "numpy": "2.5.3"
+    }
+  },
+  "qwen3-embedding": {
+    "model": "qwen3-embedding-0.6b-int8-ov@dfe67308c933",
+    "backend": "openvino",
+    "device": "CPU",
+    "source_manifest": "models/retrieval/qwen3-embedding/source-manifest.json",
+    "timestamp_unix": 1790151712.7228608,
+    "load": {
+      "backend": "openvino",
+      "management": "local",
+      "device": "CPU",
+      "inputs": [
+        "input_ids",
+        "attention_mask"
+      ],
+      "outputs": [
+        "last_hidden_state"
+      ]
+    },
+    "load_seconds": 0.8714301500003785,
+    "quality": {
+      "sample": "Chinese capital retrieval",
+      "cosine_scores": [
+        0.6703027495292846,
+        0.16851637530464142
+      ],
+      "dimensions": 1024,
+      "correct_first": true
+    },
+    "inference_seconds": 2.452910460997373,
+    "rss_peak_mb": 1467.33203125,
+    "status": "passed_real_weights_small_sample",
+    "close": {
+      "backend": "openvino",
+      "unloaded": true,
+      "management": "local"
+    },
+    "runtime_versions": {
+      "openvino": "2026.4.0",
+      "transformers": "5.17.0",
+      "torch": "2.14.0+cpu",
+      "numpy": "2.5.3"
+    }
+  },
+  "qwen3-reranker": {
+    "model": "qwen3-reranker-0.6b-int8-ov@d7dd424f08cb-m2560",
+    "backend": "openvino",
+    "device": "CPU",
+    "source_manifest": "models/retrieval/qwen3-reranker/source-manifest.json",
+    "timestamp_unix": 1790156479.9295828,
+    "runtime_versions": {
+      "openvino": "2026.4.0",
+      "transformers": "5.17.0",
+      "torch": "2.11.0+cu128",
+      "numpy": "2.5.3"
+    },
+    "load": {
+      "backend": "openvino",
+      "management": "local",
+      "device": "CPU",
+      "inputs": [
+        "input_ids",
+        "attention_mask",
+        "position_ids"
+      ],
+      "outputs": [
+        "logits"
+      ]
+    },
+    "load_seconds": 0.8624322900141124,
+    "quality": {
+      "sample": "Chinese capital reranking",
+      "results": [
+        {
+          "index": 0,
+          "score": 0.9983610510826111
+        },
+        {
+          "index": 1,
+          "score": 3.234465839341283e-05
+        }
+      ],
+      "correct_first": true
+    },
+    "inference_seconds": 2.5501276069844607,
+    "rss_peak_mb": 2271.3125,
+    "status": "passed_real_weights_small_sample",
+    "close": {
+      "backend": "openvino",
+      "unloaded": true,
+      "management": "local"
+    }
+  },
+  "openai-clip": {
+    "model": "clip-vit-base-patch16@57c216476eef",
+    "backend": "openvino_clip",
+    "device": "CPU",
+    "source_manifest": "models/retrieval/openai-clip/source-manifest.json",
+    "timestamp_unix": 1790153235.3445873,
+    "runtime_versions": {
+      "openvino": "2026.4.0",
+      "transformers": "5.17.0",
+      "torch": "2.14.0+cpu",
+      "numpy": "2.5.3"
+    },
+    "load": {
+      "backend": "openvino_clip",
+      "management": "local",
+      "device": "CPU",
+      "towers": {
+        "text": {
+          "backend": "openvino",
+          "management": "local",
+          "device": "CPU",
+          "inputs": [
+            "input_ids",
+            "attention_mask"
+          ],
+          "outputs": [
+            "text_embeds"
+          ]
+        },
+        "image": {
+          "backend": "openvino",
+          "management": "local",
+          "device": "CPU",
+          "inputs": [
+            "pixel_values"
+          ],
+          "outputs": [
+            "image_embeds"
+          ]
+        }
+      }
+    },
+    "load_seconds": 0.38743633800186217,
+    "quality": {
+      "sample": "Upstream festival.jpg vs lantern/car/cat prompts",
+      "cosine_scores": [
+        0.32218130742265955,
+        0.18595547028838966,
+        0.17564873128437264
+      ],
+      "dimensions": 512,
+      "correct_first": true
+    },
+    "inference_seconds": 2.052483255014522,
+    "rss_peak_mb": 1209.5703125,
+    "status": "passed_real_weights_small_sample",
+    "close": {
+      "backend": "openvino_clip",
+      "management": "local",
+      "unloaded": true
+    }
+  },
+  "chinese-clip": {
+    "model": "chinese-clip-vit-base-patch16@36e679e65c2a",
+    "backend": "openvino_clip",
+    "device": "CPU",
+    "source_manifest": "models/retrieval/chinese-clip/source-manifest.json",
+    "timestamp_unix": 1790153231.6733804,
+    "runtime_versions": {
+      "openvino": "2026.4.0",
+      "transformers": "5.17.0",
+      "torch": "2.14.0+cpu",
+      "numpy": "2.5.3"
+    },
+    "load": {
+      "backend": "openvino_clip",
+      "management": "local",
+      "device": "CPU",
+      "towers": {
+        "text": {
+          "backend": "openvino",
+          "management": "local",
+          "device": "CPU",
+          "inputs": [
+            "input_ids",
+            "attention_mask",
+            "token_type_ids"
+          ],
+          "outputs": [
+            "text_embeds"
+          ]
+        },
+        "image": {
+          "backend": "openvino",
+          "management": "local",
+          "device": "CPU",
+          "inputs": [
+            "pixel_values"
+          ],
+          "outputs": [
+            "image_embeds"
+          ]
+        }
+      }
+    },
+    "load_seconds": 0.3931795719836373,
+    "quality": {
+      "sample": "Upstream festival.jpg vs lantern/car/cat prompts",
+      "cosine_scores": [
+        0.48668100490543564,
+        0.3523803149416702,
+        0.3591270992434782
+      ],
+      "dimensions": 512,
+      "correct_first": true
+    },
+    "inference_seconds": 2.1258987360051833,
+    "rss_peak_mb": 1456.7265625,
+    "status": "passed_real_weights_small_sample",
+    "close": {
+      "backend": "openvino_clip",
+      "management": "local",
+      "unloaded": true
+    }
+  }
+}

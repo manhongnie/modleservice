@@ -16,6 +16,7 @@ class Lease:
     model_id: str
     temporary_mb: int
     acquired_at: float
+    gpu_temporary_mb: int = 0
 
 
 class Scheduler:
@@ -29,6 +30,7 @@ class Scheduler:
         self.settings = settings
         self._condition = asyncio.Condition()
         self._residents: dict[str, int] = {}
+        self._gpu_residents: dict[str, int] = {}
         self._active: dict[str, Lease] = {}
         self._paused: set[str] = set()
         self._queue: list[tuple[str, str]] = []
@@ -41,15 +43,21 @@ class Scheduler:
     def _used(self) -> int:
         return sum(self._residents.values()) + sum(lease.temporary_mb for lease in self._active.values())
 
+    def _gpu_used(self) -> int:
+        return sum(self._gpu_residents.values()) + sum(lease.gpu_temporary_mb for lease in self._active.values())
+
     def _fits(self, config: ModelConfig) -> bool:
         return (len(self._active) < self.settings.max_executions
                 and self._count(config.instance_key) < config.concurrency
                 and self._used() + config.request_mb + (0 if config.instance_key in self._residents else config.resident_mb)
-                <= self.settings.total_memory_mb)
+                <= self.settings.total_memory_mb
+                and self._gpu_used() + config.gpu_request_mb + (0 if config.instance_key in self._gpu_residents else config.gpu_resident_mb)
+                <= self.settings.total_gpu_memory_mb)
 
     def _grant(self, config: ModelConfig, request_id: str) -> Lease:
         self._residents.setdefault(config.instance_key, config.resident_mb)
-        lease = Lease(request_id, config.instance_key, config.model_id, config.request_mb, time.monotonic())
+        self._gpu_residents.setdefault(config.instance_key, config.gpu_resident_mb)
+        lease = Lease(request_id, config.instance_key, config.model_id, config.request_mb, time.monotonic(), config.gpu_request_mb)
         self._active[request_id] = lease
         return lease
 
@@ -66,10 +74,12 @@ class Scheduler:
             raise ServiceError("invalid_timeout", "Timeout must be finite and nonnegative", 422)
 
     def _validate_budget(self, config: ModelConfig) -> None:
-        if config.resident_mb < 0 or config.request_mb < 0:
+        if min(config.resident_mb, config.request_mb, config.gpu_resident_mb, config.gpu_request_mb) < 0:
             raise ServiceError("resource_limit", "Resource budgets must be nonnegative", 422)
         if config.resident_mb + config.request_mb > self.settings.total_memory_mb:
             raise ServiceError("resource_limit", "Model resident plus request budget exceeds service limit", 422)
+        if config.gpu_resident_mb + config.gpu_request_mb > self.settings.total_gpu_memory_mb:
+            raise ServiceError("resource_limit", "Model GPU resident plus request budget exceeds service limit", 422)
 
     async def acquire(self, config: ModelConfig, request_id: str, cancel: asyncio.Event,
                       timeout_s: float | None = None, *, administrative: bool = False) -> Lease:
@@ -182,6 +192,7 @@ class Scheduler:
             if self._count(key):
                 raise ServiceError("model_busy", "Cannot release resident resources while model is in use", 409)
             self._residents.pop(key, None)
+            self._gpu_residents.pop(key, None)
             self._condition.notify_all()
 
     def count(self, key: str) -> int:
@@ -208,5 +219,8 @@ class Scheduler:
                 "resident_mb": sum(self._residents.values()),
                 "temporary_mb": sum(lease.temporary_mb for lease in self._active.values()),
                 "reserved_mb": self._used(), "budget_mb": self.settings.total_memory_mb,
+                "gpu_resident_mb": sum(self._gpu_residents.values()),
+                "gpu_temporary_mb": sum(lease.gpu_temporary_mb for lease in self._active.values()),
+                "gpu_reserved_mb": self._gpu_used(), "gpu_budget_mb": self.settings.total_gpu_memory_mb,
                 "resident_instances": len(self._residents), "quarantined_requests": sorted(self._quarantined),
                 "active_by_model": {lease.model_id: self._count(lease.key) for lease in self._active.values()}}

@@ -1,0 +1,76 @@
+[
+  {
+    "name": "sd-turbo",
+    "version": "b261bac6-ov-fp16",
+    "capabilities": [
+      "image_generation"
+    ],
+    "task": "text_to_image",
+    "backend": "openvino_image",
+    "path": "models/media/sd-turbo-ov",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "idle_seconds": 15,
+    "concurrency": 1,
+    "resident_mb": 9216,
+    "request_mb": 1024,
+    "gpu_resident_mb": 0,
+    "gpu_request_mb": 0,
+    "max_input_bytes": 8192,
+    "options": {
+      "max_prompt_chars": 500,
+      "max_width": 512,
+      "max_height": 512,
+      "threads": 4,
+      "fixed_width": 512,
+      "fixed_height": 512
+    },
+    "validation_input": {
+      "prompt": "A red ceramic teapot on a wooden table, studio photograph",
+      "width": 512,
+      "height": 512,
+      "steps": 1,
+      "seed": 42
+    }
+  },
+  {
+    "name": "animatediff-lightning",
+    "version": "027c893e-epic6522-4step",
+    "capabilities": [
+      "video_generation"
+    ],
+    "task": "text_to_video",
+    "backend": "diffusers_video",
+    "path": "models/media/animatediff-lightning-epic",
+    "device": "CUDA",
+    "load_policy": "on_demand",
+    "idle_seconds": 15,
+    "concurrency": 1,
+    "resident_mb": 6144,
+    "request_mb": 4096,
+    "gpu_resident_mb": 6144,
+    "gpu_request_mb": 2048,
+    "max_input_bytes": 8192,
+    "options": {
+      "max_prompt_chars": 500,
+      "max_width": 512,
+      "max_height": 512,
+      "max_frames": 16,
+      "max_video_pixels": 4194304,
+      "threads": 4,
+      "fixed_width": 512,
+      "fixed_height": 512,
+      "weight_variant": null,
+      "default_frames": 16
+    },
+    "validation_input": {
+      "prompt": "A small sailboat moving on a calm blue lake, cinematic",
+      "width": 512,
+      "height": 512,
+      "frames": 16,
+      "fps": 8,
+      "steps": 4,
+      "seed": 42
+    }
+  }
+]

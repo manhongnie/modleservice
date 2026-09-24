@@ -11,10 +11,15 @@
 - **Mock**：输出均明确标记为测试数据。`delay_s`、`cancel_delay_s`、`load_delay_s`、`stream_chunks`、`chunk_delay_s`、`fail` 和 `fail_load` 仅供故障与边界测试。
 - **OpenVINO**：本地 `Core.compile_model`；每次请求创建独立 `InferRequest`。使用 `start_async / wait_for`，取消时先 `cancel` 再 `wait`，不能将发出取消视为完成。SDK 语义依据 [OpenVINO InferRequest 文档](https://docs.openvino.ai/2026/openvino-workflow/running-inference/inference-request.html)。可选依赖只在选中此后端时导入。`compile_config` 仅接受明确登记的标量执行参数；暂不开放 `CACHE_DIR` 或嵌套设备配置，防止绕过文件目录限制。
 - **HTTP**：同步 JSON POST 至配置的 `base_url + infer_path`，输入输出转换由任务插件承担。认证只接受 `auth_env` 指向环境变量；拒绝内嵌凭据、自动重定向和代理环境变量。它只管理本地适配器，远端状态始终是 `external`；适配器关闭不表示远端模型已卸载。
-- **Transformers / sherpa TTS**：由各自适配器执行本地生成，取消由生成循环或回调配合；返回前仍然等待原生调用结束。
+- **OpenVINO GenAI**：Qwen 文字/视觉与 SD-Turbo 使用原生 pipeline；文字由有界队列增量返回，生成线程 join 后才能确认停止。图像在逐步去噪回调检查取消。
+- **sherpa-onnx**：SenseVoice、Matcha、ERes2Net、ZipVoice 在独立模型进程执行；只能在原生完成或回调确认后返回取消。
+- **Diffusers 视频**：AnimateDiff-Lightning 的时序去噪在 CUDA 执行，停止确认前等待 CUDA 已提交工作完成。显存预算与主存独立预留；加载状态记录实际 CUDA allocated/reserved，详细峰值见媒体验证报告。
+- 旧 Transformers / VITS 插件保留为历史兼容代码，旧三个模型的登记已移除，不参与当前默认部署。
 
-Qwen 已实现真实增量文本输出：生成线程将 token 放入有界队列，任务插件负责安全解码 Unicode 和增量 `delta`；生成结束后提供完整文本、usage、finish_reason。控制端输出队列也有界，慢读触发 `stream_backpressure` 时明确失败，停止确认前保留许可。ASR/TTS 仍缓冲返回，`streaming_mode: buffered`，没有音频增量输出。ProcessExecutor 与真实 HTTP SSE 都有独立实测报告，见 [验证记录](verification.md)。
+Qwen 已实现真实增量文本输出：OpenVINO GenAI 回调将已解码的文字放入有界队列，任务插件整理增量 `delta`；生成结束后提供完整文本、usage、finish_reason。控制端输出队列也有界，慢读触发 `stream_backpressure` 时明确失败，停止确认前保留许可。ASR/TTS 仍缓冲返回，`streaming_mode: buffered`，没有音频增量输出。ProcessExecutor 与真实 HTTP SSE 都有独立实测报告，见 [验证记录](verification.md)。
 
 HTTP 约定远端提供同步终结响应。HTTP 202、网络断开、超时、响应超出上限，以及远端请求期间本地工作进程死亡，都不能证明远端执行已经停止，统一返回 `execution_unknown`。协调器持久化并隔离相关额度，待管理员在远端确认停止后解除。收到本地取消时保持连接，等远端返回；没有远端取消协议时不会伪造已取消。
 
 `tests/test_executor.py` 覆盖实例复用、加载超时与失败、取消确认、迭代器关闭、进程故障、卸载互斥、累计输出限制、HTTP 外部管理及执行状态未知。小型合成 OpenVINO 图测试只有安装真实 Runtime 时才执行；它验证 Runtime 适配器，不证明 BGE / Chinese-CLIP 等真实模型文件已通过验收。
+
+当前迁移验证见 [多模态部署](multimodal-deployment.md)。既有三模型报告只保留为历史证据；各新模型必须分别通过真实权重验证。

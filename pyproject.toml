@@ -14,7 +14,10 @@ test = ["pytest>=8,<10", "pytest-asyncio>=0.24,<2"]
 openvino = ["openvino>=2025.0,<2027", "numpy>=2,<3"]
 text = ["transformers>=5.2,<6", "numpy>=2,<3", "pillow>=11,<13"]
 generative = ["torch>=2.6,<3", "transformers>=5.2,<6", "numpy>=2,<3"]
-speech = ["sherpa-onnx>=1.12,<2", "numpy>=2,<3"]
+speech = ["sherpa-onnx>=1.13.8,<2", "numpy>=2,<3"]
+genai = ["openvino-genai>=2026.4,<2027", "openvino-tokenizers>=2026.4,<2027"]
+retrieval = ["transformers>=5.2,<6", "numpy>=2,<3", "pillow>=11,<13", "nltk>=3.9,<4", "mmh3>=5,<6"]
+media = ["diffusers>=0.40,<1", "accelerate>=1.15,<2", "torch>=2.9,<3", "pillow>=11,<13", "numpy>=2,<3"]
 
 [project.scripts]
 model-service = "model_service.__main__:main"

@@ -33,12 +33,12 @@ import json,sys
 from pathlib import Path
 from model_service.contracts import ModelConfig
 from model_service.tasks import create_task,validate_input
-for filename in ['examples/models.mock.json','examples/models.real.json','examples/models.retrieval.json']:
+for filename in Path('examples').glob('models.*.json'):
  for row in json.loads(Path(filename).read_text()):
   cfg=ModelConfig(**row)
   create_task(cfg)
   validate_input(cfg,cfg.validation_input,cfg.capabilities[0])
-assert not {'numpy','torch','transformers','openvino','sherpa_onnx'}.intersection(sys.modules)
+assert not {'numpy','torch','transformers','openvino','openvino_genai','diffusers','sherpa_onnx'}.intersection(sys.modules)
 """
     subprocess.run([sys.executable, "-c", script], check=True)
 

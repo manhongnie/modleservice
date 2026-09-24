@@ -1,0 +1,235 @@
+[
+  {
+    "name": "bge-m3-int4-ov",
+    "version": "d50a3650d1f6",
+    "capabilities": [
+      "embeddings"
+    ],
+    "task": "bge_m3_bounded",
+    "backend": "openvino",
+    "path": "models/retrieval/bge-m3",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "idle_seconds": 120,
+    "concurrency": 1,
+    "resident_mb": 1800,
+    "request_mb": 512,
+    "max_input_bytes": 2097152,
+    "options": {
+      "max_length": 512,
+      "max_batch_size": 8,
+      "compile_config": {
+        "PERFORMANCE_HINT": "LATENCY",
+        "INFERENCE_NUM_THREADS": 2,
+        "INFERENCE_PRECISION_HINT": "f32"
+      }
+    },
+    "validation_input": {
+      "texts": [
+        "你好，世界。"
+      ]
+    }
+  },
+  {
+    "name": "bge-reranker-v2-m3-int4-ov",
+    "version": "2252a9a291c5",
+    "capabilities": [
+      "rerank"
+    ],
+    "task": "bge_reranker_bounded",
+    "backend": "openvino",
+    "path": "models/retrieval/bge-reranker",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "idle_seconds": 120,
+    "concurrency": 1,
+    "resident_mb": 1800,
+    "request_mb": 512,
+    "max_input_bytes": 2097152,
+    "options": {
+      "max_length": 512,
+      "max_batch_size": 8,
+      "compile_config": {
+        "PERFORMANCE_HINT": "LATENCY",
+        "INFERENCE_NUM_THREADS": 2,
+        "INFERENCE_PRECISION_HINT": "f32"
+      }
+    },
+    "validation_input": {
+      "query": "中国的首都是哪里？",
+      "documents": [
+        "北京是中国的首都。",
+        "香蕉是一种水果。"
+      ]
+    }
+  },
+  {
+    "name": "chinese-clip-vit-base-patch16",
+    "version": "36e679e65c2a-m2560-r1024",
+    "capabilities": [
+      "embeddings",
+      "image_embeddings"
+    ],
+    "task": "dual_clip",
+    "backend": "openvino_clip",
+    "path": "models/retrieval/chinese-clip",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "idle_seconds": 120,
+    "concurrency": 1,
+    "resident_mb": 2560,
+    "request_mb": 1024,
+    "max_input_bytes": 2097152,
+    "options": {
+      "max_length": 52,
+      "max_batch_size": 8,
+      "compile_config": {
+        "PERFORMANCE_HINT": "LATENCY",
+        "INFERENCE_NUM_THREADS": 2,
+        "INFERENCE_PRECISION_HINT": "f32"
+      },
+      "clip_family": "chinese"
+    },
+    "validation_input": {
+      "texts": [
+        "红色方块"
+      ],
+      "images": [
+        "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKElEQVR4nO3NMQEAAAjDMMC/ZzDBvlRA01vZJvwHAAAAAAAAAAAAbx2jxAE/i2AjOgAAAABJRU5ErkJggg=="
+      ]
+    }
+  },
+  {
+    "name": "bm42-all-minilm-l6-v2-attentions",
+    "version": "9695632d760b-m1536",
+    "capabilities": [
+      "sparse_embeddings"
+    ],
+    "task": "bm42_local",
+    "backend": "openvino",
+    "path": "models/retrieval/bm42",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "idle_seconds": 120,
+    "concurrency": 1,
+    "resident_mb": 1536,
+    "request_mb": 512,
+    "max_input_bytes": 2097152,
+    "options": {
+      "max_length": 256,
+      "max_batch_size": 8,
+      "compile_config": {
+        "PERFORMANCE_HINT": "LATENCY",
+        "INFERENCE_NUM_THREADS": 2,
+        "INFERENCE_PRECISION_HINT": "f32"
+      },
+      "model_file": "model.onnx",
+      "language": "english"
+    },
+    "validation_input": {
+      "texts": [
+        "History can only prepare us to be surprised yet again."
+      ]
+    }
+  },
+  {
+    "name": "qwen3-embedding-0.6b-int8-ov",
+    "version": "dfe67308c933-m2560",
+    "capabilities": [
+      "embeddings"
+    ],
+    "task": "qwen3_embedding_ov",
+    "backend": "openvino",
+    "path": "models/retrieval/qwen3-embedding",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "idle_seconds": 120,
+    "concurrency": 1,
+    "resident_mb": 2560,
+    "request_mb": 512,
+    "max_input_bytes": 2097152,
+    "options": {
+      "max_length": 512,
+      "max_batch_size": 4,
+      "compile_config": {
+        "PERFORMANCE_HINT": "LATENCY",
+        "INFERENCE_NUM_THREADS": 2,
+        "INFERENCE_PRECISION_HINT": "f32"
+      }
+    },
+    "validation_input": {
+      "texts": [
+        "Beijing is the capital of China."
+      ]
+    }
+  },
+  {
+    "name": "qwen3-reranker-0.6b-int8-ov",
+    "version": "d7dd424f08cb-m2560",
+    "capabilities": [
+      "rerank"
+    ],
+    "task": "qwen3_reranker_ov",
+    "backend": "openvino",
+    "path": "models/retrieval/qwen3-reranker",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "idle_seconds": 120,
+    "concurrency": 1,
+    "resident_mb": 2560,
+    "request_mb": 1024,
+    "max_input_bytes": 2097152,
+    "options": {
+      "max_length": 256,
+      "max_batch_size": 2,
+      "compile_config": {
+        "PERFORMANCE_HINT": "LATENCY",
+        "INFERENCE_NUM_THREADS": 2,
+        "INFERENCE_PRECISION_HINT": "f32"
+      }
+    },
+    "validation_input": {
+      "query": "中国的首都是哪里？",
+      "documents": [
+        "北京是中国的首都。",
+        "香蕉是一种水果。"
+      ]
+    }
+  },
+  {
+    "name": "clip-vit-base-patch16",
+    "version": "57c216476eef-r1024",
+    "capabilities": [
+      "embeddings",
+      "image_embeddings"
+    ],
+    "task": "dual_clip",
+    "backend": "openvino_clip",
+    "path": "models/retrieval/openai-clip",
+    "device": "CPU",
+    "load_policy": "on_demand",
+    "idle_seconds": 120,
+    "concurrency": 1,
+    "resident_mb": 2000,
+    "request_mb": 1024,
+    "max_input_bytes": 2097152,
+    "options": {
+      "max_length": 77,
+      "max_batch_size": 8,
+      "compile_config": {
+        "PERFORMANCE_HINT": "LATENCY",
+        "INFERENCE_NUM_THREADS": 2,
+        "INFERENCE_PRECISION_HINT": "f32"
+      },
+      "clip_family": "openai"
+    },
+    "validation_input": {
+      "texts": [
+        "a red square"
+      ],
+      "images": [
+        "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKElEQVR4nO3NMQEAAAjDMMC/ZzDBvlRA01vZJvwHAAAAAAAAAAAAbx2jxAE/i2AjOgAAAABJRU5ErkJggg=="
+      ]
+    }
+  }
+]
