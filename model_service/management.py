@@ -12,6 +12,16 @@ from .contracts import ModelConfig, ServiceError
 from .coordinator import finish_shielded
 
 
+# Only numerical input hints belong in the business-facing model directory.
+# Paths, credentials, validation samples and arbitrary provider options stay private.
+_PUBLIC_INPUT_LIMITS = frozenset({
+    "max_new_tokens", "max_text_chars", "max_input_tokens", "max_length", "max_batch", "max_batch_size",
+    "max_audio_seconds", "max_reference_seconds", "max_steps", "max_width", "max_height",
+    "max_frames", "max_images", "max_image_pixels", "default_steps", "default_frames",
+    "default_fps", "fixed_width", "fixed_height", "max_prompt_chars", "max_video_pixels",
+})
+
+
 class ModelManager:
     def __init__(self, settings, registry, scheduler, lifecycle, executor, policy, coordinator, observer):
         self.settings, self.registry, self.scheduler = settings, registry, scheduler
@@ -228,6 +238,32 @@ class ModelManager:
                 "scheduler": self.scheduler.snapshot(), "workers": self.executor.snapshot(),
                 "aliases": self.registry.aliases(), "dependencies": self.registry.dependencies(),
                 "uncertain_requests": self.registry.uncertainties(), "events": self.registry.events()}
+
+    async def available_models(self) -> dict:
+        """List callable models without loading them or exposing administrative state."""
+        models = []
+        if self._closing:
+            return {"models": models, "max_body_bytes": self.settings.max_body_bytes}
+        for row in self.registry.all():
+            if not row["enabled"] or not row["validated"] or row["management_state"] != "ready":
+                continue
+            config = row["config"]
+            if self.scheduler.is_paused(config.instance_key):
+                continue
+            try:
+                features = self.policy.catalog.describe(config)
+            except ServiceError:
+                continue
+            if features.synthetic and not self.settings.allow_mock:
+                continue
+            limits = {name: value for name, value in config.options.items()
+                      if name in _PUBLIC_INPUT_LIMITS and type(value) in (int, float)
+                      and 0 < value <= 2**53 - 1}
+            models.append({"model_id": config.model_id, "name": config.name,
+                           "version": config.version, "capabilities": list(config.capabilities),
+                           "mock": features.synthetic,
+                           "limits": {**limits, "max_input_bytes": config.max_input_bytes}})
+        return {"models": models, "max_body_bytes": self.settings.max_body_bytes}
 
     async def maintain(self):
         while not self._closing:

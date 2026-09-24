@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="no-referrer">
+  <title>模型试验台 · Model Service</title>
+  <link rel="stylesheet" href="/playground.css">
+  <script src="/playground.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Model Service 首页"><span class="brand-mark" aria-hidden="true">m</span><span>Model Service<span class="brand-divider">/</span><strong>Playground</strong></span></a>
+    <span class="header-tag"><span class="status-dot"></span>同源 API · 本地工作台</span>
+  </header>
+  <main class="page">
+    <section class="intro">
+      <div><p class="eyebrow">ONE SERVICE, MANY POSSIBILITIES</p><h1>模型试验台<span class="title-dot">.</span></h1><p class="intro-copy">从一句话、一张图或一段声音开始，试试你的模型能做什么。</p></div>
+      <div class="intro-decoration" aria-hidden="true"><span>文字</span><span>图像</span><span>声音</span><span>视频</span></div>
+    </section>
+
+    <section class="connection-card" aria-labelledby="connection-title">
+      <div class="connection-label"><span class="key-icon" aria-hidden="true">⌘</span><div><h2 id="connection-title">连接模型服务</h2><p id="connection-description">输入业务密钥，读取可用模型</p></div></div>
+      <form id="connection-form" class="connection-form" autocomplete="off">
+        <label class="sr-only" for="api-key">业务 API 密钥</label>
+        <input id="api-key" type="password" autocomplete="new-password" spellcheck="false" placeholder="BUSINESS_API_KEY" aria-describedby="key-note" data-edit>
+        <button id="connect-button" class="button button-dark" type="submit" data-edit>连接服务 <span aria-hidden="true">↗</span></button>
+        <button id="clear-key" class="button button-quiet" type="button">清除密钥</button>
+      </form>
+    </section>
+    <div class="connection-footnote"><p id="key-note">密钥仅用于当前页面请求，刷新即清除。</p><p id="connection-status" role="status" aria-live="polite">尚未连接</p></div>
+    <div id="notice" class="notice" role="alert" hidden></div>
+
+    <div class="workspace">
+      <aside class="model-panel panel" aria-labelledby="model-panel-title">
+        <div class="panel-heading"><h2 id="model-panel-title">选择模型</h2><span id="model-count" class="count-badge">0</span></div>
+        <label class="field-label" for="model-select">当前模型</label>
+        <select id="model-select" disabled data-edit><option value="">先连接服务</option></select>
+        <p id="model-id" class="model-identity">可用模型将在这里显示</p>
+        <div id="model-mock" class="mock-note" hidden>MOCK 测试替身<br><span>仅验证调用流程，不代表真实模型推理。</span></div>
+        <div class="section-divider"></div>
+        <p class="section-label">模型能力</p>
+        <div id="capabilities" class="capability-list" role="group" aria-label="选择模型能力"><p class="subtle-text">连接后选择要测试的能力。</p></div>
+        <div class="model-note"><span class="small-spark" aria-hidden="true">✳</span><p>首次调用可能需要加载模型，请耐心等待。</p></div>
+      </aside>
+
+      <section class="input-panel panel" aria-labelledby="input-title">
+        <div class="panel-heading"><div><p class="step-label">01 / INPUT</p><h2 id="input-title">准备输入</h2></div><button id="example-button" class="text-button" type="button" disabled data-edit>填入示例 <span aria-hidden="true">↙</span></button></div>
+        <div class="input-toolbar"><div class="segmented" role="group" aria-label="输入模式"><button id="form-mode" class="segment active" type="button" aria-pressed="true" disabled data-edit>表单</button><button id="json-mode" class="segment" type="button" aria-pressed="false" disabled data-edit>JSON</button></div><code id="endpoint">POST /v1/…</code></div>
+        <div id="input-placeholder" class="input-placeholder"><span class="placeholder-symbol" aria-hidden="true">＋</span><h3>准备好，开始探索</h3><p>连接服务并选择模型后，<br>这里会出现对应的输入表单。</p></div>
+        <form id="inference-form" novalidate hidden>
+          <div id="form-fields" class="form-fields"></div>
+          <div id="json-input-wrap" hidden><label class="field-label" for="json-input">input 对象</label><textarea id="json-input" class="code-input" rows="15" spellcheck="false" data-edit aria-describedby="json-hint"></textarea><p id="json-hint" class="field-hint">只填写 input 对象；模型及接口由左侧选择。</p></div>
+          <label id="stream-wrap" class="checkbox-field" hidden><input id="stream" type="checkbox" checked data-edit><span>流式显示回复</span><span class="small-tag">SSE</span></label>
+          <details id="request-details" class="json-details"><summary>查看请求 JSON</summary><p class="field-hint">包含文件的 Base64 内容，不包含密钥。</p><pre id="request-json" class="json-code" tabindex="0"></pre></details>
+          <div class="run-actions"><button id="run-button" class="button button-primary" type="submit" disabled><span id="run-label">运行测试</span><span aria-hidden="true">→</span></button><button id="cancel-button" class="button button-outline" type="button" hidden>停止接收</button></div>
+          <p class="run-hint">请求发送至当前服务，结果会显示在右侧。</p>
+        </form>
+      </section>
+
+      <section class="result-panel panel" aria-labelledby="result-title" aria-busy="false">
+        <div class="panel-heading"><div><p class="step-label">02 / OUTPUT</p><h2 id="result-title">运行结果</h2></div><span id="result-status" class="result-status" data-tone="idle">等待输入</span></div>
+        <div id="result-meta" class="result-meta" hidden></div>
+        <div id="result-mock" class="mock-note" hidden>MOCK 测试结果 · 以下内容由测试替身生成，并非真实模型推理。</div>
+        <div id="result-empty" class="result-empty"><div class="result-orbit" aria-hidden="true"><span>✳</span></div><h3>每个想法，都值得一试</h3><p>填写输入并运行测试，<br>在这里查看模型的回应。</p><span class="empty-caption">YOUR NEXT IDEA STARTS HERE</span></div>
+        <div id="result-content" class="result-content" hidden></div>
+        <p id="result-message" class="result-message" role="status" aria-live="polite" hidden></p>
+        <details id="response-details" class="json-details response-details" hidden><summary>查看完整响应 JSON</summary><pre id="response-json" class="json-code" tabindex="0"></pre></details>
+      </section>
+    </div>
+    <footer class="page-footer"><span>Model Service Playground</span><span>文字 · 视觉 · 检索 · 语音 · 生成</span></footer>
+  </main>
+</body>
+</html>

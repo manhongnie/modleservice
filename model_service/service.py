@@ -63,6 +63,9 @@ class Service:
     async def status(self):
         return await self.runtime.manager.status()
 
+    async def available_models(self):
+        return await self.runtime.manager.available_models()
+
     async def readiness(self):
         return await self.runtime.readiness()
 

@@ -21,6 +21,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from starlette.responses import JSONResponse, Response
 
 from .contracts import ModelConfig, ServiceError, Settings
+from .web import PUBLIC_WEB_PATHS, playground_router
 
 logger = logging.getLogger("model_service.http")
 
@@ -137,7 +138,7 @@ class HTTPBoundary:
 
         try:
             path = scope.get("path", "")
-            if path in {"/health", "/ready"} and scope.get("method") == "GET":
+            if path in {"/health", "/ready"} | PUBLIC_WEB_PATHS and scope.get("method") == "GET":
                 await self.app(scope, receive, logged_send)
                 return
             is_admin = path == "/admin" or path.startswith("/admin/")
@@ -372,6 +373,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app = FastAPI(title="Shared model service", docs_url=None, redoc_url=None,
                   openapi_url=None, lifespan=lifespan)
     app.add_middleware(HTTPBoundary, settings=settings)
+    app.include_router(playground_router())
 
     def authenticate(request: Request, keys: list[str]) -> None:
         if not _authenticated(request.scope, keys):
@@ -401,6 +403,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def ready(request: Request) -> Response:
         result = await request.app.state.service.readiness()
         return JSONResponse(result, status_code=200 if result.get("status") == "ready" else 503)
+
+    @app.get("/v1/models", dependencies=[Depends(business_auth)])
+    async def available_models(request: Request) -> Response:
+        result = await request.app.state.service.available_models()
+        return JSONResponse(result, headers={"Cache-Control": "no-store", "Vary": "Authorization"})
 
     @app.post("/v1/{capability}", dependencies=[Depends(business_auth)])
     async def infer(capability: str, body: InferenceRequest, request: Request) -> Response:

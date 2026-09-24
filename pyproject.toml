@@ -25,6 +25,9 @@ model-service = "model_service.__main__:main"
 [tool.setuptools.packages.find]
 include = ["model_service*"]
 
+[tool.setuptools.package-data]
+model_service = ["static/*.html", "static/*.css", "static/*.js"]
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]

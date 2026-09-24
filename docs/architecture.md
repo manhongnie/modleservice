@@ -41,6 +41,8 @@ flowchart TD
 
 ## 如何扩展
 
+网页测试入口位于 `web.py` 和 `static/`：前者只提供三个固定静态资源，后者仅通过同源 HTTP 调用业务接口。`GET /v1/models` 沿 `API → Service.available_models → ModelManager.available_models` 返回经过字段白名单过滤的可用模型目录，不加载权重、不暴露管理配置。网页提交和取消仍使用现有请求协调及执行链路，未新增数据库或调度状态。
+
 1. 兼容现有处理方式的模型只增加 JSON 配置，通过管理 API 验证，无需改主流程或重启。
 2. 新预处理/后处理新增任务类并在 `tasks/__init__.py` 登记；实现 `validate / prepare / finish`。真实增量输出额外实现 `finish_chunk`。
 3. 新运行时新增后端，在 `backends/__init__.py` 通过 `register_backend` 登记工厂、配置校验器、任务输入输出协议族和 `BackendFeatures`。需要流式时实现 `stream`；它的关闭必须等底层生成停止。

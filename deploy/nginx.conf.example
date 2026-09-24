@@ -47,6 +47,16 @@ server {
     location = /ready {
         proxy_pass http://127.0.0.1:8000;
     }
+    # Public playground shell; model discovery and inference still require a business key.
+    location = / {
+        proxy_pass http://127.0.0.1:8000;
+    }
+    location = /playground.css {
+        proxy_pass http://127.0.0.1:8000;
+    }
+    location = /playground.js {
+        proxy_pass http://127.0.0.1:8000;
+    }
     location / {
         return 404;
     }

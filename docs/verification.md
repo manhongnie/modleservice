@@ -6,7 +6,14 @@
 
 ## 自动化验证
 
-当前全量结果：**326 passed，无失败、无跳过，23.19秒**。命令及精确时间见 [automated-test-results.json](automated-test-results.json)，原始JUnit见 `var/pytest-multimodal-results.xml`。依赖检查 `uv pip check --python .venv/bin/python` 和 `compileall` 通过；实际环境记录在 `requirements-tested.txt`。
+### 网页测试入口增量验证（2026-09-24）
+
+- 原有回归：`.venv/bin/python -m pytest -q --ignore=tests/test_playground.py`，326 passed，24.22 秒。
+- 新增入口及目录测试：`.venv/bin/python -m pytest -q tests/test_playground.py`，21 passed，0.57 秒；覆盖静态资源访问边界、业务/管理鉴权、目录字段过滤、可用状态、只读行为和 Mock 调用闭环。两组共 347 项通过，无失败或跳过。
+- Chromium 浏览器验证：真实本地 HTTP Mock 服务下检查连接失败/成功、模型选择、普通及 SSE 文本、向量/排序、WAV 上传与播放、JSON 输入、取消和清除密钥；其余能力使用明确标记的受控响应检查图片、音频、视频展示，表单提交经真实任务校验器验证。12 类能力表单均覆盖，桌面和手机布局无横向溢出，未发现 JavaScript 或 CSP 错误。
+- 独立构建 wheel，确认 HTML、CSS、JavaScript 均打包；本次没有重新执行下方全部真实模型质量验证。
+
+此前多模态全量结果：**326 passed，无失败、无跳过，23.19秒**。命令及精确时间见 [automated-test-results.json](automated-test-results.json)，原始JUnit见 `var/pytest-multimodal-results.xml`。当时依赖检查 `uv pip check --python .venv/bin/python` 和 `compileall` 通过；实际环境记录在 `requirements-tested.txt`。
 
 这些测试覆盖控制逻辑、受控模型替身、真实TCP、OpenVINO小张量图以及真实ffmpeg编码。不能由测试数量推断模型质量。新增覆盖包括：
 
